@@ -10,6 +10,10 @@ import org.jboss.seam.framework.EntityHome;
 @Name("racaHome")
 public class RacaHome extends EntityHome<Raca> {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3661884414256407506L;
 	@In(create = true)
 	EspeciesHome especiesHome;
 

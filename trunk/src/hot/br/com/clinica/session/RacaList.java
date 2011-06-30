@@ -8,6 +8,11 @@ import java.util.Arrays;
 @Name("racaList")
 public class RacaList extends EntityQuery<Raca> {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1385642584216949297L;
+
 	private static final String EJBQL = "select raca from Raca raca";
 
 	private static final String[] RESTRICTIONS = { "lower(raca.nomeraca) like lower(concat(#{racaList.raca.nomeraca},'%'))", };

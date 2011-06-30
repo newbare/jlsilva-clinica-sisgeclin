@@ -9,6 +9,11 @@ import org.jboss.seam.framework.EntityHome;
 @Name("pelagemHome")
 public class PelagemHome extends EntityHome<Pelagem> {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5059168088430907980L;
+
 	public void setPelagemCodpelagem(Integer id) {
 		setId(id);
 	}

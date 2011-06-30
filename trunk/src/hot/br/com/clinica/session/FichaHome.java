@@ -9,7 +9,7 @@ import org.jboss.seam.framework.EntityHome;
 
 @Name("fichaHome")
 public class FichaHome extends EntityHome<Ficha> {
-
+	private static final long serialVersionUID = 462216157723572319L;
 	@In(create = true)
 	AnimalHome animalHome;
 

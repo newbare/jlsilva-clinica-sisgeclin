@@ -10,6 +10,10 @@ import org.jboss.seam.framework.EntityHome;
 @Name("vacinacaoHome")
 public class VacinacaoHome extends EntityHome<Vacinacao> {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5943148851923008065L;
 	@In(create = true)
 	FichaHome fichaHome;
 

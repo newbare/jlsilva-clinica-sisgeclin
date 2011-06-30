@@ -16,6 +16,10 @@ import br.com.clinica.entity.Raca;
 @Name("animalHome")
 public class AnimalHome extends EntityHome<Animal> {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6344500651242495241L;
 	@In(create = true)
 	ClientesHome clientesHome;
 	@In(create = true)

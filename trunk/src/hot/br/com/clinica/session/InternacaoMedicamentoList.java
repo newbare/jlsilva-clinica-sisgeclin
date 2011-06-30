@@ -9,6 +9,11 @@ import java.util.Arrays;
 public class InternacaoMedicamentoList extends
 		EntityQuery<InternacaoMedicamento> {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3053663086389181490L;
+
 	private static final String EJBQL = "select internacaoMedicamento from InternacaoMedicamento internacaoMedicamento";
 
 	private static final String[] RESTRICTIONS = {

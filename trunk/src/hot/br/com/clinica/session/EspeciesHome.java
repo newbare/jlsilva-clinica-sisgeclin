@@ -9,6 +9,11 @@ import org.jboss.seam.framework.EntityHome;
 @Name("especiesHome")
 public class EspeciesHome extends EntityHome<Especies> {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 997341327712161447L;
+
 	public void setEspeciesCodespecie(Integer id) {
 		setId(id);
 	}
