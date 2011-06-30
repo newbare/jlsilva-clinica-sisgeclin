@@ -28,7 +28,7 @@ import org.hibernate.validator.Length;
 @Entity
 @Table(name = "internacao", schema = "public")
 public class Internacao implements java.io.Serializable {
-
+	private static final long serialVersionUID = 462216157723572319L;
 	private int codinternacao;
 	private Ficha ficha;
 	private String obs;

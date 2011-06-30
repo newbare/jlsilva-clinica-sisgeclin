@@ -24,6 +24,10 @@ import org.hibernate.validator.NotNull;
 @Table(name = "clientestel", schema = "public")
 public class Clientestel implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1430351288382744527L;
 	private int codtel;
 	private Clientes clientes;
 	private String telefone;
@@ -33,19 +37,6 @@ public class Clientestel implements java.io.Serializable {
 	public Clientestel() {
 	}
 
-	public Clientestel(int codtel, Clientes clientes) {
-		this.codtel = codtel;
-		this.clientes = clientes;
-	}
-
-	public Clientestel(int codtel, Clientes clientes, String telefone,
-			String tipo, String telefonenum) {
-		this.codtel = codtel;
-		this.clientes = clientes;
-		this.telefone = telefone;
-		this.tipo = tipo;
-		this.telefonenum = telefonenum;
-	}
 
 	
 	@Id

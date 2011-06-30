@@ -24,6 +24,10 @@ import org.hibernate.validator.Length;
 @Table(name = "tiporetornovacinacao", schema = "public")
 public class Tiporetornovacinacao implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4846227205361011037L;
 	private int codtiporetornovacinacao;
 	private String retorno;
 	private Integer dias;

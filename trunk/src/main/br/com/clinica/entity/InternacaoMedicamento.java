@@ -23,7 +23,7 @@ import javax.persistence.TemporalType;
 @Entity
 @Table(name = "internacao_medicamento", schema = "public")
 public class InternacaoMedicamento implements java.io.Serializable {
-
+	private static final long serialVersionUID = 462216157723572319L;
 	private int codinternacaoMedicamento;
 	private Internacao internacao;
 	private String medicamento;

@@ -29,7 +29,7 @@ import org.hibernate.validator.NotNull;
 @Entity
 @Table(name = "ficha", schema = "public")
 public class Ficha implements java.io.Serializable {
-
+	private static final long serialVersionUID = 462216157723572319L;
 	private int codficha;
 	private Animal animal;
 	private String anamnese;

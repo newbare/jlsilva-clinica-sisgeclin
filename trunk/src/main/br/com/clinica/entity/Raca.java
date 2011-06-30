@@ -27,6 +27,10 @@ import org.hibernate.validator.NotNull;
 @Table(name = "raca", schema = "public")
 public class Raca implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -429841584924242319L;
 	private int codraca;
 	private Especies especies;
 	private String nomeraca;
