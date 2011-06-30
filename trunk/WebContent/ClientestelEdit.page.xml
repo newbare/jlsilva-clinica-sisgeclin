@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page xmlns="http://jboss.com/products/seam/pages"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://jboss.com/products/seam/pages http://jboss.com/products/seam/pages-2.1.xsd"
+      no-conversation-view-id="/ClientestelList.xhtml"
+      login-required="true">
+
+   <begin-conversation join="true" flush-mode="MANUAL"/>
+
+   <action execute="#{clientestelHome.wire}"/>
+
+   <param name="clientestelFrom"/>
+   <param name="clientestelCodtel" value="#{clientestelHome.clientestelCodtel}"/>
+   <param name="clientesFrom"/>
+   <param name="clientesCodclientes" value="#{clientesHome.clientesCodclientes}"/>
+
+
+
+   <navigation from-action="#{clientestelHome.persist}">
+      <rule if-outcome="persisted">
+         <end-conversation/>
+         <redirect view-id="/Clientestel.xhtml"/>
+      </rule>
+   </navigation>
+
+   <navigation from-action="#{clientestelHome.update}">
+      <rule if-outcome="updated">
+         <end-conversation/>
+         <redirect view-id="/Clientestel.xhtml"/>
+      </rule>
+   </navigation>
+
+   <navigation from-action="#{clientestelHome.remove}">
+      <rule if-outcome="removed">
+         <end-conversation/>
+         <redirect view-id="/ClientesList.xhtml"/>
+      </rule>
+   </navigation>
+
+</page>

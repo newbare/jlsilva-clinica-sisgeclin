@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:s="http://jboss.com/products/seam/taglib"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:rich="http://richfaces.org/rich"
+    template="layout/template.xhtml">
+
+<ui:define name="body">
+
+    <rich:panel>
+        <f:facet name="header">Especies Details</f:facet>
+
+        <s:decorate id="codespecie" template="layout/display.xhtml">
+            <ui:define name="label">Codespecie</ui:define>
+            <h:outputText value="#{especiesHome.instance.codespecie}"/>
+        </s:decorate>
+
+        <s:decorate id="nomeespecie" template="layout/display.xhtml">
+            <ui:define name="label">Nomeespecie</ui:define>
+            <h:outputText value="#{especiesHome.instance.nomeespecie}"/>
+        </s:decorate>
+
+        <div style="clear:both"/>
+
+    </rich:panel>
+
+    <div class="actionButtons">
+
+        <s:button view="/EspeciesEdit.xhtml"
+                    id="edit"
+                 value="Edit"/>
+
+        <s:button view="/#{empty especiesFrom ? 'EspeciesList' : especiesFrom}.xhtml"
+                    id="done"
+                 value="Done"/>
+
+    </div>
+
+    <rich:tabPanel switchType="ajax">
+
+    <rich:tab>
+        <f:facet name="label">
+            <h:panelGroup><h:graphicImage value="/img/onetomany.gif" style="vertical-align: middle; padding-right: 4px;"/>Racas</h:panelGroup>
+        </f:facet>
+    <h:form styleClass="association" id="racasChildren">
+
+        <h:outputText value="There are no racas associated with this especies."
+                   rendered="#{empty especiesHome.racas}"/>
+
+        <rich:dataTable value="#{especiesHome.racas}"
+                       var="_raca"
+                  rendered="#{not empty especiesHome.racas}"
+                rowClasses="rvgRowOne,rvgRowTwo"
+                        id="racasTable">
+            <rich:column sortBy="#{_raca.codraca}">
+                <f:facet name="header">Codraca</f:facet>
+                <h:outputText value="#{_raca.codraca}"/>
+            </rich:column>
+            <rich:column sortBy="#{_raca.nomeraca}">
+                <f:facet name="header">Nomeraca</f:facet>
+                <h:outputText value="#{_raca.nomeraca}"/>
+            </rich:column>
+            <h:column>
+                <f:facet name="header">Action</f:facet>
+                <s:link id="selectraca"
+                     value="Select"
+                      view="/Raca.xhtml">
+                    <f:param name="racaCodraca"
+                            value="#{_raca.codraca}"/>
+                    <f:param name="racaFrom" value="Especies"/>
+                </s:link>
+            </h:column>
+        </rich:dataTable>
+
+    </h:form>
+
+    <div class="actionButtons">
+        <s:button
+               value="Add raca"
+                view="/RacaEdit.xhtml">
+            <f:param name="especiesCodespecie"
+                    value="#{especiesHome.instance.codespecie}"/>
+            <f:param name="racaFrom" value="Especies"/>
+        </s:button>
+    </div>
+    </rich:tab>
+</rich:tabPanel>
+</ui:define>
+
+</ui:composition>

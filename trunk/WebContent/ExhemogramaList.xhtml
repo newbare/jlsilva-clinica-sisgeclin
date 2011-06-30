@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:s="http://jboss.com/products/seam/taglib"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:rich="http://richfaces.org/rich"
+    template="layout/template.xhtml">
+
+<ui:define name="body">
+
+    <h:form id="exhemogramaSearch" styleClass="edit">
+
+        <rich:simpleTogglePanel label="Exhemograma Search Filter" switchType="ajax">
+
+            <s:decorate template="layout/display.xhtml">
+                <ui:define name="label">Obs</ui:define>
+                <h:inputText id="obs" value="#{exhemogramaList.exhemograma.obs}"/>
+            </s:decorate>
+
+            <s:decorate template="layout/display.xhtml">
+                <ui:define name="label">Match</ui:define>
+                <h:selectOneRadio id="logic" value="#{exhemogramaList.restrictionLogicOperator}" styleClass="radio">
+                    <f:selectItem itemLabel="All" itemValue="and"/>
+                    <f:selectItem itemLabel="Any" itemValue="or"/>
+                </h:selectOneRadio>
+            </s:decorate>
+
+        </rich:simpleTogglePanel>
+
+        <div class="actionButtons">
+            <h:commandButton id="search" value="Search" action="/ExhemogramaList.xhtml"/>
+            <s:button id="reset" value="Reset" includePageParams="false"/>
+        </div>
+
+    </h:form>
+
+    <rich:panel>
+        <f:facet name="header">Exhemograma Search Results (#{empty exhemogramaList.resultList ? 0 : (exhemogramaList.paginated ? exhemogramaList.resultCount : exhemogramaList.resultList.size)})</f:facet>
+    <div class="results" id="exhemogramaList">
+
+    <h:outputText value="The exhemograma search returned no results."
+               rendered="#{empty exhemogramaList.resultList}"/>
+
+    <rich:dataTable id="exhemogramaList"
+                var="_exhemograma"
+              value="#{exhemogramaList.resultList}"
+           rendered="#{not empty exhemogramaList.resultList}">
+        <h:column>
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{exhemogramaList}"/>
+                    <ui:param name="propertyLabel" value="Codhemograma"/>
+                    <ui:param name="propertyPath" value="exhemograma.codhemograma"/>
+                </ui:include>
+            </f:facet>
+            <h:outputText value="#{_exhemograma.codhemograma}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{exhemogramaList}"/>
+                    <ui:param name="propertyLabel" value="Ficha codficha"/>
+                    <ui:param name="propertyPath" value="exhemograma.ficha.codficha"/>
+                </ui:include>
+            </f:facet>
+            <h:outputText value="#{_exhemograma.ficha.codficha}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{exhemogramaList}"/>
+                    <ui:param name="propertyLabel" value="Dtregistro"/>
+                    <ui:param name="propertyPath" value="exhemograma.dtregistro"/>
+                </ui:include>
+            </f:facet>
+            <h:outputText value="#{_exhemograma.dtregistro}">
+                <s:convertDateTime type="date" dateStyle="short"/>
+            </h:outputText>
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{exhemogramaList}"/>
+                    <ui:param name="propertyLabel" value="Hemacias"/>
+                    <ui:param name="propertyPath" value="exhemograma.hemacias"/>
+                </ui:include>
+            </f:facet>
+            <h:outputText value="#{_exhemograma.hemacias}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{exhemogramaList}"/>
+                    <ui:param name="propertyLabel" value="Hemoglobina"/>
+                    <ui:param name="propertyPath" value="exhemograma.hemoglobina"/>
+                </ui:include>
+            </f:facet>
+            <h:outputText value="#{_exhemograma.hemoglobina}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{exhemogramaList}"/>
+                    <ui:param name="propertyLabel" value="Hematocrito"/>
+                    <ui:param name="propertyPath" value="exhemograma.hematocrito"/>
+                </ui:include>
+            </f:facet>
+            <h:outputText value="#{_exhemograma.hematocrito}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{exhemogramaList}"/>
+                    <ui:param name="propertyLabel" value="Vcm"/>
+                    <ui:param name="propertyPath" value="exhemograma.vcm"/>
+                </ui:include>
+            </f:facet>
+            <h:outputText value="#{_exhemograma.vcm}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{exhemogramaList}"/>
+                    <ui:param name="propertyLabel" value="Hcm"/>
+                    <ui:param name="propertyPath" value="exhemograma.hcm"/>
+                </ui:include>
+            </f:facet>
+            <h:outputText value="#{_exhemograma.hcm}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{exhemogramaList}"/>
+                    <ui:param name="propertyLabel" value="Chcm"/>
+                    <ui:param name="propertyPath" value="exhemograma.chcm"/>
+                </ui:include>
+            </f:facet>
+            <h:outputText value="#{_exhemograma.chcm}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{exhemogramaList}"/>
+                    <ui:param name="propertyLabel" value="Leuctotais"/>
+                    <ui:param name="propertyPath" value="exhemograma.leuctotais"/>
+                </ui:include>
+            </f:facet>
+            <h:outputText value="#{_exhemograma.leuctotais}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{exhemogramaList}"/>
+                    <ui:param name="propertyLabel" value="Metamielocitos"/>
+                    <ui:param name="propertyPath" value="exhemograma.metamielocitos"/>
+                </ui:include>
+            </f:facet>
+            <h:outputText value="#{_exhemograma.metamielocitos}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{exhemogramaList}"/>
+                    <ui:param name="propertyLabel" value="Bastonetes"/>
+                    <ui:param name="propertyPath" value="exhemograma.bastonetes"/>
+                </ui:include>
+            </f:facet>
+            <h:outputText value="#{_exhemograma.bastonetes}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{exhemogramaList}"/>
+                    <ui:param name="propertyLabel" value="Segmentados"/>
+                    <ui:param name="propertyPath" value="exhemograma.segmentados"/>
+                </ui:include>
+            </f:facet>
+            <h:outputText value="#{_exhemograma.segmentados}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{exhemogramaList}"/>
+                    <ui:param name="propertyLabel" value="Eosinofilos"/>
+                    <ui:param name="propertyPath" value="exhemograma.eosinofilos"/>
+                </ui:include>
+            </f:facet>
+            <h:outputText value="#{_exhemograma.eosinofilos}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{exhemogramaList}"/>
+                    <ui:param name="propertyLabel" value="Basofilos"/>
+                    <ui:param name="propertyPath" value="exhemograma.basofilos"/>
+                </ui:include>
+            </f:facet>
+            <h:outputText value="#{_exhemograma.basofilos}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{exhemogramaList}"/>
+                    <ui:param name="propertyLabel" value="Linfocitos"/>
+                    <ui:param name="propertyPath" value="exhemograma.linfocitos"/>
+                </ui:include>
+            </f:facet>
+            <h:outputText value="#{_exhemograma.linfocitos}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{exhemogramaList}"/>
+                    <ui:param name="propertyLabel" value="Monocitos"/>
+                    <ui:param name="propertyPath" value="exhemograma.monocitos"/>
+                </ui:include>
+            </f:facet>
+            <h:outputText value="#{_exhemograma.monocitos}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{exhemogramaList}"/>
+                    <ui:param name="propertyLabel" value="Obs"/>
+                    <ui:param name="propertyPath" value="exhemograma.obs"/>
+                </ui:include>
+            </f:facet>
+            <h:outputText value="#{_exhemograma.obs}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{exhemogramaList}"/>
+                    <ui:param name="propertyLabel" value="Proteinastotais"/>
+                    <ui:param name="propertyPath" value="exhemograma.proteinastotais"/>
+                </ui:include>
+            </f:facet>
+            <h:outputText value="#{_exhemograma.proteinastotais}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{exhemogramaList}"/>
+                    <ui:param name="propertyLabel" value="Plaquetas"/>
+                    <ui:param name="propertyPath" value="exhemograma.plaquetas"/>
+                </ui:include>
+            </f:facet>
+            <h:outputText value="#{_exhemograma.plaquetas}"/>
+        </h:column>
+        <rich:column styleClass="action">
+            <f:facet name="header">Action</f:facet>
+            <s:link view="/#{empty from ? 'Exhemograma' : from}.xhtml"
+                   value="#{empty from ? 'View' : 'Select'}"
+             propagation="#{empty from ? 'none' : 'default'}"
+                      id="exhemogramaViewId">
+                <f:param name="exhemogramaCodhemograma"
+                        value="#{_exhemograma.codhemograma}"/>
+            </s:link>
+            #{' '}
+            <s:link view="/ExhemogramaEdit.xhtml"
+                   value="Edit"
+             propagation="none"
+                      id="exhemogramaEdit"
+                rendered="#{empty from}">
+                <f:param name="exhemogramaCodhemograma"
+                        value="#{_exhemograma.codhemograma}"/>
+            </s:link>
+        </rich:column>
+    </rich:dataTable>
+
+    </div>
+    </rich:panel>
+
+    <div class="tableControl">
+
+        <s:link view="/ExhemogramaList.xhtml"
+            rendered="#{exhemogramaList.previousExists}"
+               value="#{messages.left}#{messages.left} First Page"
+                  id="firstPage">
+          <f:param name="firstResult" value="0"/>
+        </s:link>
+
+        <s:link view="/ExhemogramaList.xhtml"
+            rendered="#{exhemogramaList.previousExists}"
+               value="#{messages.left} Previous Page"
+                  id="previousPage">
+            <f:param name="firstResult"
+                    value="#{exhemogramaList.previousFirstResult}"/>
+        </s:link>
+
+        <s:link view="/ExhemogramaList.xhtml"
+            rendered="#{exhemogramaList.nextExists}"
+               value="Next Page #{messages.right}"
+                  id="nextPage">
+            <f:param name="firstResult"
+                    value="#{exhemogramaList.nextFirstResult}"/>
+        </s:link>
+
+        <s:link view="/ExhemogramaList.xhtml"
+            rendered="#{exhemogramaList.nextExists}"
+               value="Last Page #{messages.right}#{messages.right}"
+                  id="lastPage">
+            <f:param name="firstResult"
+                    value="#{exhemogramaList.lastFirstResult}"/>
+        </s:link>
+
+    </div>
+
+    <s:div styleClass="actionButtons" rendered="#{empty from}">
+        <s:button view="/ExhemogramaEdit.xhtml"
+                    id="create"
+           propagation="none"
+                 value="Create exhemograma">
+            <f:param name="exhemogramaCodhemograma"/>
+        </s:button>
+    </s:div>
+
+</ui:define>
+
+</ui:composition>

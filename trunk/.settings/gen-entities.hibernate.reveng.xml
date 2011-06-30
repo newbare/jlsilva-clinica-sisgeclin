@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd" >
+
+<hibernate-reverse-engineering>
+<table-filter match-name="animal" match-schema="public" match-catalog=".*"></table-filter>
+<table-filter match-name="clientes" match-schema="public" match-catalog=".*"></table-filter>
+<table-filter match-name="clientestel" match-schema="public" match-catalog=".*"></table-filter>
+<table-filter match-name="especies" match-schema="public" match-catalog=".*"></table-filter>
+<table-filter match-name="exbiosanguinea" match-schema="public" match-catalog=".*"></table-filter>
+<table-filter match-name="exfezes" match-schema="public" match-catalog=".*"></table-filter>
+<table-filter match-name="exhemograma" match-schema="public" match-catalog=".*"></table-filter>
+<table-filter match-name="exurinalise" match-schema="public" match-catalog=".*"></table-filter>
+<table-filter match-name="ficha" match-schema="public" match-catalog=".*"></table-filter>
+<table-filter match-name="internacao" match-schema="public" match-catalog=".*"></table-filter>
+<table-filter match-name="internacao_medicamento" match-schema="public" match-catalog=".*"></table-filter>
+<table-filter match-name="pelagem" match-schema="public" match-catalog=".*"></table-filter>
+<table-filter match-name="raca" match-schema="public" match-catalog=".*"></table-filter>
+<table-filter match-name="tiporetornovacinacao" match-schema="public" match-catalog=".*"></table-filter>
+<table-filter match-name="vacina" match-schema="public" match-catalog=".*"></table-filter>
+<table-filter match-name="vacinacao" match-schema="public" match-catalog=".*"></table-filter>
+</hibernate-reverse-engineering>

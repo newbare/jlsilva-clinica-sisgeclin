@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page xmlns="http://jboss.com/products/seam/pages"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://jboss.com/products/seam/pages http://jboss.com/products/seam/pages-2.1.xsd"
+      no-conversation-view-id="/InternacaoMedicamentoList.xhtml"
+      login-required="true">
+
+   <begin-conversation join="true" flush-mode="MANUAL"/>
+
+   <action execute="#{internacaoMedicamentoHome.wire}"/>
+
+   <param name="internacaoMedicamentoFrom"/>
+   <param name="internacaoMedicamentoCodinternacaoMedicamento" value="#{internacaoMedicamentoHome.internacaoMedicamentoCodinternacaoMedicamento}"/>
+   <param name="internacaoFrom"/>
+   <param name="internacaoCodinternacao" value="#{internacaoHome.internacaoCodinternacao}"/>
+   <param name="fichaFrom"/>
+   <param name="fichaCodficha" value="#{fichaHome.fichaCodficha}"/>
+   <param name="animalFrom"/>
+   <param name="animalCodanimal" value="#{animalHome.animalCodanimal}"/>
+   <param name="clientesFrom"/>
+   <param name="clientesCodclientes" value="#{clientesHome.clientesCodclientes}"/>
+
+   <param name="racaFrom"/>
+   <param name="racaCodraca" value="#{racaHome.racaCodraca}"/>
+   <param name="especiesFrom"/>
+   <param name="especiesCodespecie" value="#{especiesHome.especiesCodespecie}"/>
+
+
+   <param name="pelagemFrom"/>
+   <param name="pelagemCodpelagem" value="#{pelagemHome.pelagemCodpelagem}"/>
+
+
+
+
+
+
+   <navigation from-action="#{internacaoMedicamentoHome.persist}">
+      <rule if-outcome="persisted">
+         <end-conversation/>
+         <redirect view-id="/InternacaoMedicamento.xhtml"/>
+      </rule>
+   </navigation>
+
+   <navigation from-action="#{internacaoMedicamentoHome.update}">
+      <rule if-outcome="updated">
+         <end-conversation/>
+         <redirect view-id="/InternacaoMedicamento.xhtml"/>
+      </rule>
+   </navigation>
+
+   <navigation from-action="#{internacaoMedicamentoHome.remove}">
+      <rule if-outcome="removed">
+         <end-conversation/>
+         <redirect view-id="/InternacaoMedicamentoList.xhtml"/>
+      </rule>
+   </navigation>
+
+</page>

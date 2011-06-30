@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:s="http://jboss.com/products/seam/taglib"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:rich="http://richfaces.org/rich"
+    template="layout/template.xhtml">
+
+<ui:define name="body">
+
+    <rich:panel>
+        <f:facet name="header">Exurinalise Details</f:facet>
+
+        <s:decorate id="codurinalise" template="layout/display.xhtml">
+            <ui:define name="label">Codurinalise</ui:define>
+            <h:outputText value="#{exurinaliseHome.instance.codurinalise}"/>
+        </s:decorate>
+
+        <s:decorate id="dtregistro" template="layout/display.xhtml">
+            <ui:define name="label">Dtregistro</ui:define>
+            <h:outputText value="#{exurinaliseHome.instance.dtregistro}">
+                <s:convertDateTime type="date" dateStyle="short"/>
+            </h:outputText>
+        </s:decorate>
+
+        <s:decorate id="urinaColheita" template="layout/display.xhtml">
+            <ui:define name="label">Urina colheita</ui:define>
+            <h:outputText value="#{exurinaliseHome.instance.urinaColheita}"/>
+        </s:decorate>
+
+        <s:decorate id="volume" template="layout/display.xhtml">
+            <ui:define name="label">Volume</ui:define>
+            <h:outputText value="#{exurinaliseHome.instance.volume}"/>
+        </s:decorate>
+
+        <s:decorate id="aspecto" template="layout/display.xhtml">
+            <ui:define name="label">Aspecto</ui:define>
+            <h:outputText value="#{exurinaliseHome.instance.aspecto}"/>
+        </s:decorate>
+
+        <s:decorate id="cor" template="layout/display.xhtml">
+            <ui:define name="label">Cor</ui:define>
+            <h:outputText value="#{exurinaliseHome.instance.cor}"/>
+        </s:decorate>
+
+        <s:decorate id="odor" template="layout/display.xhtml">
+            <ui:define name="label">Odor</ui:define>
+            <h:outputText value="#{exurinaliseHome.instance.odor}"/>
+        </s:decorate>
+
+        <s:decorate id="densidade" template="layout/display.xhtml">
+            <ui:define name="label">Densidade</ui:define>
+            <h:outputText value="#{exurinaliseHome.instance.densidade}"/>
+        </s:decorate>
+
+        <s:decorate id="ph" template="layout/display.xhtml">
+            <ui:define name="label">Ph</ui:define>
+            <h:outputText value="#{exurinaliseHome.instance.ph}"/>
+        </s:decorate>
+
+        <s:decorate id="proteinas" template="layout/display.xhtml">
+            <ui:define name="label">Proteinas</ui:define>
+            <h:outputText value="#{exurinaliseHome.instance.proteinas}"/>
+        </s:decorate>
+
+        <s:decorate id="glicose" template="layout/display.xhtml">
+            <ui:define name="label">Glicose</ui:define>
+            <h:outputText value="#{exurinaliseHome.instance.glicose}"/>
+        </s:decorate>
+
+        <s:decorate id="ccetonicos" template="layout/display.xhtml">
+            <ui:define name="label">Ccetonicos</ui:define>
+            <h:outputText value="#{exurinaliseHome.instance.ccetonicos}"/>
+        </s:decorate>
+
+        <s:decorate id="bilirrubina" template="layout/display.xhtml">
+            <ui:define name="label">Bilirrubina</ui:define>
+            <h:outputText value="#{exurinaliseHome.instance.bilirrubina}"/>
+        </s:decorate>
+
+        <s:decorate id="uribilinogenio" template="layout/display.xhtml">
+            <ui:define name="label">Uribilinogenio</ui:define>
+            <h:outputText value="#{exurinaliseHome.instance.uribilinogenio}"/>
+        </s:decorate>
+
+        <s:decorate id="sgoculto" template="layout/display.xhtml">
+            <ui:define name="label">Sgoculto</ui:define>
+            <h:outputText value="#{exurinaliseHome.instance.sgoculto}"/>
+        </s:decorate>
+
+        <s:decorate id="nitritos" template="layout/display.xhtml">
+            <ui:define name="label">Nitritos</ui:define>
+            <h:outputText value="#{exurinaliseHome.instance.nitritos}"/>
+        </s:decorate>
+
+        <s:decorate id="hemacias" template="layout/display.xhtml">
+            <ui:define name="label">Hemacias</ui:define>
+            <h:outputText value="#{exurinaliseHome.instance.hemacias}"/>
+        </s:decorate>
+
+        <s:decorate id="leucocitos" template="layout/display.xhtml">
+            <ui:define name="label">Leucocitos</ui:define>
+            <h:outputText value="#{exurinaliseHome.instance.leucocitos}"/>
+        </s:decorate>
+
+        <s:decorate id="cilindros" template="layout/display.xhtml">
+            <ui:define name="label">Cilindros</ui:define>
+            <h:outputText value="#{exurinaliseHome.instance.cilindros}"/>
+        </s:decorate>
+
+        <s:decorate id="celdescm" template="layout/display.xhtml">
+            <ui:define name="label">Celdescm</ui:define>
+            <h:outputText value="#{exurinaliseHome.instance.celdescm}"/>
+        </s:decorate>
+
+        <s:decorate id="cristais" template="layout/display.xhtml">
+            <ui:define name="label">Cristais</ui:define>
+            <h:outputText value="#{exurinaliseHome.instance.cristais}"/>
+        </s:decorate>
+
+        <s:decorate id="outros" template="layout/display.xhtml">
+            <ui:define name="label">Outros</ui:define>
+            <h:outputText value="#{exurinaliseHome.instance.outros}"/>
+        </s:decorate>
+
+        <s:decorate id="obs" template="layout/display.xhtml">
+            <ui:define name="label">Obs</ui:define>
+            <h:outputText value="#{exurinaliseHome.instance.obs}"/>
+        </s:decorate>
+
+        <div style="clear:both"/>
+
+    </rich:panel>
+
+    <div class="actionButtons">
+
+        <s:button view="/ExurinaliseEdit.xhtml"
+                    id="edit"
+                 value="Edit"/>
+
+        <s:button view="/#{empty exurinaliseFrom ? 'ExurinaliseList' : exurinaliseFrom}.xhtml"
+                    id="done"
+                 value="Done"/>
+
+    </div>
+
+    <rich:tabPanel switchType="ajax">
+
+    <rich:tab>
+        <f:facet name="label">
+            <h:panelGroup><h:graphicImage value="/img/manytoone.gif" style="vertical-align: middle; padding-right: 4px;"/>Ficha</h:panelGroup>
+        </f:facet>
+    <div class="association" id="fichaParent">
+
+        <h:outputText value="There is no ficha associated with this exurinalise."
+                   rendered="#{exurinaliseHome.instance.ficha == null}"/>
+
+        <rich:dataTable var="_ficha"
+                   value="#{exurinaliseHome.instance.ficha}"
+                rendered="#{exurinaliseHome.instance.ficha != null}"
+              rowClasses="rvgRowOne,rvgRowTwo"
+                      id="fichaTable">
+            <h:column>
+                <f:facet name="header">Codficha</f:facet>
+                <h:outputText value="#{_ficha.codficha}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Animal codanimal</f:facet>
+                <h:outputText value="#{_ficha.animal.codanimal}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Anamnese</f:facet>
+                <h:outputText value="#{_ficha.anamnese}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Dtretorno</f:facet>
+                <h:outputText value="#{_ficha.dtretorno}">
+                    <s:convertDateTime type="date" dateStyle="short"/>
+                </h:outputText>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Diagnostico</f:facet>
+                <h:outputText value="#{_ficha.diagnostico}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Dtregistro</f:facet>
+                <h:outputText value="#{_ficha.dtregistro}">
+                    <s:convertDateTime type="date" dateStyle="short"/>
+                </h:outputText>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Peso</f:facet>
+                <h:outputText value="#{_ficha.peso}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Solicitados</f:facet>
+                <h:outputText value="#{_ficha.solicitados}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Receituario</f:facet>
+                <h:outputText value="#{_ficha.receituario}"/>
+            </h:column>
+            <h:column styleClass="action">
+                <f:facet name="header">Action</f:facet>
+                <s:link id="viewficha"
+                     value="View"
+                      view="/Ficha.xhtml">
+                    <f:param name="fichaCodficha"
+                           value="#{_ficha.codficha}"/>
+                </s:link>
+            </h:column>
+        </rich:dataTable>
+
+    </div>
+    </rich:tab>
+</rich:tabPanel>
+</ui:define>
+
+</ui:composition>

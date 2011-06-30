@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:s="http://jboss.com/products/seam/taglib"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:rich="http://richfaces.org/rich"
+    template="layout/template.xhtml">
+
+<ui:define name="body">
+
+    <rich:panel>
+        <f:facet name="header">Exhemograma Details</f:facet>
+
+        <s:decorate id="codhemograma" template="layout/display.xhtml">
+            <ui:define name="label">Codhemograma</ui:define>
+            <h:outputText value="#{exhemogramaHome.instance.codhemograma}"/>
+        </s:decorate>
+
+        <s:decorate id="dtregistro" template="layout/display.xhtml">
+            <ui:define name="label">Dtregistro</ui:define>
+            <h:outputText value="#{exhemogramaHome.instance.dtregistro}">
+                <s:convertDateTime type="date" dateStyle="short"/>
+            </h:outputText>
+        </s:decorate>
+
+        <s:decorate id="hemacias" template="layout/display.xhtml">
+            <ui:define name="label">Hemacias</ui:define>
+            <h:outputText value="#{exhemogramaHome.instance.hemacias}"/>
+        </s:decorate>
+
+        <s:decorate id="hemoglobina" template="layout/display.xhtml">
+            <ui:define name="label">Hemoglobina</ui:define>
+            <h:outputText value="#{exhemogramaHome.instance.hemoglobina}"/>
+        </s:decorate>
+
+        <s:decorate id="hematocrito" template="layout/display.xhtml">
+            <ui:define name="label">Hematocrito</ui:define>
+            <h:outputText value="#{exhemogramaHome.instance.hematocrito}"/>
+        </s:decorate>
+
+        <s:decorate id="vcm" template="layout/display.xhtml">
+            <ui:define name="label">Vcm</ui:define>
+            <h:outputText value="#{exhemogramaHome.instance.vcm}"/>
+        </s:decorate>
+
+        <s:decorate id="hcm" template="layout/display.xhtml">
+            <ui:define name="label">Hcm</ui:define>
+            <h:outputText value="#{exhemogramaHome.instance.hcm}"/>
+        </s:decorate>
+
+        <s:decorate id="chcm" template="layout/display.xhtml">
+            <ui:define name="label">Chcm</ui:define>
+            <h:outputText value="#{exhemogramaHome.instance.chcm}"/>
+        </s:decorate>
+
+        <s:decorate id="leuctotais" template="layout/display.xhtml">
+            <ui:define name="label">Leuctotais</ui:define>
+            <h:outputText value="#{exhemogramaHome.instance.leuctotais}"/>
+        </s:decorate>
+
+        <s:decorate id="metamielocitos" template="layout/display.xhtml">
+            <ui:define name="label">Metamielocitos</ui:define>
+            <h:outputText value="#{exhemogramaHome.instance.metamielocitos}"/>
+        </s:decorate>
+
+        <s:decorate id="bastonetes" template="layout/display.xhtml">
+            <ui:define name="label">Bastonetes</ui:define>
+            <h:outputText value="#{exhemogramaHome.instance.bastonetes}"/>
+        </s:decorate>
+
+        <s:decorate id="segmentados" template="layout/display.xhtml">
+            <ui:define name="label">Segmentados</ui:define>
+            <h:outputText value="#{exhemogramaHome.instance.segmentados}"/>
+        </s:decorate>
+
+        <s:decorate id="eosinofilos" template="layout/display.xhtml">
+            <ui:define name="label">Eosinofilos</ui:define>
+            <h:outputText value="#{exhemogramaHome.instance.eosinofilos}"/>
+        </s:decorate>
+
+        <s:decorate id="basofilos" template="layout/display.xhtml">
+            <ui:define name="label">Basofilos</ui:define>
+            <h:outputText value="#{exhemogramaHome.instance.basofilos}"/>
+        </s:decorate>
+
+        <s:decorate id="linfocitos" template="layout/display.xhtml">
+            <ui:define name="label">Linfocitos</ui:define>
+            <h:outputText value="#{exhemogramaHome.instance.linfocitos}"/>
+        </s:decorate>
+
+        <s:decorate id="monocitos" template="layout/display.xhtml">
+            <ui:define name="label">Monocitos</ui:define>
+            <h:outputText value="#{exhemogramaHome.instance.monocitos}"/>
+        </s:decorate>
+
+        <s:decorate id="obs" template="layout/display.xhtml">
+            <ui:define name="label">Obs</ui:define>
+            <h:outputText value="#{exhemogramaHome.instance.obs}"/>
+        </s:decorate>
+
+        <s:decorate id="proteinastotais" template="layout/display.xhtml">
+            <ui:define name="label">Proteinastotais</ui:define>
+            <h:outputText value="#{exhemogramaHome.instance.proteinastotais}"/>
+        </s:decorate>
+
+        <s:decorate id="plaquetas" template="layout/display.xhtml">
+            <ui:define name="label">Plaquetas</ui:define>
+            <h:outputText value="#{exhemogramaHome.instance.plaquetas}"/>
+        </s:decorate>
+
+        <div style="clear:both"/>
+
+    </rich:panel>
+
+    <div class="actionButtons">
+
+        <s:button view="/ExhemogramaEdit.xhtml"
+                    id="edit"
+                 value="Edit"/>
+
+        <s:button view="/#{empty exhemogramaFrom ? 'ExhemogramaList' : exhemogramaFrom}.xhtml"
+                    id="done"
+                 value="Done"/>
+
+    </div>
+
+    <rich:tabPanel switchType="ajax">
+
+    <rich:tab>
+        <f:facet name="label">
+            <h:panelGroup><h:graphicImage value="/img/manytoone.gif" style="vertical-align: middle; padding-right: 4px;"/>Ficha</h:panelGroup>
+        </f:facet>
+    <div class="association" id="fichaParent">
+
+        <h:outputText value="There is no ficha associated with this exhemograma."
+                   rendered="#{exhemogramaHome.instance.ficha == null}"/>
+
+        <rich:dataTable var="_ficha"
+                   value="#{exhemogramaHome.instance.ficha}"
+                rendered="#{exhemogramaHome.instance.ficha != null}"
+              rowClasses="rvgRowOne,rvgRowTwo"
+                      id="fichaTable">
+            <h:column>
+                <f:facet name="header">Codficha</f:facet>
+                <h:outputText value="#{_ficha.codficha}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Animal codanimal</f:facet>
+                <h:outputText value="#{_ficha.animal.codanimal}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Anamnese</f:facet>
+                <h:outputText value="#{_ficha.anamnese}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Dtretorno</f:facet>
+                <h:outputText value="#{_ficha.dtretorno}">
+                    <s:convertDateTime type="date" dateStyle="short"/>
+                </h:outputText>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Diagnostico</f:facet>
+                <h:outputText value="#{_ficha.diagnostico}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Dtregistro</f:facet>
+                <h:outputText value="#{_ficha.dtregistro}">
+                    <s:convertDateTime type="date" dateStyle="short"/>
+                </h:outputText>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Peso</f:facet>
+                <h:outputText value="#{_ficha.peso}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Solicitados</f:facet>
+                <h:outputText value="#{_ficha.solicitados}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Receituario</f:facet>
+                <h:outputText value="#{_ficha.receituario}"/>
+            </h:column>
+            <h:column styleClass="action">
+                <f:facet name="header">Action</f:facet>
+                <s:link id="viewficha"
+                     value="View"
+                      view="/Ficha.xhtml">
+                    <f:param name="fichaCodficha"
+                           value="#{_ficha.codficha}"/>
+                </s:link>
+            </h:column>
+        </rich:dataTable>
+
+    </div>
+    </rich:tab>
+</rich:tabPanel>
+</ui:define>
+
+</ui:composition>

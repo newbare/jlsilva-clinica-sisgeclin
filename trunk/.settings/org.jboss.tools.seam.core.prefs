@@ -1,0 +1,16 @@
+#Fri Apr 15 10:46:50 BRT 2011
+action.package=br.com.clinica.session
+action.sources=/CLINICA/src/hot
+eclipse.preferences.version=1
+model.package=br.com.clinica.entity
+model.sources=/CLINICA/src/main
+seam.ejb.project=CLINICA
+seam.project.connection.profile=New PostgreSQL(0)
+seam.project.deployment.type=war
+seam.project.settings.version=1.1
+seam.project.web.root.folder=/CLINICA/WebContent
+seam.runtime.name=jboss-4.2.3.GA
+seam.test.creating=false
+seam.test.project=CLINICA-test
+test.package=br.com.clinica.test
+test.sources=/CLINICA-test/test-src

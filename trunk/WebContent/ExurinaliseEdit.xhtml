@@ -1,0 +1,370 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:s="http://jboss.com/products/seam/taglib"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:a="http://richfaces.org/a4j"
+    xmlns:rich="http://richfaces.org/rich"
+    template="layout/template.xhtml">
+
+<ui:define name="body">
+
+    <h:form id="exurinalise" styleClass="edit">
+
+        <rich:panel>
+            <f:facet name="header">#{exurinaliseHome.managed ? 'Edit' : 'Add'} Exurinalise</f:facet>
+
+
+            <!-- <s:decorate id="codurinaliseField" template="layout/edit.xhtml">
+                <ui:define name="label">Codurinalise</ui:define>
+                <h:inputText id="codurinalise"
+                       required="true"
+                       disabled="#{exurinaliseHome.managed}"
+                          value="#{exurinaliseHome.instance.codurinalise}">
+                    <a:support event="onblur" reRender="codurinaliseField" bypassUpdates="true" ajaxSingle="true"/>
+                </h:inputText>
+            </s:decorate> -->
+
+
+
+            <s:decorate id="dtregistroField" template="layout/edit.xhtml">
+                <ui:define name="label">Dtregistro</ui:define>
+                <rich:calendar id="dtregistro"
+                          value="#{exurinaliseHome.instance.dtregistro}" datePattern="MM/dd/yyyy" />
+            </s:decorate>
+
+
+            <s:decorate id="urinaColheitaField" template="layout/edit.xhtml">
+                <ui:define name="label">Urina colheita</ui:define>
+                <h:inputText id="urinaColheita"
+                           size="50"
+                      maxlength="50"
+                          value="#{exurinaliseHome.instance.urinaColheita}">
+                    <a:support event="onblur" reRender="urinaColheitaField" bypassUpdates="true" ajaxSingle="true"/>
+                </h:inputText>
+            </s:decorate>
+
+
+            <s:decorate id="volumeField" template="layout/edit.xhtml">
+                <ui:define name="label">Volume</ui:define>
+                <h:inputText id="volume"
+                          value="#{exurinaliseHome.instance.volume}">
+                    <a:support event="onblur" reRender="volumeField" bypassUpdates="true" ajaxSingle="true"/>
+                </h:inputText>
+            </s:decorate>
+
+
+            <s:decorate id="aspectoField" template="layout/edit.xhtml">
+                <ui:define name="label">Aspecto</ui:define>
+                <h:inputText id="aspecto"
+                           size="50"
+                      maxlength="50"
+                          value="#{exurinaliseHome.instance.aspecto}">
+                    <a:support event="onblur" reRender="aspectoField" bypassUpdates="true" ajaxSingle="true"/>
+                </h:inputText>
+            </s:decorate>
+
+
+            <s:decorate id="corField" template="layout/edit.xhtml">
+                <ui:define name="label">Cor</ui:define>
+                <h:inputText id="cor"
+                           size="50"
+                      maxlength="50"
+                          value="#{exurinaliseHome.instance.cor}">
+                    <a:support event="onblur" reRender="corField" bypassUpdates="true" ajaxSingle="true"/>
+                </h:inputText>
+            </s:decorate>
+
+
+            <s:decorate id="odorField" template="layout/edit.xhtml">
+                <ui:define name="label">Odor</ui:define>
+                <h:inputText id="odor"
+                           size="50"
+                      maxlength="50"
+                          value="#{exurinaliseHome.instance.odor}">
+                    <a:support event="onblur" reRender="odorField" bypassUpdates="true" ajaxSingle="true"/>
+                </h:inputText>
+            </s:decorate>
+
+
+            <s:decorate id="densidadeField" template="layout/edit.xhtml">
+                <ui:define name="label">Densidade</ui:define>
+                <h:inputText id="densidade"
+                          value="#{exurinaliseHome.instance.densidade}">
+                    <a:support event="onblur" reRender="densidadeField" bypassUpdates="true" ajaxSingle="true"/>
+                </h:inputText>
+            </s:decorate>
+
+
+            <s:decorate id="phField" template="layout/edit.xhtml">
+                <ui:define name="label">Ph</ui:define>
+                <h:inputText id="ph"
+                          value="#{exurinaliseHome.instance.ph}">
+                    <a:support event="onblur" reRender="phField" bypassUpdates="true" ajaxSingle="true"/>
+                </h:inputText>
+            </s:decorate>
+
+
+            <s:decorate id="proteinasField" template="layout/edit.xhtml">
+                <ui:define name="label">Proteinas</ui:define>
+                <h:inputText id="proteinas"
+                           size="50"
+                      maxlength="50"
+                          value="#{exurinaliseHome.instance.proteinas}">
+                    <a:support event="onblur" reRender="proteinasField" bypassUpdates="true" ajaxSingle="true"/>
+                </h:inputText>
+            </s:decorate>
+
+
+            <s:decorate id="glicoseField" template="layout/edit.xhtml">
+                <ui:define name="label">Glicose</ui:define>
+                <h:inputText id="glicose"
+                           size="50"
+                      maxlength="50"
+                          value="#{exurinaliseHome.instance.glicose}">
+                    <a:support event="onblur" reRender="glicoseField" bypassUpdates="true" ajaxSingle="true"/>
+                </h:inputText>
+            </s:decorate>
+
+
+            <s:decorate id="ccetonicosField" template="layout/edit.xhtml">
+                <ui:define name="label">Ccetonicos</ui:define>
+                <h:inputText id="ccetonicos"
+                           size="50"
+                      maxlength="50"
+                          value="#{exurinaliseHome.instance.ccetonicos}">
+                    <a:support event="onblur" reRender="ccetonicosField" bypassUpdates="true" ajaxSingle="true"/>
+                </h:inputText>
+            </s:decorate>
+
+
+            <s:decorate id="bilirrubinaField" template="layout/edit.xhtml">
+                <ui:define name="label">Bilirrubina</ui:define>
+                <h:inputText id="bilirrubina"
+                           size="50"
+                      maxlength="50"
+                          value="#{exurinaliseHome.instance.bilirrubina}">
+                    <a:support event="onblur" reRender="bilirrubinaField" bypassUpdates="true" ajaxSingle="true"/>
+                </h:inputText>
+            </s:decorate>
+
+
+            <s:decorate id="uribilinogenioField" template="layout/edit.xhtml">
+                <ui:define name="label">Uribilinogenio</ui:define>
+                <h:inputText id="uribilinogenio"
+                           size="50"
+                      maxlength="50"
+                          value="#{exurinaliseHome.instance.uribilinogenio}">
+                    <a:support event="onblur" reRender="uribilinogenioField" bypassUpdates="true" ajaxSingle="true"/>
+                </h:inputText>
+            </s:decorate>
+
+
+            <s:decorate id="sgocultoField" template="layout/edit.xhtml">
+                <ui:define name="label">Sgoculto</ui:define>
+                <h:inputText id="sgoculto"
+                           size="50"
+                      maxlength="50"
+                          value="#{exurinaliseHome.instance.sgoculto}">
+                    <a:support event="onblur" reRender="sgocultoField" bypassUpdates="true" ajaxSingle="true"/>
+                </h:inputText>
+            </s:decorate>
+
+
+            <s:decorate id="nitritosField" template="layout/edit.xhtml">
+                <ui:define name="label">Nitritos</ui:define>
+                <h:inputText id="nitritos"
+                           size="50"
+                      maxlength="50"
+                          value="#{exurinaliseHome.instance.nitritos}">
+                    <a:support event="onblur" reRender="nitritosField" bypassUpdates="true" ajaxSingle="true"/>
+                </h:inputText>
+            </s:decorate>
+
+
+            <s:decorate id="hemaciasField" template="layout/edit.xhtml">
+                <ui:define name="label">Hemacias</ui:define>
+                <h:inputText id="hemacias"
+                           size="50"
+                      maxlength="50"
+                          value="#{exurinaliseHome.instance.hemacias}">
+                    <a:support event="onblur" reRender="hemaciasField" bypassUpdates="true" ajaxSingle="true"/>
+                </h:inputText>
+            </s:decorate>
+
+
+            <s:decorate id="leucocitosField" template="layout/edit.xhtml">
+                <ui:define name="label">Leucocitos</ui:define>
+                <h:inputText id="leucocitos"
+                           size="50"
+                      maxlength="50"
+                          value="#{exurinaliseHome.instance.leucocitos}">
+                    <a:support event="onblur" reRender="leucocitosField" bypassUpdates="true" ajaxSingle="true"/>
+                </h:inputText>
+            </s:decorate>
+
+
+            <s:decorate id="cilindrosField" template="layout/edit.xhtml">
+                <ui:define name="label">Cilindros</ui:define>
+                <h:inputText id="cilindros"
+                           size="50"
+                      maxlength="50"
+                          value="#{exurinaliseHome.instance.cilindros}">
+                    <a:support event="onblur" reRender="cilindrosField" bypassUpdates="true" ajaxSingle="true"/>
+                </h:inputText>
+            </s:decorate>
+
+
+            <s:decorate id="celdescmField" template="layout/edit.xhtml">
+                <ui:define name="label">Celdescm</ui:define>
+                <h:inputText id="celdescm"
+                           size="50"
+                      maxlength="50"
+                          value="#{exurinaliseHome.instance.celdescm}">
+                    <a:support event="onblur" reRender="celdescmField" bypassUpdates="true" ajaxSingle="true"/>
+                </h:inputText>
+            </s:decorate>
+
+
+            <s:decorate id="cristaisField" template="layout/edit.xhtml">
+                <ui:define name="label">Cristais</ui:define>
+                <h:inputText id="cristais"
+                           size="50"
+                      maxlength="50"
+                          value="#{exurinaliseHome.instance.cristais}">
+                    <a:support event="onblur" reRender="cristaisField" bypassUpdates="true" ajaxSingle="true"/>
+                </h:inputText>
+            </s:decorate>
+
+
+            <s:decorate id="outrosField" template="layout/edit.xhtml">
+                <ui:define name="label">Outros</ui:define>
+                <h:inputText id="outros"
+                           size="50"
+                      maxlength="50"
+                          value="#{exurinaliseHome.instance.outros}">
+                    <a:support event="onblur" reRender="outrosField" bypassUpdates="true" ajaxSingle="true"/>
+                </h:inputText>
+            </s:decorate>
+
+
+            <s:decorate id="obsField" template="layout/edit.xhtml">
+                <ui:define name="label">Obs</ui:define>
+                <h:inputTextarea id="obs"
+                               cols="80"
+                               rows="3"
+                              value="#{exurinaliseHome.instance.obs}"/>
+            </s:decorate>
+
+            <div style="clear:both">
+                <span class="required">*</span>
+                required fields
+            </div>
+
+        </rich:panel>
+
+        <div class="actionButtons">
+
+            <h:commandButton id="save"
+                          value="Save"
+                         action="#{exurinaliseHome.persist}"
+                       disabled="#{!exurinaliseHome.wired}"
+                       rendered="#{!exurinaliseHome.managed}"/>
+
+            <h:commandButton id="update"
+                          value="Save"
+                         action="#{exurinaliseHome.update}"
+                       rendered="#{exurinaliseHome.managed}"/>
+
+            <h:commandButton id="delete"
+                          value="Delete"
+                         action="#{exurinaliseHome.remove}"
+                      immediate="true"
+                       rendered="#{exurinaliseHome.managed}"/>
+
+            <s:button id="cancelEdit"
+                   value="Cancel"
+             propagation="end"
+                    view="/Exurinalise.xhtml"
+                rendered="#{exurinaliseHome.managed}"/>
+
+            <s:button id="cancelAdd"
+                   value="Cancel"
+             propagation="end"
+                    view="/#{empty exurinaliseFrom ? 'ExurinaliseList' : exurinaliseFrom}.xhtml"
+                rendered="#{!exurinaliseHome.managed}"/>
+
+        </div>
+    </h:form>
+
+<rich:tabPanel switchType="ajax">
+
+    <rich:tab label="Ficha *" labelClass="required">
+    <div class="association" id="fichaParent">
+
+        <h:outputText value="There is no ficha associated with this exurinalise."
+                   rendered="#{exurinaliseHome.instance.ficha == null}"/>
+
+        <rich:dataTable var="_ficha"
+                   value="#{exurinaliseHome.instance.ficha}"
+                rendered="#{exurinaliseHome.instance.ficha != null}"
+              rowClasses="rvgRowOne,rvgRowTwo"
+                      id="fichaTable">
+            <h:column>
+                <f:facet name="header">Codficha</f:facet>
+                <h:outputText value="#{_ficha.codficha}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Animal codanimal</f:facet>
+                <h:outputText value="#{_ficha.animal.codanimal}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Anamnese</f:facet>
+                <h:outputText value="#{_ficha.anamnese}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Dtretorno</f:facet>
+                <h:outputText value="#{_ficha.dtretorno}">
+                    <s:convertDateTime type="date" dateStyle="short"/>
+                </h:outputText>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Diagnostico</f:facet>
+                <h:outputText value="#{_ficha.diagnostico}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Dtregistro</f:facet>
+                <h:outputText value="#{_ficha.dtregistro}">
+                    <s:convertDateTime type="date" dateStyle="short"/>
+                </h:outputText>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Peso</f:facet>
+                <h:outputText value="#{_ficha.peso}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Solicitados</f:facet>
+                <h:outputText value="#{_ficha.solicitados}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Receituario</f:facet>
+                <h:outputText value="#{_ficha.receituario}"/>
+            </h:column>
+        </rich:dataTable>
+
+        <div class="actionButtons">
+            <s:button id="#{exurinaliseHome.instance.ficha != null ? 'changeParent' : 'selectParent'}" value="#{exurinaliseHome.instance.ficha != null ? 'Change' : 'Select'} ficha"
+                       view="/FichaList.xhtml">
+                <f:param name="from" value="ExurinaliseEdit"/>
+            </s:button>
+        </div>
+
+    </div>
+    </rich:tab>
+</rich:tabPanel>
+</ui:define>
+
+</ui:composition>

@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich" template="layout/template.xhtml">
+
+	<ui:define name="body">
+		<rich:panel>
+			<f:facet name="header">#{animalHome.managed ? 'Editar' : 'Adicionar'} Animal</f:facet>
+			<rich:tabPanel switchType="ajax">
+
+				<rich:tab label="Clientes *" labelClass="required">
+					<div class="association" id="clientesParent"><h:outputText
+						value="There is no clientes associated with this animal."
+						rendered="#{animalHome.instance.clientes == null}" /> <rich:dataTable
+						var="_clientes" value="#{animalHome.instance.clientes}"
+						rendered="#{animalHome.instance.clientes != null}"
+						rowClasses="rvgRowOne,rvgRowTwo" id="clientesTable">
+
+						<h:column>
+							<f:facet name="header">Nome</f:facet>
+							<h:outputText value="#{_clientes.nome}" />
+						</h:column>
+						<h:column>
+							<f:facet name="header">CPF</f:facet>
+							<h:outputText value="#{_clientes.cpf}" />
+						</h:column>
+						<h:column>
+							<f:facet name="header">Identidade</f:facet>
+							<h:outputText value="#{_clientes.rg}" />
+						</h:column>
+
+
+						<h:column>
+							<f:facet name="header">E-mail</f:facet>
+							<h:outputText value="#{_clientes.email}" />
+						</h:column>
+
+
+					</rich:dataTable>
+
+					<div class="actionButtons"><s:button
+						id="#{animalHome.instance.clientes != null ? 'changeParent1' : 'selectParent1'}"
+						value="#{animalHome.instance.clientes != null ? 'Carregar' : 'Selecionar'} clientes"
+						view="/ClientesList.xhtml">
+						<f:param name="from" value="AnimalEdit" />
+					</s:button></div>
+
+					</div>
+				</rich:tab>
+
+				<rich:tab label="Raca">
+					<div class="association" id="racaParent"><h:outputText
+						value="There is no raca associated with this animal."
+						rendered="#{animalHome.instance.raca == null}" /> <rich:dataTable
+						var="_raca" value="#{animalHome.instance.raca}"
+						rendered="#{animalHome.instance.raca != null}"
+						rowClasses="rvgRowOne,rvgRowTwo" id="racaTable">
+
+						<h:column>
+							<f:facet name="header">Especies </f:facet>
+							<h:outputText value="#{_raca.especies.nomeespecie}" />
+						</h:column>
+						<h:column>
+							<f:facet name="header">Raca</f:facet>
+							<h:outputText value="#{_raca.nomeraca}" />
+						</h:column>
+					</rich:dataTable>
+
+					<div class="actionButtons"><s:button
+						id="#{animalHome.instance.raca != null ? 'changeParent2' : 'selectParent2'}"
+						value="#{animalHome.instance.raca != null ? 'Carregar' : 'Selecionar'} raca"
+						view="/RacaList.xhtml">
+						<f:param name="from" value="AnimalEdit" />
+					</s:button></div>
+
+					</div>
+				</rich:tab>
+
+				<rich:tab label="Pelagem *" labelClass="required">
+					<div class="association" id="pelagemParent"><h:outputText
+						value="There is no pelagem associated with this animal."
+						rendered="#{animalHome.instance.pelagem == null}" /> <rich:dataTable
+						var="_pelagem" value="#{animalHome.instance.pelagem}"
+						rendered="#{animalHome.instance.pelagem != null}"
+						rowClasses="rvgRowOne,rvgRowTwo" id="pelagemTable">
+
+						<h:column>
+							<f:facet name="header">Pelagem</f:facet>
+							<h:outputText value="#{_pelagem.pelagem}" />
+						</h:column>
+					</rich:dataTable>
+
+					<div class="actionButtons"><s:button
+						id="#{animalHome.instance.pelagem != null ? 'changeParent3' : 'selectParent3'}"
+						value="#{animalHome.instance.pelagem != null ? 'Change' : 'Select'} pelagem"
+						view="/PelagemList.xhtml">
+						<f:param name="from" value="AnimalEdit" />
+					</s:button></div>
+
+					</div>
+				</rich:tab>
+
+				<rich:tab label="Fichas">
+					<h:form styleClass="association" id="fichasChildren">
+
+						<h:outputText value="Não existem Fichas associadas a este Animal."
+							rendered="#{empty animalHome.fichas}" />
+
+						<rich:dataTable value="#{animalHome.fichas}" var="_ficha"
+							rendered="#{not empty animalHome.fichas}"
+							rowClasses="rvgRowOne,rvgRowTwo" id="fichasTable">
+							<rich:column sortBy="#{_ficha.dtregistro}">
+								<f:facet name="header">Data do Registro</f:facet>
+								<h:outputText value="#{_ficha.dtregistro}">
+									<s:convertDateTime type="date" dateStyle="short"
+										pattern="dd/MM/yyyy" />
+								</h:outputText>
+							</rich:column>
+
+							<rich:column sortBy="#{_ficha.anamnese}">
+								<f:facet name="header">Anamnese:</f:facet>
+								<h:outputText value="#{_ficha.anamnese}" />
+							</rich:column>
+
+
+
+							<rich:column sortBy="#{_ficha.diagnostico}">
+								<f:facet name="header">Diagnostico:</f:facet>
+								<h:outputText value="#{_ficha.diagnostico}" />
+							</rich:column>
+							<rich:column sortBy="#{_ficha.receituario}">
+								<f:facet name="header">Medicamentos:</f:facet>
+								<h:outputText value="#{_ficha.receituario}" />
+							</rich:column>
+							<rich:column sortBy="#{_ficha.dtretorno}">
+								<f:facet name="header">Data de Retorno</f:facet>
+								<h:outputText value="#{_ficha.dtretorno}">
+									<s:convertDateTime type="date" dateStyle="short"
+										pattern="dd/MM/yyyy" />
+								</h:outputText>
+							</rich:column>
+
+						</rich:dataTable>
+
+					</h:form>
+
+					<f:subview rendered="#{animalHome.managed}" id="fichas">
+						<div class="actionButtons"><s:button id="addficha"
+							value="Adicionar Ficha" view="/FichaEdit.xhtml"
+							propagation="none">
+							<f:param name="animalCodanimal"
+								value="#{animalHome.instance.codanimal}" />
+							<f:param name="fichaFrom" value="Animal" />
+						</s:button></div>
+					</f:subview>
+				</rich:tab>
+			</rich:tabPanel>
+		</rich:panel>
+
+		<h:form id="animal" styleClass="edit">
+
+			<rich:panel>
+
+
+
+				<!--      
+       <f:facet name="header">#{animalHome.managed ? 'Editar' : 'Adicionar'} Animal</f:facet>
+      <s:decorate id="codanimalField" template="layout/edit.xhtml">
+                <ui:define name="label">Codanimal</ui:define>
+                <h:inputText id="codanimal"
+                       required="true"
+                       disabled="#{animalHome.managed}"
+                          value="#{animalHome.instance.codanimal}">
+                    <a:support event="onblur" reRender="codanimalField" bypassUpdates="true" ajaxSingle="true"/>
+                </h:inputText>
+            </s:decorate>
+		-->
+
+
+
+
+				<s:decorate id="nomeField" template="layout/edit.xhtml">
+					<ui:define name="label">Nome:</ui:define>
+					<h:inputText id="nome" required="true" size="50" maxlength="50"
+						value="#{animalHome.instance.nome}">
+						<a:support event="onblur" reRender="nomeField"
+							bypassUpdates="true" ajaxSingle="true" />
+					</h:inputText>
+				</s:decorate>
+
+
+				<s:decorate id="dtnascimentoField" template="layout/edit.xhtml">
+					<ui:define name="label">Data de Nascimento:</ui:define>
+					<rich:calendar id="dtnascimento"
+						value="#{animalHome.instance.dtnascimento}"
+						datePattern="dd/MM/yyyy" required="true" />
+					<a:support event="onblur" reRender="dtnascimentoField"
+						bypassUpdates="true" ajaxSingle="true" />
+				</s:decorate>
+
+
+				<s:decorate id="sexoField" template="layout/edit.xhtml">
+					<ui:define name="label">Sexo:</ui:define>
+					<h:selectOneRadio id="logic" value="#{animalHome.instance.sexo}"
+						styleClass="radio" required="true">
+						<f:selectItem itemLabel="Feminino" itemValue="Feminino" />
+						<f:selectItem itemLabel="Masculino" itemValue="Masculino" />
+						<a:support event="onblur" reRender="sexoField"
+							bypassUpdates="true" ajaxSingle="true" />
+					</h:selectOneRadio>
+				</s:decorate>
+
+
+				<s:decorate id="cciField" template="layout/edit.xhtml">
+					<ui:define name="label">CCI:</ui:define>
+					<h:inputText id="cci" size="50" maxlength="50"
+						value="#{animalHome.instance.cci}">
+						<a:support event="onblur" reRender="cciField" bypassUpdates="true"
+							ajaxSingle="true" />
+					</h:inputText>
+				</s:decorate>
+
+
+				<s:decorate id="chipField" template="layout/edit.xhtml">
+					<ui:define name="label">CHIP:</ui:define>
+					<h:inputText id="chip" size="50" maxlength="50"
+						value="#{animalHome.instance.chip}">
+						<a:support event="onblur" reRender="chipField"
+							bypassUpdates="true" ajaxSingle="true" />
+					</h:inputText>
+				</s:decorate>
+
+
+				<s:decorate id="pedigreeField" template="layout/edit.xhtml">
+					<ui:define name="label">Pedigree:</ui:define>
+					<h:selectOneRadio id="logic1"
+						value="#{animalHome.instance.pedigree}" styleClass="radio"
+						required="true">
+						<f:selectItem itemLabel="Sim" itemValue="true" />
+						<f:selectItem itemLabel="Não" itemValue="false" />
+						<a:support event="onblur" reRender="pedigreeField"
+							bypassUpdates="true" ajaxSingle="true" />
+					</h:selectOneRadio>
+				</s:decorate>
+
+				<s:decorate id="mortoField" template="layout/edit.xhtml">
+					<ui:define name="label">Morto?</ui:define>
+					<h:selectOneRadio id="logic2" value="#{animalHome.instance.morto}"
+						styleClass="radio" required="true">
+						<f:selectItem itemLabel="Sim" itemValue="true" />
+						<f:selectItem itemLabel="Não" itemValue="false" />
+						<a:support event="onblur" reRender="mortoField"
+							bypassUpdates="true" ajaxSingle="true" />
+					</h:selectOneRadio>
+				</s:decorate>
+
+
+				<s:decorate id="dtmortoField" template="layout/edit.xhtml"
+					rendered="#{animalHome.instance.morto==true}">
+					<ui:define name="label">Data Óbito:</ui:define>
+					<rich:calendar id="dtmorto" value="#{animalHome.instance.dtmorto}"
+						datePattern="dd/MM/yyyy" />
+				</s:decorate>
+
+				<s:decorate id="motivoField" template="layout/edit.xhtml"
+					rendered="#{animalHome.instance.morto==true}">
+					<ui:define name="label">Motivo:</ui:define>
+					<h:inputText id="motivo" size="30" maxlength="30"
+						value="#{animalHome.instance.motivo}">
+						<a:support event="onblur" reRender="motivoField"
+							bypassUpdates="true" ajaxSingle="true" />
+					</h:inputText>
+				</s:decorate>
+
+				<s:decorate id="alergiasField" template="layout/edit.xhtml">
+					<ui:define name="label">Alergias:</ui:define>
+					<h:inputText id="alergias" size="50" maxlength="50"
+						value="#{animalHome.instance.alergias}">
+						<a:support event="onblur" reRender="alergiasField"
+							bypassUpdates="true" ajaxSingle="true" />
+					</h:inputText>
+				</s:decorate>
+
+
+				<s:decorate id="obsField" template="layout/edit.xhtml">
+					<ui:define name="label">OBS:</ui:define>
+					<h:inputTextarea id="obs" cols="80" rows="3"
+						value="#{animalHome.instance.obs}" />
+				</s:decorate>
+
+
+
+
+
+				<div style="clear: both"><span class="required">*</span>
+				Campos Requeridos</div>
+
+			</rich:panel>
+
+			<div class="actionButtons"><h:commandButton id="save"
+				value="Salvar" action="#{animalHome.persist}"
+				disabled="#{!animalHome.wired}" rendered="#{!animalHome.managed}" />
+
+			<h:commandButton id="update" value="Salvar"
+				action="#{animalHome.update}" rendered="#{animalHome.managed}" /> <h:commandButton
+				id="delete" value="Excluir" action="#{animalHome.remove}"
+				immediate="true" rendered="#{animalHome.managed}" /> <s:button
+				id="cancelEdit" value="Cancelar" propagation="end"
+				view="/Animal.xhtml" rendered="#{animalHome.managed}" /> <s:button
+				id="cancelAdd" value="Cancelar" propagation="end"
+				view="/#{empty animalFrom ? 'AnimalList' : animalFrom}.xhtml"
+				rendered="#{!animalHome.managed}" /></div>
+		</h:form>
+
+
+	</ui:define>
+
+</ui:composition>

@@ -1,0 +1,723 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:s="http://jboss.com/products/seam/taglib"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:rich="http://richfaces.org/rich"
+    template="layout/template.xhtml">
+
+<ui:define name="body">
+
+    <rich:panel>
+        <f:facet name="header">Detalhes do Prontuário</f:facet>
+
+        <s:decorate id="cliente" template="layout/display.xhtml">
+            <ui:define name="label">Proprietário:</ui:define>
+            <h:outputText value="#{fichaHome.instance.animal.clientes.nome}"/>
+        </s:decorate>
+        
+        <s:decorate id="animal" template="layout/display.xhtml">
+            <ui:define name="label">Animal:</ui:define>
+            <h:outputText value="#{fichaHome.instance.animal.nome}"/>
+        </s:decorate>
+
+        <s:decorate id="anamnese" template="layout/display.xhtml">
+            <ui:define name="label">Anamnese</ui:define>
+            <h:outputText value="#{fichaHome.instance.anamnese}"/>
+        </s:decorate>
+        
+		<s:decorate id="dtregistro" template="layout/display.xhtml">
+            <ui:define name="label">Data Registro:</ui:define>
+            <h:outputText value="#{fichaHome.instance.dtregistro}">
+                <s:convertDateTime type="date" dateStyle="short" pattern="dd/MM/yyyy"/>
+            </h:outputText>
+        </s:decorate>
+        
+        <s:decorate id="dtretorno" template="layout/display.xhtml">
+            <ui:define name="label">Data Retorno:</ui:define>
+            <h:outputText value="#{fichaHome.instance.dtretorno}">
+                <s:convertDateTime type="date" dateStyle="short" pattern="dd/MM/yyyy"/>
+            </h:outputText>
+        </s:decorate>
+
+        <s:decorate id="diagnostico" template="layout/display.xhtml">
+            <ui:define name="label">Diagnóstico:</ui:define>
+            <h:outputText value="#{fichaHome.instance.diagnostico}"/>
+        </s:decorate>
+
+        
+
+        <s:decorate id="peso" template="layout/display.xhtml">
+            <ui:define name="label">Peso:</ui:define>
+            <h:outputText value="#{fichaHome.instance.peso}"/>
+        </s:decorate>
+
+        <s:decorate id="solicitados" template="layout/display.xhtml">
+            <ui:define name="label">Solicitou exames:</ui:define>
+            <h:outputText value="#{fichaHome.instance.solicitados}"/>
+        </s:decorate>
+
+        <s:decorate id="receituario" template="layout/display.xhtml">
+            <ui:define name="label">Receituário</ui:define>
+            <h:outputText value="#{fichaHome.instance.receituario}"/>
+        </s:decorate>
+
+        <div style="clear:both"/>
+
+    </rich:panel>
+
+    <div class="actionButtons">
+
+        <s:button view="/FichaEdit.xhtml"
+                    id="edit"
+                 value="Editar"/>
+
+        <s:button view="/#{empty fichaFrom ? 'FichaList' : fichaFrom}.xhtml"
+                    id="done"
+                 value="Finalizar"/>
+
+    </div>
+
+    <rich:tabPanel switchType="ajax">
+
+    <rich:tab>
+        <f:facet name="label">
+            <h:panelGroup><h:graphicImage value="/img/manytoone.gif" style="vertical-align: middle; padding-right: 4px;"/>Animal</h:panelGroup>
+        </f:facet>
+    <div class="association" id="animalParent">
+
+        <h:outputText value="There is no animal associated with this ficha."
+                   rendered="#{fichaHome.instance.animal == null}"/>
+
+        <rich:dataTable var="_animal"
+                   value="#{fichaHome.instance.animal}"
+                rendered="#{fichaHome.instance.animal != null}"
+              rowClasses="rvgRowOne,rvgRowTwo"
+                      id="animalTable">
+           
+            <h:column>
+                <f:facet name="header">Nome</f:facet>
+                <h:outputText value="#{_animal.nome}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Espécie</f:facet>
+                <h:outputText value="#{_animal.raca.especies.nomeespecie}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Raça</f:facet>
+                <h:outputText value="#{_animal.raca.nomeraca}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Pelagem</f:facet>
+                <h:outputText value="#{_animal.pelagem.codpelagem}"/>
+            </h:column>
+            
+            <h:column>
+                <f:facet name="header">Data de Nascimento</f:facet>
+                <h:outputText value="#{_animal.dtnascimento}">
+                    <s:convertDateTime type="date" dateStyle="short" pattern="dd/MM/yyyy"/>
+                </h:outputText>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Sexo</f:facet>
+                <h:outputText value="#{ _animal.sexo eq 'M'? 'Macho':'Fêmea'}"/>
+            </h:column>
+          
+            <h:column>
+                <f:facet name="header">Possui Pedigree?</f:facet>
+                <h:outputText value="#{_animal.pedigree eq 'true'? 'Sim':'Não'}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Morreu?</f:facet>
+                <h:outputText value="#{_animal.morto eq 'true'? 'Sim':'Não'}"/>
+            </h:column>  
+            
+            <h:column styleClass="action">
+                <f:facet name="header">Ação</f:facet>
+                <s:link id="viewanimal"
+                     
+                      view="/Animal.xhtml">
+                      <h:graphicImage value="/img/ico_HotKey.gif" alt="Visualizar" />
+                    <f:param name="animalCodanimal"
+                           value="#{_animal.codanimal}"/>
+                </s:link>
+            </h:column>
+        </rich:dataTable>
+
+    </div>
+    </rich:tab>
+
+    <rich:tab>
+        <f:facet name="label">
+            <h:panelGroup><h:graphicImage value="/img/onetomany.gif" style="vertical-align: middle; padding-right: 4px;"/>Exames de Bio Sanguinea</h:panelGroup>
+        </f:facet>
+    <h:form styleClass="association" id="exbiosanguineasChildren">
+
+        <h:outputText value="Não Existem Exames de Bio-Sanguínea Associados a este Prontuário"
+                   rendered="#{empty fichaHome.exbiosanguineas}"/>
+
+        <rich:dataTable value="#{fichaHome.exbiosanguineas}"
+                       var="_exbiosanguinea"
+                  rendered="#{not empty fichaHome.exbiosanguineas}"
+                rowClasses="rvgRowOne,rvgRowTwo"
+                        id="exbiosanguineasTable">
+            
+            <rich:column sortBy="#{_exbiosanguinea.dtregistro}">
+                <f:facet name="header">Data Registro</f:facet>
+                <h:outputText value="#{_exbiosanguinea.dtregistro}">
+                    <s:convertDateTime type="date" dateStyle="short" pattern="dd/MM/yyyy"/>
+                </h:outputText>
+            </rich:column>
+            
+            <rich:column sortBy="#{_exbiosanguinea.proteina}">
+                <f:facet name="header">Proteína T</f:facet>
+                <h:outputText value="#{_exbiosanguinea.proteina}"/> &nbsp;d/dl
+            </rich:column>
+            
+            <rich:column sortBy="#{_exbiosanguinea.albumina}">
+                <f:facet name="header">Albumina</f:facet>
+                <h:outputText value="#{_exbiosanguinea.albumina}"/> &nbsp;g/dl
+            </rich:column>
+            
+            <rich:column sortBy="#{_exbiosanguinea.fibrinogenio}">
+                <f:facet name="header">Fibrinogênio</f:facet>
+                <h:outputText value="#{_exbiosanguinea.fibrinogenio}"/>
+            </rich:column>
+            
+            <rich:column sortBy="#{_exbiosanguinea.bilirtotal}">
+                <f:facet name="header">Bilir T</f:facet>
+                <h:outputText value="#{_exbiosanguinea.bilirtotal}"/> &nbsp;mg/dl
+            </rich:column>
+            <rich:column sortBy="#{_exbiosanguinea.bilirdireta}">
+                <f:facet name="header">Bilir D</f:facet>
+                <h:outputText value="#{_exbiosanguinea.bilirdireta}"/> &nbsp;mg/dl
+            </rich:column>
+            
+            <rich:column sortBy="#{_exbiosanguinea.glicemia}">
+                <f:facet name="header">Glicemia</f:facet>
+                <h:outputText value="#{_exbiosanguinea.glicemia}"/> &nbsp;mg/dl
+            </rich:column>
+            
+              <rich:column sortBy="#{_exbiosanguinea.colesterol}">
+                <f:facet name="header">Colesterol</f:facet>
+                <h:outputText value="#{_exbiosanguinea.colesterol}"/> &nbsp;mg/dl
+            </rich:column>
+            
+            <rich:column sortBy="#{_exbiosanguinea.alt}">
+                <f:facet name="header"> ALT</f:facet>
+                <h:outputText value="#{_exbiosanguinea.alt}"/> &nbsp;U/L
+            </rich:column>
+          
+            <rich:column sortBy="#{_exbiosanguinea.ast}">
+                <f:facet name="header">AST</f:facet>
+                <h:outputText value="#{_exbiosanguinea.ast}"/> &nbsp;U/L
+            </rich:column>
+            
+            <rich:column sortBy="#{_exbiosanguinea.fosfalcalina}">
+                <f:facet name="header">Fosfatase A</f:facet>
+                <h:outputText value="#{_exbiosanguinea.fosfalcalina}"/> &nbsp;U/L
+            </rich:column>
+            
+            <rich:column sortBy="#{_exbiosanguinea.ureia}">
+                <f:facet name="header">Ureia</f:facet>
+                <h:outputText value="#{_exbiosanguinea.ureia}"/> &nbsp;mg/dl
+            </rich:column>
+            
+            <rich:column sortBy="#{_exbiosanguinea.creatinina}">
+                <f:facet name="header">Creatinina</f:facet>
+                <h:outputText value="#{_exbiosanguinea.creatinina}"/> &nbsp;mg/dl
+            </rich:column>            
+            
+            
+            <rich:column sortBy="#{_exbiosanguinea.sodio}">
+                <f:facet name="header">Sódio</f:facet>
+                <h:outputText value="#{_exbiosanguinea.sodio}"/> &nbsp;mg/dl
+            </rich:column>
+            
+            <rich:column sortBy="#{_exbiosanguinea.potassio}">
+                <f:facet name="header">Potássio</f:facet>
+                <h:outputText value="#{_exbiosanguinea.potassio}"/> &nbsp;mg/dl
+            </rich:column>
+            
+            <h:column>
+                <f:facet name="header">Ação</f:facet>
+                <s:link id="selectexbiosanguinea"
+                     value="Selecionar"
+                      view="/Exbiosanguinea.xhtml">
+                    <f:param name="exbiosanguineaCodbiosanguinea"
+                            value="#{_exbiosanguinea.codbiosanguinea}"/>
+                    <f:param name="exbiosanguineaFrom" value="Ficha"/>
+                </s:link>
+            </h:column>
+        </rich:dataTable>
+
+    </h:form>
+
+    <div class="actionButtons">
+        <s:button
+               value="Adicionar Exame de Bio-sanguínea"
+                view="/ExbiosanguineaEdit.xhtml">
+            <f:param name="fichaCodficha"
+                    value="#{fichaHome.instance.codficha}"/>
+            <f:param name="exbiosanguineaFrom" value="Ficha"/>
+        </s:button>
+    </div>
+    </rich:tab>
+
+    <rich:tab>
+        <f:facet name="label">
+            <h:panelGroup><h:graphicImage value="/img/onetomany.gif" style="vertical-align: middle; padding-right: 4px;"/>Internacaos</h:panelGroup>
+        </f:facet>
+    <h:form styleClass="association" id="internacaosChildren">
+
+        <h:outputText value="There are no internacaos associated with this ficha."
+                   rendered="#{empty fichaHome.internacaos}"/>
+
+        <rich:dataTable value="#{fichaHome.internacaos}"
+                       var="_internacao"
+                  rendered="#{not empty fichaHome.internacaos}"
+                rowClasses="rvgRowOne,rvgRowTwo"
+                        id="internacaosTable">
+            <rich:column sortBy="#{_internacao.codinternacao}">
+                <f:facet name="header">Codinternacao</f:facet>
+                <h:outputText value="#{_internacao.codinternacao}"/>
+            </rich:column>
+            <rich:column sortBy="#{_internacao.obs}">
+                <f:facet name="header">Obs</f:facet>
+                <h:outputText value="#{_internacao.obs}"/>
+            </rich:column>
+            <rich:column sortBy="#{_internacao.dtregistro}">
+                <f:facet name="header">Dtregistro</f:facet>
+                <h:outputText value="#{_internacao.dtregistro}">
+                    <s:convertDateTime type="date" dateStyle="short"/>
+                </h:outputText>
+            </rich:column>
+            <rich:column sortBy="#{_internacao.estsaida}">
+                <f:facet name="header">Estsaida</f:facet>
+                <h:outputText value="#{_internacao.estsaida}">
+                    <s:convertDateTime type="date" dateStyle="short"/>
+                </h:outputText>
+            </rich:column>
+            <rich:column sortBy="#{_internacao.datasaida}">
+                <f:facet name="header">Datasaida</f:facet>
+                <h:outputText value="#{_internacao.datasaida}">
+                    <s:convertDateTime type="date" dateStyle="short"/>
+                </h:outputText>
+            </rich:column>
+            <rich:column sortBy="#{_internacao.vlcheque}">
+                <f:facet name="header">Vlcheque</f:facet>
+                <h:outputText value="#{_internacao.vlcheque}"/>
+            </rich:column>
+            <rich:column sortBy="#{_internacao.datahorasaida}">
+                <f:facet name="header">Datahorasaida</f:facet>
+                <h:outputText value="#{_internacao.datahorasaida}">
+                    <s:convertDateTime type="date" dateStyle="short"/>
+                </h:outputText>
+            </rich:column>
+            <rich:column sortBy="#{_internacao.motivosaida}">
+                <f:facet name="header">Motivosaida</f:facet>
+                <h:outputText value="#{_internacao.motivosaida}"/>
+            </rich:column>
+            <rich:column sortBy="#{_internacao.obssaida}">
+                <f:facet name="header">Obssaida</f:facet>
+                <h:outputText value="#{_internacao.obssaida}"/>
+            </rich:column>
+            <h:column>
+                <f:facet name="header">Action</f:facet>
+                <s:link id="selectinternacao"
+                     value="Select"
+                      view="/Internacao.xhtml">
+                    <f:param name="internacaoCodinternacao"
+                            value="#{_internacao.codinternacao}"/>
+                    <f:param name="internacaoFrom" value="Ficha"/>
+                </s:link>
+            </h:column>
+        </rich:dataTable>
+
+    </h:form>
+
+    <div class="actionButtons">
+        <s:button
+               value="Add internacao"
+                view="/InternacaoEdit.xhtml">
+            <f:param name="fichaCodficha"
+                    value="#{fichaHome.instance.codficha}"/>
+            <f:param name="internacaoFrom" value="Ficha"/>
+        </s:button>
+    </div>
+    </rich:tab>
+
+    <rich:tab>
+        <f:facet name="label">
+            <h:panelGroup><h:graphicImage value="/img/onetomany.gif" style="vertical-align: middle; padding-right: 4px;"/>Exhemogramas</h:panelGroup>
+        </f:facet>
+    <h:form styleClass="association" id="exhemogramasChildren">
+
+        <h:outputText value="There are no exhemogramas associated with this ficha."
+                   rendered="#{empty fichaHome.exhemogramas}"/>
+
+        <rich:dataTable value="#{fichaHome.exhemogramas}"
+                       var="_exhemograma"
+                  rendered="#{not empty fichaHome.exhemogramas}"
+                rowClasses="rvgRowOne,rvgRowTwo"
+                        id="exhemogramasTable">
+            <rich:column sortBy="#{_exhemograma.codhemograma}">
+                <f:facet name="header">Codhemograma</f:facet>
+                <h:outputText value="#{_exhemograma.codhemograma}"/>
+            </rich:column>
+            <rich:column sortBy="#{_exhemograma.dtregistro}">
+                <f:facet name="header">Dtregistro</f:facet>
+                <h:outputText value="#{_exhemograma.dtregistro}">
+                    <s:convertDateTime type="date" dateStyle="short"/>
+                </h:outputText>
+            </rich:column>
+            <rich:column sortBy="#{_exhemograma.hemacias}">
+                <f:facet name="header">Hemacias</f:facet>
+                <h:outputText value="#{_exhemograma.hemacias}"/>
+            </rich:column>
+            <rich:column sortBy="#{_exhemograma.hemoglobina}">
+                <f:facet name="header">Hemoglobina</f:facet>
+                <h:outputText value="#{_exhemograma.hemoglobina}"/>
+            </rich:column>
+            <rich:column sortBy="#{_exhemograma.hematocrito}">
+                <f:facet name="header">Hematocrito</f:facet>
+                <h:outputText value="#{_exhemograma.hematocrito}"/>
+            </rich:column>
+            <rich:column sortBy="#{_exhemograma.vcm}">
+                <f:facet name="header">Vcm</f:facet>
+                <h:outputText value="#{_exhemograma.vcm}"/>
+            </rich:column>
+            <rich:column sortBy="#{_exhemograma.hcm}">
+                <f:facet name="header">Hcm</f:facet>
+                <h:outputText value="#{_exhemograma.hcm}"/>
+            </rich:column>
+            <rich:column sortBy="#{_exhemograma.chcm}">
+                <f:facet name="header">Chcm</f:facet>
+                <h:outputText value="#{_exhemograma.chcm}"/>
+            </rich:column>
+            <rich:column sortBy="#{_exhemograma.leuctotais}">
+                <f:facet name="header">Leuctotais</f:facet>
+                <h:outputText value="#{_exhemograma.leuctotais}"/>
+            </rich:column>
+            <rich:column sortBy="#{_exhemograma.metamielocitos}">
+                <f:facet name="header">Metamielocitos</f:facet>
+                <h:outputText value="#{_exhemograma.metamielocitos}"/>
+            </rich:column>
+            <rich:column sortBy="#{_exhemograma.bastonetes}">
+                <f:facet name="header">Bastonetes</f:facet>
+                <h:outputText value="#{_exhemograma.bastonetes}"/>
+            </rich:column>
+            <rich:column sortBy="#{_exhemograma.segmentados}">
+                <f:facet name="header">Segmentados</f:facet>
+                <h:outputText value="#{_exhemograma.segmentados}"/>
+            </rich:column>
+            <rich:column sortBy="#{_exhemograma.eosinofilos}">
+                <f:facet name="header">Eosinofilos</f:facet>
+                <h:outputText value="#{_exhemograma.eosinofilos}"/>
+            </rich:column>
+            <rich:column sortBy="#{_exhemograma.basofilos}">
+                <f:facet name="header">Basofilos</f:facet>
+                <h:outputText value="#{_exhemograma.basofilos}"/>
+            </rich:column>
+            <rich:column sortBy="#{_exhemograma.linfocitos}">
+                <f:facet name="header">Linfocitos</f:facet>
+                <h:outputText value="#{_exhemograma.linfocitos}"/>
+            </rich:column>
+            <rich:column sortBy="#{_exhemograma.monocitos}">
+                <f:facet name="header">Monocitos</f:facet>
+                <h:outputText value="#{_exhemograma.monocitos}"/>
+            </rich:column>
+            <rich:column sortBy="#{_exhemograma.obs}">
+                <f:facet name="header">Obs</f:facet>
+                <h:outputText value="#{_exhemograma.obs}"/>
+            </rich:column>
+            <rich:column sortBy="#{_exhemograma.proteinastotais}">
+                <f:facet name="header">Proteinastotais</f:facet>
+                <h:outputText value="#{_exhemograma.proteinastotais}"/>
+            </rich:column>
+            <rich:column sortBy="#{_exhemograma.plaquetas}">
+                <f:facet name="header">Plaquetas</f:facet>
+                <h:outputText value="#{_exhemograma.plaquetas}"/>
+            </rich:column>
+            <h:column>
+                <f:facet name="header">Action</f:facet>
+                <s:link id="selectexhemograma"
+                     value="Select"
+                      view="/Exhemograma.xhtml">
+                    <f:param name="exhemogramaCodhemograma"
+                            value="#{_exhemograma.codhemograma}"/>
+                    <f:param name="exhemogramaFrom" value="Ficha"/>
+                </s:link>
+            </h:column>
+        </rich:dataTable>
+
+    </h:form>
+
+    <div class="actionButtons">
+        <s:button
+               value="Add exhemograma"
+                view="/ExhemogramaEdit.xhtml">
+            <f:param name="fichaCodficha"
+                    value="#{fichaHome.instance.codficha}"/>
+            <f:param name="exhemogramaFrom" value="Ficha"/>
+        </s:button>
+    </div>
+    </rich:tab>
+
+    <rich:tab>
+        <f:facet name="label">
+            <h:panelGroup><h:graphicImage value="/img/onetomany.gif" style="vertical-align: middle; padding-right: 4px;"/>Exfezeses</h:panelGroup>
+        </f:facet>
+    <h:form styleClass="association" id="exfezesesChildren">
+
+        <h:outputText value="There are no exfezeses associated with this ficha."
+                   rendered="#{empty fichaHome.exfezeses}"/>
+
+        <rich:dataTable value="#{fichaHome.exfezeses}"
+                       var="_exfezes"
+                  rendered="#{not empty fichaHome.exfezeses}"
+                rowClasses="rvgRowOne,rvgRowTwo"
+                        id="exfezesesTable">
+            <rich:column sortBy="#{_exfezes.codexfezes}">
+                <f:facet name="header">Codexfezes</f:facet>
+                <h:outputText value="#{_exfezes.codexfezes}"/>
+            </rich:column>
+            <rich:column sortBy="#{_exfezes.dtregistro}">
+                <f:facet name="header">Dtregistro</f:facet>
+                <h:outputText value="#{_exfezes.dtregistro}">
+                    <s:convertDateTime type="date" dateStyle="short"/>
+                </h:outputText>
+            </rich:column>
+            <rich:column sortBy="#{_exfezes.resultado}">
+                <f:facet name="header">Resultado</f:facet>
+                <h:outputText value="#{_exfezes.resultado}"/>
+            </rich:column>
+            <rich:column sortBy="#{_exfezes.metodo}">
+                <f:facet name="header">Metodo</f:facet>
+                <h:outputText value="#{_exfezes.metodo}"/>
+            </rich:column>
+            <h:column>
+                <f:facet name="header">Action</f:facet>
+                <s:link id="selectexfezes"
+                     value="Select"
+                      view="/Exfezes.xhtml">
+                    <f:param name="exfezesCodexfezes"
+                            value="#{_exfezes.codexfezes}"/>
+                    <f:param name="exfezesFrom" value="Ficha"/>
+                </s:link>
+            </h:column>
+        </rich:dataTable>
+
+    </h:form>
+
+    <div class="actionButtons">
+        <s:button
+               value="Add exfezes"
+                view="/ExfezesEdit.xhtml">
+            <f:param name="fichaCodficha"
+                    value="#{fichaHome.instance.codficha}"/>
+            <f:param name="exfezesFrom" value="Ficha"/>
+        </s:button>
+    </div>
+    </rich:tab>
+
+    <rich:tab>
+        <f:facet name="label">
+            <h:panelGroup><h:graphicImage value="/img/onetomany.gif" style="vertical-align: middle; padding-right: 4px;"/>Vacinacaos</h:panelGroup>
+        </f:facet>
+    <h:form styleClass="association" id="vacinacaosChildren">
+
+        <h:outputText value="There are no vacinacaos associated with this ficha."
+                   rendered="#{empty fichaHome.vacinacaos}"/>
+
+        <rich:dataTable value="#{fichaHome.vacinacaos}"
+                       var="_vacinacao"
+                  rendered="#{not empty fichaHome.vacinacaos}"
+                rowClasses="rvgRowOne,rvgRowTwo"
+                        id="vacinacaosTable">
+            <rich:column sortBy="#{_vacinacao.codvacinacao}">
+                <f:facet name="header">Codvacinacao</f:facet>
+                <h:outputText value="#{_vacinacao.codvacinacao}"/>
+            </rich:column>
+            <rich:column sortBy="#{_vacinacao.nomelaboratorio}">
+                <f:facet name="header">Nomelaboratorio</f:facet>
+                <h:outputText value="#{_vacinacao.nomelaboratorio}"/>
+            </rich:column>
+            <rich:column sortBy="#{_vacinacao.dtvacinacao}">
+                <f:facet name="header">Dtvacinacao</f:facet>
+                <h:outputText value="#{_vacinacao.dtvacinacao}">
+                    <s:convertDateTime type="date" dateStyle="short"/>
+                </h:outputText>
+            </rich:column>
+            <rich:column sortBy="#{_vacinacao.lote}">
+                <f:facet name="header">Lote</f:facet>
+                <h:outputText value="#{_vacinacao.lote}"/>
+            </rich:column>
+            <rich:column sortBy="#{_vacinacao.retornou}">
+                <f:facet name="header">Retornou</f:facet>
+                <h:outputText value="#{_vacinacao.retornou}"/>
+            </rich:column>
+            <h:column>
+                <f:facet name="header">Action</f:facet>
+                <s:link id="selectvacinacao"
+                     value="Select"
+                      view="/Vacinacao.xhtml">
+                    <f:param name="vacinacaoCodvacinacao"
+                            value="#{_vacinacao.codvacinacao}"/>
+                    <f:param name="vacinacaoFrom" value="Ficha"/>
+                </s:link>
+            </h:column>
+        </rich:dataTable>
+
+    </h:form>
+
+    <div class="actionButtons">
+        <s:button
+               value="Add vacinacao"
+                view="/VacinacaoEdit.xhtml">
+            <f:param name="fichaCodficha"
+                    value="#{fichaHome.instance.codficha}"/>
+            <f:param name="vacinacaoFrom" value="Ficha"/>
+        </s:button>
+    </div>
+    </rich:tab>
+
+    <rich:tab>
+        <f:facet name="label">
+            <h:panelGroup><h:graphicImage value="/img/onetomany.gif" style="vertical-align: middle; padding-right: 4px;"/>Exurinalises</h:panelGroup>
+        </f:facet>
+    <h:form styleClass="association" id="exurinalisesChildren">
+
+        <h:outputText value="There are no exurinalises associated with this ficha."
+                   rendered="#{empty fichaHome.exurinalises}"/>
+
+        <rich:dataTable value="#{fichaHome.exurinalises}"
+                       var="_exurinalise"
+                  rendered="#{not empty fichaHome.exurinalises}"
+                rowClasses="rvgRowOne,rvgRowTwo"
+                        id="exurinalisesTable">
+            <rich:column sortBy="#{_exurinalise.codurinalise}">
+                <f:facet name="header">Codurinalise</f:facet>
+                <h:outputText value="#{_exurinalise.codurinalise}"/>
+            </rich:column>
+            <rich:column sortBy="#{_exurinalise.dtregistro}">
+                <f:facet name="header">Dtregistro</f:facet>
+                <h:outputText value="#{_exurinalise.dtregistro}">
+                    <s:convertDateTime type="date" dateStyle="short"/>
+                </h:outputText>
+            </rich:column>
+            <rich:column sortBy="#{_exurinalise.urinaColheita}">
+                <f:facet name="header">Urina colheita</f:facet>
+                <h:outputText value="#{_exurinalise.urinaColheita}"/>
+            </rich:column>
+            <rich:column sortBy="#{_exurinalise.volume}">
+                <f:facet name="header">Volume</f:facet>
+                <h:outputText value="#{_exurinalise.volume}"/>
+            </rich:column>
+            <rich:column sortBy="#{_exurinalise.aspecto}">
+                <f:facet name="header">Aspecto</f:facet>
+                <h:outputText value="#{_exurinalise.aspecto}"/>
+            </rich:column>
+            <rich:column sortBy="#{_exurinalise.cor}">
+                <f:facet name="header">Cor</f:facet>
+                <h:outputText value="#{_exurinalise.cor}"/>
+            </rich:column>
+            <rich:column sortBy="#{_exurinalise.odor}">
+                <f:facet name="header">Odor</f:facet>
+                <h:outputText value="#{_exurinalise.odor}"/>
+            </rich:column>
+            <rich:column sortBy="#{_exurinalise.densidade}">
+                <f:facet name="header">Densidade</f:facet>
+                <h:outputText value="#{_exurinalise.densidade}"/>
+            </rich:column>
+            <rich:column sortBy="#{_exurinalise.ph}">
+                <f:facet name="header">Ph</f:facet>
+                <h:outputText value="#{_exurinalise.ph}"/>
+            </rich:column>
+            <rich:column sortBy="#{_exurinalise.proteinas}">
+                <f:facet name="header">Proteinas</f:facet>
+                <h:outputText value="#{_exurinalise.proteinas}"/>
+            </rich:column>
+            <rich:column sortBy="#{_exurinalise.glicose}">
+                <f:facet name="header">Glicose</f:facet>
+                <h:outputText value="#{_exurinalise.glicose}"/>
+            </rich:column>
+            <rich:column sortBy="#{_exurinalise.ccetonicos}">
+                <f:facet name="header">Ccetonicos</f:facet>
+                <h:outputText value="#{_exurinalise.ccetonicos}"/>
+            </rich:column>
+            <rich:column sortBy="#{_exurinalise.bilirrubina}">
+                <f:facet name="header">Bilirrubina</f:facet>
+                <h:outputText value="#{_exurinalise.bilirrubina}"/>
+            </rich:column>
+            <rich:column sortBy="#{_exurinalise.uribilinogenio}">
+                <f:facet name="header">Uribilinogenio</f:facet>
+                <h:outputText value="#{_exurinalise.uribilinogenio}"/>
+            </rich:column>
+            <rich:column sortBy="#{_exurinalise.sgoculto}">
+                <f:facet name="header">Sgoculto</f:facet>
+                <h:outputText value="#{_exurinalise.sgoculto}"/>
+            </rich:column>
+            <rich:column sortBy="#{_exurinalise.nitritos}">
+                <f:facet name="header">Nitritos</f:facet>
+                <h:outputText value="#{_exurinalise.nitritos}"/>
+            </rich:column>
+            <rich:column sortBy="#{_exurinalise.hemacias}">
+                <f:facet name="header">Hemacias</f:facet>
+                <h:outputText value="#{_exurinalise.hemacias}"/>
+            </rich:column>
+            <rich:column sortBy="#{_exurinalise.leucocitos}">
+                <f:facet name="header">Leucocitos</f:facet>
+                <h:outputText value="#{_exurinalise.leucocitos}"/>
+            </rich:column>
+            <rich:column sortBy="#{_exurinalise.cilindros}">
+                <f:facet name="header">Cilindros</f:facet>
+                <h:outputText value="#{_exurinalise.cilindros}"/>
+            </rich:column>
+            <rich:column sortBy="#{_exurinalise.celdescm}">
+                <f:facet name="header">Celdescm</f:facet>
+                <h:outputText value="#{_exurinalise.celdescm}"/>
+            </rich:column>
+            <rich:column sortBy="#{_exurinalise.cristais}">
+                <f:facet name="header">Cristais</f:facet>
+                <h:outputText value="#{_exurinalise.cristais}"/>
+            </rich:column>
+            <rich:column sortBy="#{_exurinalise.outros}">
+                <f:facet name="header">Outros</f:facet>
+                <h:outputText value="#{_exurinalise.outros}"/>
+            </rich:column>
+            <rich:column sortBy="#{_exurinalise.obs}">
+                <f:facet name="header">Obs</f:facet>
+                <h:outputText value="#{_exurinalise.obs}"/>
+            </rich:column>
+            <h:column>
+                <f:facet name="header">Action</f:facet>
+                <s:link id="selectexurinalise"
+                     value="Select"
+                      view="/Exurinalise.xhtml">
+                    <f:param name="exurinaliseCodurinalise"
+                            value="#{_exurinalise.codurinalise}"/>
+                    <f:param name="exurinaliseFrom" value="Ficha"/>
+                </s:link>
+            </h:column>
+        </rich:dataTable>
+
+    </h:form>
+
+    <div class="actionButtons">
+        <s:button
+               value="Add exurinalise"
+                view="/ExurinaliseEdit.xhtml">
+            <f:param name="fichaCodficha"
+                    value="#{fichaHome.instance.codficha}"/>
+            <f:param name="exurinaliseFrom" value="Ficha"/>
+        </s:button>
+    </div>
+    </rich:tab>
+</rich:tabPanel>
+</ui:define>
+
+</ui:composition>

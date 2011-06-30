@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:s="http://jboss.com/products/seam/taglib"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:rich="http://richfaces.org/rich"
+    template="layout/template.xhtml">
+
+<ui:define name="body">
+
+    <rich:panel>
+        <f:facet name="header">Detalhes do Telefone</f:facet>
+
+        
+        <s:decorate id="telefone" template="layout/display.xhtml">
+            <ui:define name="label">DDD:</ui:define>
+            <h:outputText value="#{clientestelHome.instance.telefone}"/>
+        </s:decorate>
+
+
+        <s:decorate id="telefonenum" template="layout/display.xhtml">
+            <ui:define name="label">Número:</ui:define>
+            <h:outputText value="#{clientestelHome.instance.telefonenum}"/>
+        </s:decorate>
+
+        <s:decorate id="tipo" template="layout/display.xhtml">
+            <ui:define name="label">Tipo:</ui:define>
+            <h:outputText value="#{clientestelHome.instance.tipo}"/>
+        </s:decorate>
+        <div style="clear:both"/>
+
+    </rich:panel>
+
+    <div class="actionButtons">
+
+        <s:button view="/ClientestelEdit.xhtml"
+                    id="edit"
+                 value="Editar"/>
+
+        <s:button view="/#{empty clientestelFrom ? 'ClientestelList' : clientestelFrom}.xhtml"
+                    id="done"
+                 value="Finalizar"/>
+
+    </div>
+
+    <rich:tabPanel switchType="ajax">
+
+    <rich:tab>
+        <f:facet name="label">
+            <h:panelGroup><h:graphicImage value="/img/manytoone.gif" style="vertical-align: middle; padding-right: 4px;"/>Clientes</h:panelGroup>
+        </f:facet>
+    <div class="association" id="clientesParent">
+
+        <h:outputText value="There is no clientes associated with this clientestel."
+                   rendered="#{clientestelHome.instance.clientes == null}"/>
+
+        <rich:dataTable var="_clientes"
+                   value="#{clientestelHome.instance.clientes}"
+                rendered="#{clientestelHome.instance.clientes != null}"
+              rowClasses="rvgRowOne,rvgRowTwo"
+                      id="clientesTable">
+            
+            <h:column>
+                <f:facet name="header">Nome</f:facet>
+                <h:outputText value="#{_clientes.nome}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">CPF</f:facet>
+                <h:outputText value="#{_clientes.cpf}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Identidade</f:facet>
+                <h:outputText value="#{_clientes.rg}"/>
+            </h:column>
+            
+            <h:column>
+                <f:facet name="header">E-mail</f:facet>
+                <h:outputText value="#{_clientes.email}"/>
+            </h:column>
+           
+            
+           
+            <h:column styleClass="action" >
+                <f:facet name="header">Ação</f:facet>
+                <s:link id="viewclientes"
+                     view="/Clientes.xhtml">
+                    <f:param name="clientesCodclientes"
+                           value="#{_clientes.codclientes}"/>
+                             <h:graphicImage value="/img/ico_HotKey.gif" alt="Visualizar" />
+                </s:link>
+            </h:column>
+        </rich:dataTable>
+
+    </div>
+    </rich:tab>
+</rich:tabPanel>
+</ui:define>
+
+</ui:composition>

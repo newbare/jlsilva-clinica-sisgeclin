@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:s="http://jboss.com/products/seam/taglib"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:rich="http://richfaces.org/rich"
+    xmlns:c="http://java.sun.com/jstl/core"
+    template="layout/template.xhtml">
+
+<ui:define name="body">
+
+    <rich:panel>
+        <f:facet name="header">Detalhamento do Cliente </f:facet>
+
+        
+
+        <s:decorate id="nome" template="layout/display.xhtml">
+            <ui:define name="label">Nome:</ui:define>
+            <h:outputText value="#{clientesHome.instance.nome}"/>
+        </s:decorate>
+
+        <s:decorate id="cpf" template="layout/display.xhtml">
+            <ui:define name="label">CPF:</ui:define>
+            <h:outputText value="#{not empty clientesHome.instance.cpf ? clientesHome.instance.cpf : 'Não Informado' }"/>
+        </s:decorate>
+
+        <s:decorate id="rg" template="layout/display.xhtml">
+            <ui:define name="label">Identidade:</ui:define>
+            <h:outputText value="#{not empty clientesHome.instance.rg ? clientesHome.instance.rg : 'Não Informado'}"/>
+        </s:decorate>
+
+        <s:decorate id="sexo" template="layout/display.xhtml">
+            <ui:define name="label">Sexo:</ui:define>
+            <h:outputText value="#{not empty clientesHome.instance.sexo ? clientesHome.instance.sexo : 'Não Informado'}"/>
+        </s:decorate>
+
+        <s:decorate id="dtnasc" template="layout/display.xhtml">
+            <ui:define name="label">Data de Nascimento:</ui:define>
+            <h:outputText value="#{not empty clientesHome.instance.dtnasc ? clientesHome.instance.dtnasc : 'Não Informado'}">
+                <s:convertDateTime type="date" dateStyle="short" pattern="dd/MM/yyyy"/>
+            </h:outputText>
+        </s:decorate>
+        
+        <s:decorate id="profissao" template="layout/display.xhtml">
+            <ui:define name="label">Profissao:</ui:define>
+            <h:outputText value="#{clientesHome.instance.profissao}"/>
+        </s:decorate>
+		
+		<s:decorate id="email" template="layout/display.xhtml">
+            <ui:define name="label">E-mail:</ui:define>
+            <h:outputText value="#{clientesHome.instance.email}"/>
+        </s:decorate>
+		
+        <s:decorate id="endereco" template="layout/display.xhtml">
+            <ui:define name="label">Endereco:</ui:define>
+            <h:outputText value="#{clientesHome.instance.endereco}"/>
+        </s:decorate>
+		<s:decorate id="numero" template="layout/display.xhtml">
+            <ui:define name="label">Número:</ui:define>
+            <h:outputText value="#{clientesHome.instance.numero}"/>
+        </s:decorate>
+        
+
+        <s:decorate id="complemento" template="layout/display.xhtml">
+            <ui:define name="label">Complemento:</ui:define>
+            <h:outputText value="#{clientesHome.instance.complemento}"/>
+        </s:decorate>
+
+        <s:decorate id="cidade" template="layout/display.xhtml">
+            <ui:define name="label">Cidade:</ui:define>
+            <h:outputText value="#{clientesHome.instance.cidade}"/>
+        </s:decorate>
+
+        <s:decorate id="estado" template="layout/display.xhtml">
+            <ui:define name="label">Estado:</ui:define>
+            <h:outputText value="#{clientesHome.instance.estado}"/>
+        </s:decorate>
+        <s:decorate id="bairro" template="layout/display.xhtml">
+            <ui:define name="label">Bairro:</ui:define>
+            <h:outputText value="#{clientesHome.instance.bairro}"/>
+        </s:decorate>    
+
+        <s:decorate id="cep" template="layout/display.xhtml">
+            <ui:define name="label">CEP:</ui:define>
+            <h:outputText value="#{clientesHome.instance.cep}"/>
+        </s:decorate>
+
+
+    
+
+     
+
+        <s:decorate id="contato1" template="layout/display.xhtml">
+            <ui:define name="label">Primeiro Contato:</ui:define>
+            <h:outputText value="#{clientesHome.instance.contato1}"/>
+        </s:decorate>
+
+        <s:decorate id="telefone1" template="layout/display.xhtml">
+            <ui:define name="label">Telefone:</ui:define>
+            <h:outputText value="#{clientesHome.instance.telefone1}"/>
+        </s:decorate>
+
+        <s:decorate id="contato2" template="layout/display.xhtml">
+            <ui:define name="label">Segundo Contato:</ui:define>
+            <h:outputText value="#{clientesHome.instance.contato2}"/>
+        </s:decorate>
+
+        <s:decorate id="telefone2" template="layout/display.xhtml">
+            <ui:define name="label">Telefone:</ui:define>
+            <h:outputText value="#{clientesHome.instance.telefone2}"/>
+        </s:decorate>
+
+        
+
+        
+
+        
+
+        <div style="clear:both"/>
+
+    </rich:panel>
+
+    <div class="actionButtons">
+
+        <s:button view="/ClientesEdit.xhtml"
+                    id="edit"
+                 value="Editar"/>
+
+        <s:button view="/#{empty clientesFrom ? 'ClientesList' : clientesFrom}.xhtml"
+                    id="done"
+                 value="Finalizar"/>
+
+    </div>
+
+    <rich:tabPanel switchType="ajax">
+
+    <rich:tab>
+        <f:facet name="label">
+            <h:panelGroup><h:graphicImage value="/img/onetomany.gif" style="vertical-align: middle; padding-right: 4px;"/>Telefones</h:panelGroup>
+        </f:facet>
+    <h:form styleClass="association" id="clientestelsChildren">
+
+        <h:outputText value="There are no clientestels associated with this clientes."
+                   rendered="#{empty clientesHome.clientestels}"/>
+
+        <rich:dataTable value="#{clientesHome.clientestels}"
+                       var="_clientestel"
+                  rendered="#{not empty clientesHome.clientestels}"
+                rowClasses="rvgRowOne,rvgRowTwo"
+                        id="clientestelsTable">
+            
+            <rich:column sortBy="#{_clientestel.telefone}">
+                <f:facet name="header">DDD</f:facet>
+                <h:outputText value="#{_clientestel.telefone}"/>
+            </rich:column>
+            <rich:column sortBy="#{_clientestel.telefonenum}">
+                <f:facet name="header">Número</f:facet>
+                <h:outputText value="#{_clientestel.telefonenum}"/>
+            </rich:column>
+            
+            <rich:column sortBy="#{_clientestel.tipo}">
+                <f:facet name="header">Tipo</f:facet>
+                <h:outputText value="#{_clientestel.tipo}"/>
+            </rich:column>
+            
+            <h:column>
+                <f:facet name="header">Ação</f:facet>
+                <s:link id="selectclientestel"
+                    
+                      view="/Clientestel.xhtml">
+                    <f:param name="clientestelCodtel"
+                            value="#{_clientestel.codtel}"/>
+                            <h:graphicImage value="/img/passed.gif" alt="Selecionar" />
+                    <f:param name="clientestelFrom" value="Clientes"/>
+                </s:link>
+            </h:column>
+        </rich:dataTable>
+
+    </h:form>
+
+    <div class="actionButtons">
+        <s:button
+               value="Adicionar Telefones"
+                view="/ClientestelEdit.xhtml">
+            <f:param name="clientesCodclientes"
+                    value="#{clientesHome.instance.codclientes}"/>
+            <f:param name="clientestelFrom" value="Clientes"/>
+        </s:button>
+    </div>
+    </rich:tab>
+
+    <rich:tab>
+        <f:facet name="label">
+            <h:panelGroup><h:graphicImage value="/img/onetomany.gif" style="vertical-align: middle; padding-right: 4px;"/>Animais</h:panelGroup>
+        </f:facet>
+    <h:form styleClass="association" id="animalsChildren">
+
+        <h:outputText value="There are no animals associated with this clientes."
+                   rendered="#{empty clientesHome.animals}"/>
+
+        <rich:dataTable value="#{clientesHome.animals}"
+                       var="_animal"
+                  rendered="#{not empty clientesHome.animals}"
+                rowClasses="rvgRowOne,rvgRowTwo"
+                        id="animalsTable">
+            
+            <rich:column sortBy="#{_animal.nome}">
+                <f:facet name="header">Nome</f:facet>
+                <h:outputText value="#{_animal.nome}"/>
+            </rich:column>
+            <rich:column sortBy="#{_animal.dtnascimento}">
+                <f:facet name="header">Data de Nascimento</f:facet>
+                <h:outputText value="#{_animal.dtnascimento}">
+                    <s:convertDateTime type="date" dateStyle="short" pattern="dd/MM/yyyy"/>
+                </h:outputText>
+            </rich:column>
+            <rich:column sortBy="#{_animal.sexo}">
+                <f:facet name="header">Sexo:</f:facet>
+                 <h:outputText value="#{ _animal.sexo eq 'M'? 'Macho':'Fêmea'}"/>                
+            </rich:column>
+            <rich:column sortBy="#{_animal.cci}">
+                <f:facet name="header">Cci</f:facet>
+                <h:outputText value="#{not empty _animal.cci? _animal.cci :'Não Informado'}"/>
+            </rich:column>
+            <rich:column sortBy="#{_animal.chip}">
+                <f:facet name="header">Chip</f:facet>
+                <h:outputText value="#{_animal.chip}"/>
+            </rich:column>
+            <rich:column sortBy="#{_animal.pedigree}">
+                <f:facet name="header">Pedigree</f:facet>
+                <h:outputText value="#{_animal.pedigree==true? 'Sim':'Não'}"/>
+            </rich:column>
+            <c:if test="#{_animal.morto==true}">
+            <rich:column sortBy="#{_animal.morto}">
+                <f:facet name="header">Morto</f:facet>
+                <h:outputText value="Sim"/>
+            </rich:column>
+            <rich:column sortBy="#{_animal.dtmorto}">
+                <f:facet name="header">Data Óbito</f:facet>
+                <h:outputText value="#{_animal.dtmorto}">
+                    <s:convertDateTime type="date" dateStyle="short"/>
+                </h:outputText>
+            </rich:column>
+            <rich:column sortBy="#{_animal.motivo}">
+                <f:facet name="header">Motivo</f:facet>
+                <h:outputText value="#{_animal.motivo}"/>
+            </rich:column>
+            </c:if>
+            
+            
+            <h:column>
+                <f:facet name="header">Ação</f:facet>
+                <s:link id="selectanimal"                     
+                      view="/Animal.xhtml">
+                      <h:graphicImage value="/img/passed.gif" alt="Selecionar" />
+                    <f:param name="animalCodanimal"
+                            value="#{_animal.codanimal}"/>
+                    <f:param name="animalFrom" value="Clientes"/>
+                </s:link>
+            </h:column>
+        </rich:dataTable>
+
+    </h:form>
+
+    <div class="actionButtons">
+        <s:button
+               value="Adicionar Animal"
+                view="/AnimalEdit.xhtml">
+            <f:param name="clientesCodclientes"
+                    value="#{clientesHome.instance.codclientes}"/>
+            <f:param name="animalFrom" value="Clientes"/>
+        </s:button>
+    </div>
+    </rich:tab>
+</rich:tabPanel>
+</ui:define>
+
+</ui:composition>

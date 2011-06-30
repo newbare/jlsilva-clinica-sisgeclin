@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:s="http://jboss.com/products/seam/taglib"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:rich="http://richfaces.org/rich"
+    template="layout/template.xhtml">
+
+<ui:define name="body">
+
+    <rich:panel>
+        <f:facet name="header">Exfezes Details</f:facet>
+
+        <s:decorate id="codexfezes" template="layout/display.xhtml">
+            <ui:define name="label">Codexfezes</ui:define>
+            <h:outputText value="#{exfezesHome.instance.codexfezes}"/>
+        </s:decorate>
+
+        <s:decorate id="dtregistro" template="layout/display.xhtml">
+            <ui:define name="label">Dtregistro</ui:define>
+            <h:outputText value="#{exfezesHome.instance.dtregistro}">
+                <s:convertDateTime type="date" dateStyle="short"/>
+            </h:outputText>
+        </s:decorate>
+
+        <s:decorate id="resultado" template="layout/display.xhtml">
+            <ui:define name="label">Resultado</ui:define>
+            <h:outputText value="#{exfezesHome.instance.resultado}"/>
+        </s:decorate>
+
+        <s:decorate id="metodo" template="layout/display.xhtml">
+            <ui:define name="label">Metodo</ui:define>
+            <h:outputText value="#{exfezesHome.instance.metodo}"/>
+        </s:decorate>
+
+        <div style="clear:both"/>
+
+    </rich:panel>
+
+    <div class="actionButtons">
+
+        <s:button view="/ExfezesEdit.xhtml"
+                    id="edit"
+                 value="Edit"/>
+
+        <s:button view="/#{empty exfezesFrom ? 'ExfezesList' : exfezesFrom}.xhtml"
+                    id="done"
+                 value="Done"/>
+
+    </div>
+
+    <rich:tabPanel switchType="ajax">
+
+    <rich:tab>
+        <f:facet name="label">
+            <h:panelGroup><h:graphicImage value="/img/manytoone.gif" style="vertical-align: middle; padding-right: 4px;"/>Ficha</h:panelGroup>
+        </f:facet>
+    <div class="association" id="fichaParent">
+
+        <h:outputText value="There is no ficha associated with this exfezes."
+                   rendered="#{exfezesHome.instance.ficha == null}"/>
+
+        <rich:dataTable var="_ficha"
+                   value="#{exfezesHome.instance.ficha}"
+                rendered="#{exfezesHome.instance.ficha != null}"
+              rowClasses="rvgRowOne,rvgRowTwo"
+                      id="fichaTable">
+            <h:column>
+                <f:facet name="header">Codficha</f:facet>
+                <h:outputText value="#{_ficha.codficha}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Animal codanimal</f:facet>
+                <h:outputText value="#{_ficha.animal.codanimal}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Anamnese</f:facet>
+                <h:outputText value="#{_ficha.anamnese}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Dtretorno</f:facet>
+                <h:outputText value="#{_ficha.dtretorno}">
+                    <s:convertDateTime type="date" dateStyle="short"/>
+                </h:outputText>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Diagnostico</f:facet>
+                <h:outputText value="#{_ficha.diagnostico}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Dtregistro</f:facet>
+                <h:outputText value="#{_ficha.dtregistro}">
+                    <s:convertDateTime type="date" dateStyle="short"/>
+                </h:outputText>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Peso</f:facet>
+                <h:outputText value="#{_ficha.peso}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Solicitados</f:facet>
+                <h:outputText value="#{_ficha.solicitados}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Receituario</f:facet>
+                <h:outputText value="#{_ficha.receituario}"/>
+            </h:column>
+            <h:column styleClass="action">
+                <f:facet name="header">Action</f:facet>
+                <s:link id="viewficha"
+                     value="View"
+                      view="/Ficha.xhtml">
+                    <f:param name="fichaCodficha"
+                           value="#{_ficha.codficha}"/>
+                </s:link>
+            </h:column>
+        </rich:dataTable>
+
+    </div>
+    </rich:tab>
+</rich:tabPanel>
+</ui:define>
+
+</ui:composition>

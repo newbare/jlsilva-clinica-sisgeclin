@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page xmlns="http://jboss.com/products/seam/pages"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://jboss.com/products/seam/pages http://jboss.com/products/seam/pages-2.1.xsd">
+
+   <param name="firstResult" value="#{clientesList.firstResult}"/>
+   <param name="sort" value="#{clientesList.orderColumn}"/>
+   <param name="dir" value="#{clientesList.orderDirection}"/>
+   <param name="logic" value="#{clientesList.restrictionLogicOperator}"/>
+
+   <param name="from"/>
+   <param name="nome" value="#{clientesList.clientes.nome}"/>
+   <param name="cpf" value="#{clientesList.clientes.cpf}"/>
+   <param name="rg" value="#{clientesList.clientes.rg}"/>
+   <param name="sexo" value="#{clientesList.clientes.sexo}"/>
+   <param name="endereco" value="#{clientesList.clientes.endereco}"/>
+   <param name="profissao" value="#{clientesList.clientes.profissao}"/>
+   <param name="complemento" value="#{clientesList.clientes.complemento}"/>
+   <param name="cidade" value="#{clientesList.clientes.cidade}"/>
+   <param name="estado" value="#{clientesList.clientes.estado}"/>
+   <param name="cep" value="#{clientesList.clientes.cep}"/>
+   <param name="email" value="#{clientesList.clientes.email}"/>
+   <param name="bairro" value="#{clientesList.clientes.bairro}"/>
+   
+   <param name="contato1" value="#{clientesList.clientes.contato1}"/>
+   <param name="telefone1" value="#{clientesList.clientes.telefone1}"/>
+   <param name="contato2" value="#{clientesList.clientes.contato2}"/>
+   <param name="telefone2" value="#{clientesList.clientes.telefone2}"/>
+  
+   <param name="numero" value="#{clientesList.clientes.numero}"/>
+  
+
+</page>

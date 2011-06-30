@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:s="http://jboss.com/products/seam/taglib"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:a="http://richfaces.org/a4j"
+    xmlns:rich="http://richfaces.org/rich"
+    template="layout/template.xhtml">
+
+<ui:define name="body">
+
+    <h:form id="raca" styleClass="edit">
+
+        <rich:panel>
+            <f:facet name="header">#{racaHome.managed ? 'Edit' : 'Add'} Raca</f:facet>
+
+
+            <!-- <s:decorate id="codracaField" template="layout/edit.xhtml">
+                <ui:define name="label">Codraca</ui:define>
+                <h:inputText id="codraca"
+                       required="true"
+                       disabled="#{racaHome.managed}"
+                          value="#{racaHome.instance.codraca}">
+                    <a:support event="onblur" reRender="codracaField" bypassUpdates="true" ajaxSingle="true"/>
+                </h:inputText>
+            </s:decorate> -->
+
+
+
+            <s:decorate id="nomeracaField" template="layout/edit.xhtml">
+                <ui:define name="label">Nomeraca</ui:define>
+                <h:inputText id="nomeraca"
+                           size="30"
+                      maxlength="30"
+                          value="#{racaHome.instance.nomeraca}">
+                    <a:support event="onblur" reRender="nomeracaField" bypassUpdates="true" ajaxSingle="true"/>
+                </h:inputText>
+            </s:decorate>
+
+
+            <div style="clear:both">
+                <span class="required">*</span>
+                required fields
+            </div>
+
+        </rich:panel>
+
+        <div class="actionButtons">
+
+            <h:commandButton id="save"
+                          value="Save"
+                         action="#{racaHome.persist}"
+                       disabled="#{!racaHome.wired}"
+                       rendered="#{!racaHome.managed}"/>
+
+            <h:commandButton id="update"
+                          value="Save"
+                         action="#{racaHome.update}"
+                       rendered="#{racaHome.managed}"/>
+
+            <h:commandButton id="delete"
+                          value="Delete"
+                         action="#{racaHome.remove}"
+                      immediate="true"
+                       rendered="#{racaHome.managed}"/>
+
+            <s:button id="cancelEdit"
+                   value="Cancel"
+             propagation="end"
+                    view="/Raca.xhtml"
+                rendered="#{racaHome.managed}"/>
+
+            <s:button id="cancelAdd"
+                   value="Cancel"
+             propagation="end"
+                    view="/#{empty racaFrom ? 'RacaList' : racaFrom}.xhtml"
+                rendered="#{!racaHome.managed}"/>
+
+        </div>
+    </h:form>
+
+<rich:tabPanel switchType="ajax">
+
+    <rich:tab label="Especies *" labelClass="required">
+    <div class="association" id="especiesParent">
+
+        <h:outputText value="There is no especies associated with this raca."
+                   rendered="#{racaHome.instance.especies == null}"/>
+
+        <rich:dataTable var="_especies"
+                   value="#{racaHome.instance.especies}"
+                rendered="#{racaHome.instance.especies != null}"
+              rowClasses="rvgRowOne,rvgRowTwo"
+                      id="especiesTable">
+            <h:column>
+                <f:facet name="header">Codespecie</f:facet>
+                <h:outputText value="#{_especies.codespecie}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Nomeespecie</f:facet>
+                <h:outputText value="#{_especies.nomeespecie}"/>
+            </h:column>
+        </rich:dataTable>
+
+        <div class="actionButtons">
+            <s:button id="#{racaHome.instance.especies != null ? 'changeParent' : 'selectParent'}" value="#{racaHome.instance.especies != null ? 'Change' : 'Select'} especies"
+                       view="/EspeciesList.xhtml">
+                <f:param name="from" value="RacaEdit"/>
+            </s:button>
+        </div>
+
+    </div>
+    </rich:tab>
+
+    <rich:tab label="Animals">
+        <h:form styleClass="association" id="animalsChildren">
+
+            <h:outputText value="There are no animals associated with this raca."
+                       rendered="#{empty racaHome.animals}"/>
+
+            <rich:dataTable value="#{racaHome.animals}"
+                           var="_animal"
+                      rendered="#{not empty racaHome.animals}"
+                    rowClasses="rvgRowOne,rvgRowTwo"
+                            id="animalsTable">
+                <rich:column sortBy="#{_animal.codanimal}">
+                    <f:facet name="header">Codanimal</f:facet>
+                    <h:outputText value="#{_animal.codanimal}"/>
+                </rich:column>
+                <rich:column sortBy="#{_animal.nome}">
+                    <f:facet name="header">Nome</f:facet>
+                    <h:outputText value="#{_animal.nome}"/>
+                </rich:column>
+                <rich:column sortBy="#{_animal.dtnascimento}">
+                    <f:facet name="header">Data de Nascimento</f:facet>
+                    <h:outputText value="#{_animal.dtnascimento}">
+                        <s:convertDateTime type="date" dateStyle="short" pattern="dd/MM/yyyy"/>
+                    </h:outputText>
+                </rich:column>
+                <rich:column sortBy="#{_animal.sexo}">
+                    <f:facet name="header">Sexo</f:facet>
+                    <h:outputText value="#{ _animal.sexo eq 'M'? 'Macho':'Fêmea'}"/>
+                </rich:column>
+                <rich:column sortBy="#{_animal.cci}">
+                    <f:facet name="header">Cci</f:facet>
+                    <h:outputText value="#{_animal.cci}"/>
+                </rich:column>
+                <rich:column sortBy="#{_animal.chip}">
+                    <f:facet name="header">Chip</f:facet>
+                    <h:outputText value="#{_animal.chip}"/>
+                </rich:column>
+                <rich:column sortBy="#{_animal.pedigree}">
+                    <f:facet name="header">Pedigree</f:facet>
+                    <h:outputText value="#{_animal.pedigree}"/>
+                </rich:column>
+                <rich:column sortBy="#{_animal.morto}">
+                    <f:facet name="header">Morto</f:facet>
+                    <h:outputText value="#{_animal.morto}"/>
+                </rich:column>
+                <rich:column sortBy="#{_animal.dtmorto}">
+                    <f:facet name="header">Dtmorto</f:facet>
+                    <h:outputText value="#{_animal.dtmorto}">
+                        <s:convertDateTime type="date" dateStyle="short"/>
+                    </h:outputText>
+                </rich:column>
+                <rich:column sortBy="#{_animal.alergias}">
+                    <f:facet name="header">Alergias</f:facet>
+                    <h:outputText value="#{_animal.alergias}"/>
+                </rich:column>
+                <rich:column sortBy="#{_animal.obs}">
+                    <f:facet name="header">Obs</f:facet>
+                    <h:outputText value="#{_animal.obs}"/>
+                </rich:column>
+                <rich:column sortBy="#{_animal.motivo}">
+                    <f:facet name="header">Motivo</f:facet>
+                    <h:outputText value="#{_animal.motivo}"/>
+                </rich:column>
+            </rich:dataTable>
+
+        </h:form>
+
+        <f:subview rendered="#{racaHome.managed}" id="animals">
+        <div class="actionButtons">
+            <s:button id="addanimal"
+                   value="Add animal"
+                    view="/AnimalEdit.xhtml"
+             propagation="none">
+                 <f:param name="racaCodraca"
+                         value="#{racaHome.instance.codraca}"/>
+                 <f:param name="animalFrom" value="Raca"/>
+            </s:button>
+        </div>
+        </f:subview>
+    </rich:tab>
+</rich:tabPanel>
+</ui:define>
+
+</ui:composition>

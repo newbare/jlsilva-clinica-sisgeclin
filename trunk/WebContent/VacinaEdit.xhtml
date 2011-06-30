@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:s="http://jboss.com/products/seam/taglib"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:a="http://richfaces.org/a4j"
+    xmlns:rich="http://richfaces.org/rich"
+    template="layout/template.xhtml">
+
+<ui:define name="body">
+
+    <h:form id="vacina" styleClass="edit">
+
+        <rich:panel>
+            <f:facet name="header">#{vacinaHome.managed ? 'Edit' : 'Add'} Vacina</f:facet>
+
+
+           <!--  <s:decorate id="codvacinasField" template="layout/edit.xhtml">
+                <ui:define name="label">Codvacinas</ui:define>
+                <h:inputText id="codvacinas"
+                       required="true"
+                       disabled="#{vacinaHome.managed}"
+                          value="#{vacinaHome.instance.codvacinas}">
+                    <a:support event="onblur" reRender="codvacinasField" bypassUpdates="true" ajaxSingle="true"/>
+                </h:inputText>
+            </s:decorate>
+            -->
+
+
+
+            <s:decorate id="nomevacinaField" template="layout/edit.xhtml">
+                <ui:define name="label">Nomevacina</ui:define>
+                <h:inputText id="nomevacina"
+                           size="40"
+                      maxlength="40"
+                          value="#{vacinaHome.instance.nomevacina}">
+                    <a:support event="onblur" reRender="nomevacinaField" bypassUpdates="true" ajaxSingle="true"/>
+                </h:inputText>
+            </s:decorate>
+
+
+            <s:decorate id="retornoField" template="layout/edit.xhtml">
+                <ui:define name="label">Retorno</ui:define>
+                <h:inputText id="retorno"
+                          value="#{vacinaHome.instance.retorno}">
+                    <a:support event="onblur" reRender="retornoField" bypassUpdates="true" ajaxSingle="true"/>
+                </h:inputText>
+            </s:decorate>
+
+
+            <s:decorate id="dosesField" template="layout/edit.xhtml">
+                <ui:define name="label">Doses</ui:define>
+                <h:inputText id="doses"
+                          value="#{vacinaHome.instance.doses}">
+                    <a:support event="onblur" reRender="dosesField" bypassUpdates="true" ajaxSingle="true"/>
+                </h:inputText>
+            </s:decorate>
+
+
+            <s:decorate id="proximavacinaField" template="layout/edit.xhtml">
+                <ui:define name="label">Proximavacina</ui:define>
+                <h:inputText id="proximavacina"
+                          value="#{vacinaHome.instance.proximavacina}">
+                    <a:support event="onblur" reRender="proximavacinaField" bypassUpdates="true" ajaxSingle="true"/>
+                </h:inputText>
+            </s:decorate>
+
+            <div style="clear:both">
+                <span class="required">*</span>
+                required fields
+            </div>
+
+        </rich:panel>
+
+        <div class="actionButtons">
+
+            <h:commandButton id="save"
+                          value="Save"
+                         action="#{vacinaHome.persist}"
+                       disabled="#{!vacinaHome.wired}"
+                       rendered="#{!vacinaHome.managed}"/>
+
+            <h:commandButton id="update"
+                          value="Save"
+                         action="#{vacinaHome.update}"
+                       rendered="#{vacinaHome.managed}"/>
+
+            <h:commandButton id="delete"
+                          value="Delete"
+                         action="#{vacinaHome.remove}"
+                      immediate="true"
+                       rendered="#{vacinaHome.managed}"/>
+
+            <s:button id="cancelEdit"
+                   value="Cancel"
+             propagation="end"
+                    view="/Vacina.xhtml"
+                rendered="#{vacinaHome.managed}"/>
+
+            <s:button id="cancelAdd"
+                   value="Cancel"
+             propagation="end"
+                    view="/#{empty vacinaFrom ? 'VacinaList' : vacinaFrom}.xhtml"
+                rendered="#{!vacinaHome.managed}"/>
+
+        </div>
+    </h:form>
+
+<rich:tabPanel switchType="ajax">
+
+    <rich:tab label="Vacinacao *" labelClass="required">
+    <div class="association" id="vacinacaoParent">
+
+        <h:outputText value="There is no vacinacao associated with this vacina."
+                   rendered="#{vacinaHome.instance.vacinacao == null}"/>
+
+        <rich:dataTable var="_vacinacao"
+                   value="#{vacinaHome.instance.vacinacao}"
+                rendered="#{vacinaHome.instance.vacinacao != null}"
+              rowClasses="rvgRowOne,rvgRowTwo"
+                      id="vacinacaoTable">
+            <h:column>
+                <f:facet name="header">Codvacinacao</f:facet>
+                <h:outputText value="#{_vacinacao.codvacinacao}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Ficha codficha</f:facet>
+                <h:outputText value="#{_vacinacao.ficha.codficha}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Nomelaboratorio</f:facet>
+                <h:outputText value="#{_vacinacao.nomelaboratorio}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Dtvacinacao</f:facet>
+                <h:outputText value="#{_vacinacao.dtvacinacao}">
+                    <s:convertDateTime type="date" dateStyle="short"/>
+                </h:outputText>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Lote</f:facet>
+                <h:outputText value="#{_vacinacao.lote}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Retornou</f:facet>
+                <h:outputText value="#{_vacinacao.retornou}"/>
+            </h:column>
+        </rich:dataTable>
+
+        <div class="actionButtons">
+            <s:button id="#{vacinaHome.instance.vacinacao != null ? 'changeParent1' : 'selectParent1'}" 
+            value="#{vacinaHome.instance.vacinacao != null ? 'Change' : 'Select'} vacinacao"
+                       view="/VacinacaoList.xhtml">
+                <f:param name="from" value="VacinaEdit"/>
+            </s:button>
+        </div>
+
+    </div>
+    </rich:tab>
+
+    <rich:tab label="Tiporetornovacinacao">
+    <div class="association" id="tiporetornovacinacaoParent">
+
+        <h:outputText value="There is no tiporetornovacinacao associated with this vacina."
+                   rendered="#{vacinaHome.instance.tiporetornovacinacao == null}"/>
+
+        <rich:dataTable var="_tiporetornovacinacao"
+                   value="#{vacinaHome.instance.tiporetornovacinacao}"
+                rendered="#{vacinaHome.instance.tiporetornovacinacao != null}"
+              rowClasses="rvgRowOne,rvgRowTwo"
+                      id="tiporetornovacinacaoTable">
+            <h:column>
+                <f:facet name="header">Codtiporetornovacinacao</f:facet>
+                <h:outputText value="#{_tiporetornovacinacao.codtiporetornovacinacao}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Retorno</f:facet>
+                <h:outputText value="#{_tiporetornovacinacao.retorno}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Dias</f:facet>
+                <h:outputText value="#{_tiporetornovacinacao.dias}"/>
+            </h:column>
+        </rich:dataTable>
+
+        <div class="actionButtons">
+            <s:button id="#{vacinaHome.instance.tiporetornovacinacao != null ? 'changeParent' : 'selectParent'}" value="#{vacinaHome.instance.tiporetornovacinacao != null ? 'Change' : 'Select'} tiporetornovacinacao"
+                       view="/TiporetornovacinacaoList.xhtml">
+                <f:param name="from" value="VacinaEdit"/>
+            </s:button>
+        </div>
+
+    </div>
+    </rich:tab>
+</rich:tabPanel>
+</ui:define>
+
+</ui:composition>

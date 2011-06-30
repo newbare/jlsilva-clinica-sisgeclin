@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page xmlns="http://jboss.com/products/seam/pages"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://jboss.com/products/seam/pages http://jboss.com/products/seam/pages-2.1.xsd">
+
+   <param name="firstResult" value="#{internacaoList.firstResult}"/>
+   <param name="sort" value="#{internacaoList.orderColumn}"/>
+   <param name="dir" value="#{internacaoList.orderDirection}"/>
+   <param name="logic" value="#{internacaoList.restrictionLogicOperator}"/>
+
+   <param name="from"/>
+   <param name="obs" value="#{internacaoList.internacao.obs}"/>
+   <param name="motivosaida" value="#{internacaoList.internacao.motivosaida}"/>
+   <param name="obssaida" value="#{internacaoList.internacao.obssaida}"/>
+
+</page>

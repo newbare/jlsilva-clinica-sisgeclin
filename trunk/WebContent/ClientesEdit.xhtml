@@ -1,0 +1,428 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:s="http://jboss.com/products/seam/taglib"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:a="http://richfaces.org/a4j"
+    xmlns:rich="http://richfaces.org/rich"
+    xmlns:stella="http://stella.caelum.com.br/faces"
+    xmlns:fmt="http://java.sun.com/jstl/fmt" 
+    xmlns:c="http://java.sun.com/jstl/core"
+    template="layout/template.xhtml">
+   
+
+
+
+
+<ui:define name="body">
+
+    <h:form id="clientes" styleClass="edit">
+
+        <rich:panel>
+            <f:facet name="header">#{clientesHome.managed ? 'Editar' : 'Adicionar'} Clientes</f:facet>
+
+
+            <!-- <s:decorate id="codclientesField" template="layout/edit.xhtml">
+                <ui:define name="label">Codclientes</ui:define>
+                <h:inputText id="codclientes"
+                       required="true"
+                       disabled="#{clientesHome.managed}"
+                          value="#{clientesHome.instance.codclientes}">
+                    <a:support event="onblur" reRender="codclientesField" bypassUpdates="true" ajaxSingle="true"/>
+                </h:inputText>
+            </s:decorate> -->
+
+<fieldset class="demo_fieldset">
+				<legend class="demo_legend">Dados Pessoais</legend>
+            <s:decorate id="nomeField" template="layout/edit.xhtml">
+                <ui:define name="label">Nome:</ui:define>
+                <h:inputText id="nome"
+                       required="true"
+                           size="50"
+                      maxlength="50"
+                          value="#{clientesHome.instance.nome}">
+                    <a:support event="onblur" reRender="nomeField" bypassUpdates="true" ajaxSingle="true"/>
+                </h:inputText>
+            </s:decorate>
+            
+            <s:decorate id="dtnascField" template="layout/edit.xhtml">
+                <ui:define name="label">Data de Nascimento:</ui:define>
+                <rich:calendar id="dtnasc"  value="#{clientesHome.instance.dtnasc}" datePattern="dd/MM/yyyy" />
+            </s:decorate>
+
+
+            <s:decorate id="cpfField" template="layout/edit.xhtml">
+                <ui:define name="label">CPF:</ui:define>
+                <h:inputText id="cpf"
+                           size="20"
+                      maxlength="15"
+                          value="#{clientesHome.instance.cpf}"
+                          >
+                           <stella:validateCPF formatted="true" />
+         					<rich:jQuery selector="#cpf"  query="mask('999.999.999-99')" timing="onload"/>  
+                           
+                    <a:support event="onblur" reRender="cpfField" bypassUpdates="true" ajaxSingle="true" />
+                </h:inputText>
+            </s:decorate>
+
+
+            <s:decorate id="rgField" template="layout/edit.xhtml">
+                <ui:define name="label">Rg</ui:define>
+                <h:inputText id="rg"
+                           size="20"
+                      maxlength="20"
+                          value="#{clientesHome.instance.rg}">
+                    <a:support event="onblur" reRender="rgField" bypassUpdates="true" ajaxSingle="true"/>
+                </h:inputText>
+            </s:decorate>
+
+
+            <!-- <s:decorate id="sexoField" template="layout/edit.xhtml">
+                <ui:define name="label">Sexo</ui:define>
+                <h:inputText id="sexo"
+                           size="50"
+                      maxlength="50"
+                          value="#{clientesHome.instance.sexo}">
+                    <a:support event="onblur" reRender="sexoField" bypassUpdates="true" ajaxSingle="true"/>
+                </h:inputText>
+            </s:decorate> -->
+            
+			<s:decorate id="sexoField" template="layout/display.xhtml">
+					<ui:define name="label">Sexo:</ui:define>
+					<h:selectOneRadio id="logic"
+						value="#{clientesHome.instance.sexo}"
+						styleClass="radio"
+						required="true">
+						<f:selectItem itemLabel="Feminino" itemValue="Feminino" />
+						<f:selectItem itemLabel="Masculino" itemValue="Masculino" />
+						<a:support event="onblur" reRender="sexoField" bypassUpdates="true" ajaxSingle="true"/>
+					</h:selectOneRadio>
+				</s:decorate>
+
+			<s:decorate id="emailField" template="layout/edit.xhtml">
+                <ui:define name="label">E-mail:</ui:define>
+                <h:inputText id="email"
+                       required="true"                        
+                           size="50"
+                      maxlength="50"
+                          value="#{clientesHome.instance.email}">
+                          
+                    <a:support event="onblur" reRender="emailField" bypassUpdates="true" ajaxSingle="true"/>
+                </h:inputText>
+            </s:decorate>       
+
+            <s:decorate id="profissaoField" template="layout/edit.xhtml">
+                <ui:define name="label">Profissao:</ui:define>
+                <h:inputText id="profissao"
+                           size="50"
+                      maxlength="50"
+                          value="#{clientesHome.instance.profissao}">
+                    <a:support event="onblur" reRender="profissaoField" bypassUpdates="true" ajaxSingle="true"/>
+                </h:inputText>
+            </s:decorate>
+</fieldset>
+<fieldset class="demo_fieldset">
+				<legend class="demo_legend">Dados Residenciais</legend>
+            <s:decorate id="enderecoField" template="layout/edit.xhtml">
+                <ui:define name="label">Endereco:</ui:define>
+                <h:inputText id="endereco"
+                           size="70"
+                      maxlength="50"
+                          value="#{clientesHome.instance.endereco}">
+                    <a:support event="onblur" reRender="enderecoField" bypassUpdates="true" ajaxSingle="true"/>
+                </h:inputText>
+                
+                
+            </s:decorate>
+            
+            <s:decorate id="numeroField" template="layout/edit.xhtml">
+                <ui:define name="label">Número:</ui:define>
+                <h:inputText id="numero"
+                           size="50"
+                      maxlength="50"
+                          value="#{clientesHome.instance.numero}">
+                    <a:support event="onblur" reRender="numeroField" bypassUpdates="true" ajaxSingle="true"/>
+                </h:inputText>
+            </s:decorate>
+            
+			 <s:decorate id="bairroField" template="layout/edit.xhtml">
+                <ui:define name="label">Bairro:</ui:define>
+                <h:inputText id="bairro"
+                           size="50"
+                      maxlength="50"
+                          value="#{clientesHome.instance.bairro}">
+                    <a:support event="onblur" reRender="bairroField" bypassUpdates="true" ajaxSingle="true"/>
+                </h:inputText>
+            </s:decorate>
+            
+            <s:decorate id="complementoField" template="layout/edit.xhtml">
+                <ui:define name="label">Complemento:</ui:define>
+                <h:inputText id="complemento"
+                           size="50"
+                      maxlength="50"
+                          value="#{clientesHome.instance.complemento}">
+                    <a:support event="onblur" reRender="complementoField" bypassUpdates="true" ajaxSingle="true"/>
+                </h:inputText>
+            </s:decorate>
+
+
+            <s:decorate id="cidadeField" template="layout/edit.xhtml">
+                <ui:define name="label">Cidade:</ui:define>
+                <h:inputText id="cidade"
+                           size="25"
+                      maxlength="25"
+                          value="#{clientesHome.instance.cidade}">
+                    <a:support event="onblur" reRender="cidadeField" bypassUpdates="true" ajaxSingle="true"/>
+                </h:inputText>
+            </s:decorate>
+
+
+            <s:decorate id="estadoField" template="layout/edit.xhtml">
+                <ui:define name="label">Estado:</ui:define>
+                 <rich:inplaceSelect value="#{clientesHome.instance.estado}"  required="true"   defaultLabel="Selecione um Estado">
+			        <f:selectItem itemValue="DF" itemLabel="DF" />
+			        <f:selectItem itemValue="RJ" itemLabel="RJ" />
+			        <f:selectItem itemValue="SP" itemLabel="SP" />
+			    </rich:inplaceSelect>
+                    <a:support event="onblur" reRender="estadoField" bypassUpdates="true" ajaxSingle="true"/>
+			    <rich:spacer width="100%" height="20px"/>                
+                
+            </s:decorate>
+
+
+            <s:decorate id="cepField" template="layout/edit.xhtml">
+                <ui:define name="label">Cep:</ui:define>
+                <h:inputText id="cep"
+                           size="11"
+                      maxlength="11"
+                          value="#{clientesHome.instance.cep}">
+                          
+                          <rich:jQuery selector="#cep"  query="mask('99.999-999')" timing="onload"/> 
+                    <a:support event="onblur" reRender="cepField" bypassUpdates="true" ajaxSingle="true"/>
+                </h:inputText>
+            </s:decorate>
+            
+            
+</fieldset>
+		<fieldset class="demo_fieldset">
+				<legend class="demo_legend">Contatos para Referência</legend>
+				 <s:decorate id="contato1Field" template="layout/edit.xhtml">
+                <ui:define name="label">Primeiro Contato:</ui:define>
+                <h:inputText id="contato1"
+                           size="30"
+                      maxlength="30"
+                          value="#{clientesHome.instance.contato1}">
+                    <a:support event="onblur" reRender="contato1Field" bypassUpdates="true" ajaxSingle="true"/>
+                </h:inputText>
+            </s:decorate>
+		
+
+            <s:decorate id="telefone1Field" template="layout/edit.xhtml">
+                <ui:define name="label">Telefone:</ui:define>
+                <h:inputText id="telefone1"
+                           size="20"
+                      maxlength="20"
+                          value="#{clientesHome.instance.telefone1}">
+                    <a:support event="onblur" reRender="telefone1Field" bypassUpdates="true" ajaxSingle="true"/>
+                </h:inputText>
+            </s:decorate>
+
+
+            <s:decorate id="contato2Field" template="layout/edit.xhtml">
+                <ui:define name="label">Segundo Contato:</ui:define>
+                <h:inputText id="contato2"
+                           size="30"
+                      maxlength="30"
+                          value="#{clientesHome.instance.contato2}">
+                    <a:support event="onblur" reRender="contato2Field" bypassUpdates="true" ajaxSingle="true"/>
+                </h:inputText>
+            </s:decorate>
+
+
+            <s:decorate id="telefone2Field" template="layout/edit.xhtml">
+                <ui:define name="label">Telefone:</ui:define>
+                <h:inputText id="telefone2"
+                           size="20"
+                      maxlength="20"
+                          value="#{clientesHome.instance.telefone2}">
+                    <a:support event="onblur" reRender="telefone2Field" bypassUpdates="true" ajaxSingle="true"/>
+                </h:inputText>
+            </s:decorate>
+		</fieldset>
+                
+
+
+
+            <div style="clear:both">
+                <span class="required">*</span>
+                Campo Requerido.
+            </div>
+
+        </rich:panel>
+
+        <div class="actionButtons">
+
+            <h:commandButton id="save"
+                          value="Salvar"
+                         action="#{clientesHome.persist}"
+                       disabled="#{!clientesHome.wired}"
+                       rendered="#{!clientesHome.managed}"/>
+
+            <h:commandButton id="update"
+                          value="Salvar"
+                         action="#{clientesHome.update}"
+                       rendered="#{clientesHome.managed}"/>
+			
+            
+            <h:commandButton id="delete"
+                          value="Excluir"
+                         action="#{clientesHome.remove}"
+                      immediate="true"
+                      disabled="#{clientesHome.podeExcluir == true}"
+                       rendered="#{clientesHome.managed}"/>
+			
+            <s:button id="cancelEdit"
+                   value="Cancelar"
+             propagation="end"
+                    view="/Clientes.xhtml"
+                rendered="#{clientesHome.managed}"/>
+
+            <s:button id="cancelAdd"
+                   value="Cancelar"
+             propagation="end"
+                    view="/#{empty clientesFrom ? 'ClientesList' : clientesFrom}.xhtml"
+                rendered="#{!clientesHome.managed}"/>
+
+        </div>
+    </h:form>
+
+<rich:tabPanel switchType="ajax">
+
+    <rich:tab label="Telefones do Cliente">
+        <h:form styleClass="association" id="clientestelsChildren">
+
+            <h:outputText value="Não existem Telefones relacionados a este Cliente."
+                       rendered="#{empty clientesHome.clientestels}"/>
+
+            <rich:dataTable value="#{clientesHome.clientestels}"
+                           var="_clientestel"
+                      rendered="#{not empty clientesHome.clientestels}"
+                    rowClasses="rvgRowOne,rvgRowTwo"
+                            id="clientestelsTable">
+                
+                <rich:column sortBy="#{_clientestel.telefone}">
+                    <f:facet name="header">DDD</f:facet>
+                    <h:outputText value="#{_clientestel.telefone}"/>
+                </rich:column>
+                
+                <rich:column sortBy="#{_clientestel.telefonenum}">
+                    <f:facet name="header">Número</f:facet>
+                    <h:outputText value="#{_clientestel.telefonenum}"/>
+                </rich:column>
+                
+                <rich:column sortBy="#{_clientestel.tipo}">
+                    <f:facet name="header">Tipo</f:facet>
+                    <h:outputText value="#{_clientestel.tipo}"/>
+                </rich:column>
+                
+            </rich:dataTable>
+
+        </h:form>
+
+        <f:subview rendered="#{clientesHome.managed}" id="clientestels">
+        <div class="actionButtons">
+            <s:button id="addclientestel"
+                   value="Adicionar Telefones"
+                    view="/ClientestelEdit.xhtml"
+             propagation="none">
+                 <f:param name="clientesCodclientes"
+                         value="#{clientesHome.instance.codclientes}"/>
+                 <f:param name="clientestelFrom" value="Clientes"/>
+            </s:button>
+        </div>
+        </f:subview>
+    </rich:tab>
+
+    <rich:tab label="Animais">
+        <h:form styleClass="association" id="animalsChildren">
+
+            <h:outputText value="Não Existem Animais relacionados a este Cliente."
+                       rendered="#{empty clientesHome.animals}"/>
+
+            <rich:dataTable value="#{clientesHome.animals}"
+                           var="_animal"
+                      rendered="#{not empty clientesHome.animals}"
+                    rowClasses="rvgRowOne,rvgRowTwo"
+                            id="animalsTable">
+                
+                <rich:column sortBy="#{_animal.nome}">
+                    <f:facet name="header">Nome</f:facet>
+                    <h:outputText value="#{_animal.nome}"/>
+                </rich:column>
+                <rich:column sortBy="#{_animal.dtnascimento}">
+                    <f:facet name="header">Data de Nascimento</f:facet>
+                    <h:outputText value="#{_animal.dtnascimento}">
+                        <s:convertDateTime type="date" dateStyle="short" pattern="dd/MM/yyyy"/>
+                    </h:outputText>
+                </rich:column>
+                <rich:column sortBy="#{_animal.sexo}">
+                    <f:facet name="header">Sexo</f:facet>
+                    <h:outputText value="#{_animal.sexo eq 'M'?'Macho':'Fêmea'}"/>                    
+                </rich:column>
+                <rich:column sortBy="#{_animal.cci}">
+                    <f:facet name="header">Cci</f:facet>
+                    <h:outputText value="#{_animal.cci}"/> 
+                </rich:column>
+                <rich:column sortBy="#{_animal.chip}">
+                    <f:facet name="header">Chip</f:facet>
+                    <h:outputText value="#{_animal.chip}"/>
+                </rich:column>
+                <rich:column sortBy="#{_animal.pedigree}">
+                    <f:facet name="header">Pedigree</f:facet>
+                    <h:outputText value="#{_animal.pedigree eq true ? 'Sim' : 'Não'}"/>
+                </rich:column>
+             <c:if test="#{_animal.morto==true}">
+             
+                <rich:column sortBy="#{_animal.morto}">
+                    <f:facet name="header">Morto</f:facet>
+                    <h:outputText value="#{_animal.morto}"/>
+                </rich:column>
+                <rich:column sortBy="#{_animal.dtmorto}">
+                    <f:facet name="header">Data Óbito</f:facet>
+                    <h:outputText value="#{_animal.dtmorto}">
+                        <s:convertDateTime type="date" dateStyle="short"/>
+                    </h:outputText>
+                </rich:column>
+                <rich:column sortBy="#{_animal.motivo}">
+                    <f:facet name="header">Motivo da Morte</f:facet>
+                    <h:outputText value="#{_animal.motivo}"/>
+                </rich:column>
+                </c:if>
+                
+                
+                
+                
+            </rich:dataTable>
+
+        </h:form>
+
+        <f:subview rendered="#{clientesHome.managed}" id="animals">
+        <div class="actionButtons">
+            <s:button id="addanimal"
+                   value="Adicionar Animal"
+                    view="/AnimalEdit.xhtml"
+             propagation="none">
+                 <f:param name="clientesCodclientes"
+                         value="#{clientesHome.instance.codclientes}"/>
+                 <f:param name="animalFrom" value="Clientes"/>
+            </s:button>
+        </div>
+        </f:subview>
+    </rich:tab>
+</rich:tabPanel>
+</ui:define>
+
+</ui:composition>

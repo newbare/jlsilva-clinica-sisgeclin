@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page xmlns="http://jboss.com/products/seam/pages"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://jboss.com/products/seam/pages http://jboss.com/products/seam/pages-2.1.xsd">
+
+   <param name="firstResult" value="#{animalList.firstResult}"/>
+   <param name="sort" value="#{animalList.orderColumn}"/>
+   <param name="dir" value="#{animalList.orderDirection}"/>
+   <param name="logic" value="#{animalList.restrictionLogicOperator}"/>
+
+   <param name="from"/>
+   <param name="nome" value="#{animalList.animal.nome}"/>
+   <param name="cci" value="#{animalList.animal.cci}"/>
+   <param name="chip" value="#{animalList.animal.chip}"/>
+   <param name="alergias" value="#{animalList.animal.alergias}"/>
+   <param name="obs" value="#{animalList.animal.obs}"/>
+   <param name="motivo" value="#{animalList.animal.motivo}"/>
+
+</page>

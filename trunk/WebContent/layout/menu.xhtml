@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<rich:toolBar xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:rich="http://richfaces.org/rich">
+	<rich:toolBarGroup>
+		<h:outputText value="#{projectName}:" />
+		<s:link id="menuHomeId" view="/home.xhtml" value="Principal"
+			propagation="none" />
+	</rich:toolBarGroup>
+
+	<rich:dropDownMenu showDelay="250" hideDelay="0" submitMode="none">
+		<f:facet name="label">Animais</f:facet>
+		<rich:menuItem>
+			<s:link view="/AnimalList.xhtml" value="Listar" id="AnimalId"
+				includePageParams="false" propagation="none" />
+		</rich:menuItem>
+	</rich:dropDownMenu>
+
+	<rich:dropDownMenu showDelay="250" hideDelay="0" submitMode="none">
+		<f:facet name="label">Clientes</f:facet>
+		<rich:menuItem>
+			<s:link view="/ClientesList.xhtml" value="Listar Clientes"
+				id="ClientesId" includePageParams="false" propagation="none" />
+		</rich:menuItem>
+		<!-- <rich:menuItem>
+			<s:link view="/ClientestelList.xhtml" value="Listar Telefones"
+				id="ClientestelId" includePageParams="false" propagation="none" />
+		</rich:menuItem> -->
+	</rich:dropDownMenu>
+	
+	<!-- <rich:dropDownMenu showDelay="250" hideDelay="0" submitMode="none">
+		<f:facet name="label">Exames</f:facet>
+		<rich:menuItem>
+			<s:link view="/ExurinaliseList.xhtml" value="Urinálise"
+				id="ExurinaliseId" includePageParams="false" propagation="none" />
+		</rich:menuItem>
+		<rich:menuItem>
+			<s:link view="/ExbiosanguineaList.xhtml" value="Bio Sanguínea  "
+				id="ExbiosanguineaId" includePageParams="false" propagation="none" />
+		</rich:menuItem>
+		<rich:menuItem>
+			<s:link view="/ExhemogramaList.xhtml" value="Hemograma"
+				id="ExhemogramaId" includePageParams="false" propagation="none" />
+		</rich:menuItem>
+		<rich:menuItem>
+			<s:link view="/ExfezesList.xhtml" value="Fezes" id="ExfezesId"
+				includePageParams="false" propagation="none" />
+		</rich:menuItem>
+	</rich:dropDownMenu>
+	
+	<rich:dropDownMenu showDelay="250" hideDelay="0" submitMode="none">
+		<f:facet name="label">Internações</f:facet>
+
+		<rich:menuItem>
+			<s:link view="/InternacaoList.xhtml" value="Listar Internações"
+				id="InternacaoId" includePageParams="false" propagation="none" />
+		</rich:menuItem>
+
+		<rich:menuItem>
+			<s:link view="/InternacaoMedicamentoList.xhtml"
+				value="Listar Medicamentos de Internacao"
+				id="InternacaoMedicamentoId" includePageParams="false"
+				propagation="none" />
+		</rich:menuItem>
+
+	</rich:dropDownMenu>
+	
+	<rich:dropDownMenu showDelay="250" hideDelay="0" submitMode="none">
+		<f:facet name="label">Vacinas</f:facet>       
+       <rich:menuItem>
+			<s:link view="/VacinacaoList.xhtml" value="Listar Vacinações"
+				id="VacinacaoId" includePageParams="false" propagation="none" />
+		</rich:menuItem>
+
+		<rich:menuItem>
+			<s:link view="/VacinaList.xhtml" value="Listar Vacina" id="VacinaId"
+				includePageParams="false" propagation="none" />
+		</rich:menuItem>
+
+		<rich:menuItem>
+			<s:link view="/TiporetornovacinacaoList.xhtml"
+				value="Listar Tipo de retorno Vacinação" id="TiporetornovacinacaoId"
+				includePageParams="false" propagation="none" />
+		</rich:menuItem>
+
+	</rich:dropDownMenu> -->
+	<rich:dropDownMenu showDelay="250" hideDelay="0" submitMode="none">
+		<f:facet name="label">Prontuários</f:facet>
+		<rich:menuItem>
+			<s:link view="/FichaList.xhtml" value="Listar Ficha Clínica"
+				id="FichaId" includePageParams="false" propagation="none" />
+		</rich:menuItem>
+	</rich:dropDownMenu>
+	
+
+	<rich:dropDownMenu showDelay="250" hideDelay="0" submitMode="none">
+		<f:facet name="label">Dominios</f:facet>
+		<rich:menuItem>
+
+			<s:link view="/RacaList.xhtml" value="Listar Raças" id="RacaId"
+				includePageParams="false" propagation="none" />
+		</rich:menuItem>
+		<rich:menuItem>
+			<s:link view="/EspeciesList.xhtml" value="Listar Espécies"
+				id="EspeciesId" includePageParams="false" propagation="none" />
+		</rich:menuItem>
+
+		<rich:menuItem>
+			<s:link view="/PelagemList.xhtml" value="Listar Pelagem"
+				id="PelagemId" includePageParams="false" propagation="none" />
+		</rich:menuItem>
+	</rich:dropDownMenu>
+	
+	<!-- @newMenuItem@ -->
+	<rich:toolBarGroup location="right">
+		<h:outputText id="menuWelcomeId"
+			value="Assinado como: #{credentials.username}"
+			rendered="#{identity.loggedIn}" />
+		<s:link id="menuLoginId" view="/login.xhtml" value="Login"
+			rendered="#{not identity.loggedIn}" propagation="none" />
+		<s:link id="menuLogoutId" view="/home.xhtml"
+			action="#{identity.logout}" value="Logout"
+			rendered="#{identity.loggedIn}" propagation="none" />
+	</rich:toolBarGroup>
+</rich:toolBar>

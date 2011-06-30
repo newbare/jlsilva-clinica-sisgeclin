@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:s="http://jboss.com/products/seam/taglib"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:rich="http://richfaces.org/rich"
+    template="layout/template.xhtml">
+
+<ui:define name="body">
+
+    <rich:panel>
+        <f:facet name="header">Internacao medicamento Details</f:facet>
+
+        <s:decorate id="codinternacaoMedicamento" template="layout/display.xhtml">
+            <ui:define name="label">Codinternacao medicamento</ui:define>
+            <h:outputText value="#{internacaoMedicamentoHome.instance.codinternacaoMedicamento}"/>
+        </s:decorate>
+
+        <s:decorate id="medicamento" template="layout/display.xhtml">
+            <ui:define name="label">Medicamento</ui:define>
+            <h:outputText value="#{internacaoMedicamentoHome.instance.medicamento}"/>
+        </s:decorate>
+
+        <s:decorate id="doses" template="layout/display.xhtml">
+            <ui:define name="label">Doses</ui:define>
+            <h:outputText value="#{internacaoMedicamentoHome.instance.doses}"/>
+        </s:decorate>
+
+        <s:decorate id="forma" template="layout/display.xhtml">
+            <ui:define name="label">Forma</ui:define>
+            <h:outputText value="#{internacaoMedicamentoHome.instance.forma}"/>
+        </s:decorate>
+
+        <s:decorate id="qtd" template="layout/display.xhtml">
+            <ui:define name="label">Qtd</ui:define>
+            <h:outputText value="#{internacaoMedicamentoHome.instance.qtd}"/>
+        </s:decorate>
+
+        <s:decorate id="dias" template="layout/display.xhtml">
+            <ui:define name="label">Dias</ui:define>
+            <h:outputText value="#{internacaoMedicamentoHome.instance.dias}"/>
+        </s:decorate>
+
+        <s:decorate id="horarios" template="layout/display.xhtml">
+            <ui:define name="label">Horarios</ui:define>
+            <h:outputText value="#{internacaoMedicamentoHome.instance.horarios}">
+                <s:convertDateTime type="time"/>
+            </h:outputText>
+        </s:decorate>
+
+        <div style="clear:both"/>
+
+    </rich:panel>
+
+    <div class="actionButtons">
+
+        <s:button view="/InternacaoMedicamentoEdit.xhtml"
+                    id="edit"
+                 value="Edit"/>
+
+        <s:button view="/#{empty internacaoMedicamentoFrom ? 'InternacaoMedicamentoList' : internacaoMedicamentoFrom}.xhtml"
+                    id="done"
+                 value="Done"/>
+
+    </div>
+
+    <rich:tabPanel switchType="ajax">
+
+    <rich:tab>
+        <f:facet name="label">
+            <h:panelGroup><h:graphicImage value="/img/manytoone.gif" style="vertical-align: middle; padding-right: 4px;"/>Internacao</h:panelGroup>
+        </f:facet>
+    <div class="association" id="internacaoParent">
+
+        <h:outputText value="There is no internacao associated with this internacaoMedicamento."
+                   rendered="#{internacaoMedicamentoHome.instance.internacao == null}"/>
+
+        <rich:dataTable var="_internacao"
+                   value="#{internacaoMedicamentoHome.instance.internacao}"
+                rendered="#{internacaoMedicamentoHome.instance.internacao != null}"
+              rowClasses="rvgRowOne,rvgRowTwo"
+                      id="internacaoTable">
+            <h:column>
+                <f:facet name="header">Codinternacao</f:facet>
+                <h:outputText value="#{_internacao.codinternacao}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Ficha codficha</f:facet>
+                <h:outputText value="#{_internacao.ficha.codficha}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Obs</f:facet>
+                <h:outputText value="#{_internacao.obs}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Dtregistro</f:facet>
+                <h:outputText value="#{_internacao.dtregistro}">
+                    <s:convertDateTime type="date" dateStyle="short"/>
+                </h:outputText>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Estsaida</f:facet>
+                <h:outputText value="#{_internacao.estsaida}">
+                    <s:convertDateTime type="date" dateStyle="short"/>
+                </h:outputText>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Datasaida</f:facet>
+                <h:outputText value="#{_internacao.datasaida}">
+                    <s:convertDateTime type="date" dateStyle="short"/>
+                </h:outputText>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Vlcheque</f:facet>
+                <h:outputText value="#{_internacao.vlcheque}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Datahorasaida</f:facet>
+                <h:outputText value="#{_internacao.datahorasaida}">
+                    <s:convertDateTime type="date" dateStyle="short"/>
+                </h:outputText>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Motivosaida</f:facet>
+                <h:outputText value="#{_internacao.motivosaida}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Obssaida</f:facet>
+                <h:outputText value="#{_internacao.obssaida}"/>
+            </h:column>
+            <h:column styleClass="action">
+                <f:facet name="header">Action</f:facet>
+                <s:link id="viewinternacao"
+                     value="View"
+                      view="/Internacao.xhtml">
+                    <f:param name="internacaoCodinternacao"
+                           value="#{_internacao.codinternacao}"/>
+                </s:link>
+            </h:column>
+        </rich:dataTable>
+
+    </div>
+    </rich:tab>
+</rich:tabPanel>
+</ui:define>
+
+</ui:composition>
