@@ -8,6 +8,11 @@ import org.jboss.seam.framework.EntityQuery;
 import br.com.clinica.entity.Animal;
 @Name("relatorioList")
 public class RelatorioList extends EntityQuery<Animal> {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	private static final String EJBQL = "select animal from Animal animais";
 	
 	private static final String[] RESTRICTIONS = { "animais.codanimal = relatorioList.animal.codanimal}" };

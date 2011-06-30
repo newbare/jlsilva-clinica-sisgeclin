@@ -9,6 +9,11 @@ import org.jboss.seam.framework.EntityHome;
 @Name("tiporetornovacinacaoHome")
 public class TiporetornovacinacaoHome extends EntityHome<Tiporetornovacinacao> {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2064744716856219831L;
+
 	public void setTiporetornovacinacaoCodtiporetornovacinacao(Integer id) {
 		setId(id);
 	}

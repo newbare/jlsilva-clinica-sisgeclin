@@ -8,6 +8,11 @@ import java.util.Arrays;
 @Name("especiesList")
 public class EspeciesList extends EntityQuery<Especies> {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2578605596479042768L;
+
 	private static final String EJBQL = "select especies from Especies especies";
 
 	private static final String[] RESTRICTIONS = { "lower(especies.nomeespecie) like lower(concat(#{especiesList.especies.nomeespecie},'%'))", };

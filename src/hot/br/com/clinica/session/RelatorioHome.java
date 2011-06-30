@@ -11,6 +11,11 @@ import br.com.clinica.entity.Ficha;
 
 @Name("relatorioHome")
 public class RelatorioHome extends EntityHome<Animal> {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8066696961060652550L;
+
 	public void setAnimalCodanimal(Integer id) {
 		setId(id);
 	}

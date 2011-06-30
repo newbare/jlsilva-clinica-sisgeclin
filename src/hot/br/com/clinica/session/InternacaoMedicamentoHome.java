@@ -6,9 +6,12 @@ import org.jboss.seam.annotations.Name;
 import org.jboss.seam.framework.EntityHome;
 
 @Name("internacaoMedicamentoHome")
-public class InternacaoMedicamentoHome extends
-		EntityHome<InternacaoMedicamento> {
+public class InternacaoMedicamentoHome extends EntityHome<InternacaoMedicamento> {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 462216157723572319L;
 	@In(create = true)
 	InternacaoHome internacaoHome;
 

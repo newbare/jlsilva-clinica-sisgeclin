@@ -8,6 +8,10 @@ import org.jboss.seam.framework.EntityHome;
 @Name("exhemogramaHome")
 public class ExhemogramaHome extends EntityHome<Exhemograma> {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3156088093607590566L;
 	@In(create = true)
 	FichaHome fichaHome;
 

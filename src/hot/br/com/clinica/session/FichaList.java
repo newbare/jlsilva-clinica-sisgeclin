@@ -7,7 +7,7 @@ import java.util.Arrays;
 
 @Name("fichaList")
 public class FichaList extends EntityQuery<Ficha> {
-
+	private static final long serialVersionUID = 462216157723572319L;
 	private static final String EJBQL = "select ficha from Ficha ficha";
 
 	private static final String[] RESTRICTIONS = {
