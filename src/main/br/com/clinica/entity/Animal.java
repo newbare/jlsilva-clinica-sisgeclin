@@ -29,6 +29,22 @@ import org.hibernate.validator.NotNull;
 @Table(name = "animal", schema = "public")
 public class Animal implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
+	
+	/**
+	 * 
+	 */
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5836541454202091119L;
+	/**
+	 * 
+	 */
+	
 	private int codanimal;
 	private Clientes clientes;
 	private Raca raca;

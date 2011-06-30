@@ -27,6 +27,10 @@ import org.hibernate.validator.NotNull;
 @Table(name = "exurinalise", schema = "public")
 public class Exurinalise implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1110630556163394760L;
 	private int codurinalise;
 	private Ficha ficha;
 	private Date dtregistro;

@@ -30,6 +30,10 @@ import org.hibernate.validator.NotNull;
 @Table(name = "vacinacao", schema = "public")
 public class Vacinacao implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6157876079979346405L;
 	private int codvacinacao;
 	private Ficha ficha;
 	private String nomelaboratorio;

@@ -25,6 +25,10 @@ import org.hibernate.validator.Length;
 @Table(name = "especies", schema = "public")
 public class Especies implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4633316244905154403L;
 	private int codespecie;
 	private String nomeespecie;
 	private Set<Raca> racas = new HashSet<Raca>(0);
