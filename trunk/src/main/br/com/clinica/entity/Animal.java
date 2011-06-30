@@ -1,4 +1,5 @@
 package br.com.clinica.entity;
+
 // Generated 26/03/2011 00:27:00 by Hibernate Tools 3.2.4.GA
 
 import java.util.Date;
@@ -29,80 +30,77 @@ import org.hibernate.validator.NotNull;
 @Table(name = "animal", schema = "public")
 public class Animal implements java.io.Serializable {
 
-	/**
-	 * 
-	 */
-	
-	/**
-	 * 
-	 */
-	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -5836541454202091119L;
 	/**
 	 * 
 	 */
-	
+	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "id_animal")
+	@SequenceGenerator(name = "id_animal", sequenceName = "id_animal")
+	@Column(name = "codanimal", unique = true, nullable = false)
 	private int codanimal;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "codclientes", nullable = false)
+	@NotNull
 	private Clientes clientes;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "codraca")
 	private Raca raca;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "codpelagem", nullable = false)
+	@NotNull
 	private Pelagem pelagem;
+
+	@Column(name = "nome", nullable = false, length = 50)
+	@NotNull
+	@Length(max = 50)
 	private String nome;
+
+	@Temporal(TemporalType.DATE)
+	@Column(name = "dtnascimento", length = 13)
 	private Date dtnascimento;
+
+	@Column(name = "sexo", nullable = false, length = 1)
 	private char sexo;
+
+	@Column(name = "cci", length = 50)
+	@Length(max = 50)
 	private String cci;
+
+	@Column(name = "chip", length = 50)
+	@Length(max = 50)
 	private String chip;
+
+	@Column(name = "pedigree", nullable = false)
 	private boolean pedigree;
+
+	@Column(name = "morto", nullable = false)
 	private boolean morto;
+
+	@Temporal(TemporalType.DATE)
+	@Column(name = "dtmorto", length = 13)
 	private Date dtmorto;
+
+	@Column(name = "alergias", length = 50)
+	@Length(max = 50)
 	private String alergias;
+
+	@Column(name = "obs")
 	private String obs;
+
+	@Column(name = "motivo", length = 30)
+	@Length(max = 30)
 	private String motivo;
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "animal")
 	private Set<Ficha> fichas = new HashSet<Ficha>(0);
 
 	public Animal() {
 	}
 
-	public Animal(int codanimal, Clientes clientes, Pelagem pelagem,
-			String nome, char sexo, boolean pedigree, boolean morto) {
-		this.codanimal = codanimal;
-		this.clientes = clientes;
-		this.pelagem = pelagem;
-		this.nome = nome;
-		this.sexo = sexo;
-		this.pedigree = pedigree;
-		this.morto = morto;
-	}
-
-	public Animal(int codanimal, Clientes clientes, Raca raca, Pelagem pelagem,
-			String nome, Date dtnascimento, char sexo, String cci, String chip,
-			boolean pedigree, boolean morto, Date dtmorto, String alergias,
-			String obs, String motivo, Set<Ficha> fichas) {
-		this.codanimal = codanimal;
-		this.clientes = clientes;
-		this.raca = raca;
-		this.pelagem = pelagem;
-		this.nome = nome;
-		this.dtnascimento = dtnascimento;
-		this.sexo = sexo;
-		this.cci = cci;
-		this.chip = chip;
-		this.pedigree = pedigree;
-		this.morto = morto;
-		this.dtmorto = dtmorto;
-		this.alergias = alergias;
-		this.obs = obs;
-		this.motivo = motivo;
-		this.fichas = fichas;
-	}
-
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "id_animal")
-	@SequenceGenerator( name = "id_animal", sequenceName = "id_animal")
-	@Column(name = "codanimal", unique = true, nullable = false)
 	public int getCodanimal() {
 		return this.codanimal;
 	}
@@ -111,9 +109,6 @@ public class Animal implements java.io.Serializable {
 		this.codanimal = codanimal;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "codclientes", nullable = false)
-	@NotNull
 	public Clientes getClientes() {
 		return this.clientes;
 	}
@@ -122,8 +117,6 @@ public class Animal implements java.io.Serializable {
 		this.clientes = clientes;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "codraca")
 	public Raca getRaca() {
 		return this.raca;
 	}
@@ -132,9 +125,6 @@ public class Animal implements java.io.Serializable {
 		this.raca = raca;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "codpelagem", nullable = false)
-	@NotNull
 	public Pelagem getPelagem() {
 		return this.pelagem;
 	}
@@ -143,9 +133,6 @@ public class Animal implements java.io.Serializable {
 		this.pelagem = pelagem;
 	}
 
-	@Column(name = "nome", nullable = false, length = 50)
-	@NotNull
-	@Length(max = 50)
 	public String getNome() {
 		return this.nome;
 	}
@@ -154,8 +141,6 @@ public class Animal implements java.io.Serializable {
 		this.nome = nome;
 	}
 
-	@Temporal(TemporalType.DATE)
-	@Column(name = "dtnascimento", length = 13)
 	public Date getDtnascimento() {
 		return this.dtnascimento;
 	}
@@ -164,7 +149,6 @@ public class Animal implements java.io.Serializable {
 		this.dtnascimento = dtnascimento;
 	}
 
-	@Column(name = "sexo", nullable = false, length = 1)
 	public char getSexo() {
 		return this.sexo;
 	}
@@ -173,8 +157,6 @@ public class Animal implements java.io.Serializable {
 		this.sexo = sexo;
 	}
 
-	@Column(name = "cci", length = 50)
-	@Length(max = 50)
 	public String getCci() {
 		return this.cci;
 	}
@@ -183,8 +165,6 @@ public class Animal implements java.io.Serializable {
 		this.cci = cci;
 	}
 
-	@Column(name = "chip", length = 50)
-	@Length(max = 50)
 	public String getChip() {
 		return this.chip;
 	}
@@ -193,7 +173,6 @@ public class Animal implements java.io.Serializable {
 		this.chip = chip;
 	}
 
-	@Column(name = "pedigree", nullable = false)
 	public boolean isPedigree() {
 		return this.pedigree;
 	}
@@ -202,7 +181,6 @@ public class Animal implements java.io.Serializable {
 		this.pedigree = pedigree;
 	}
 
-	@Column(name = "morto", nullable = false)
 	public boolean isMorto() {
 		return this.morto;
 	}
@@ -211,8 +189,6 @@ public class Animal implements java.io.Serializable {
 		this.morto = morto;
 	}
 
-	@Temporal(TemporalType.DATE)
-	@Column(name = "dtmorto", length = 13)
 	public Date getDtmorto() {
 		return this.dtmorto;
 	}
@@ -221,8 +197,6 @@ public class Animal implements java.io.Serializable {
 		this.dtmorto = dtmorto;
 	}
 
-	@Column(name = "alergias", length = 50)
-	@Length(max = 50)
 	public String getAlergias() {
 		return this.alergias;
 	}
@@ -231,7 +205,6 @@ public class Animal implements java.io.Serializable {
 		this.alergias = alergias;
 	}
 
-	@Column(name = "obs")
 	public String getObs() {
 		return this.obs;
 	}
@@ -240,8 +213,6 @@ public class Animal implements java.io.Serializable {
 		this.obs = obs;
 	}
 
-	@Column(name = "motivo", length = 30)
-	@Length(max = 30)
 	public String getMotivo() {
 		return this.motivo;
 	}
@@ -250,7 +221,6 @@ public class Animal implements java.io.Serializable {
 		this.motivo = motivo;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "animal")
 	public Set<Ficha> getFichas() {
 		return this.fichas;
 	}
@@ -258,5 +228,6 @@ public class Animal implements java.io.Serializable {
 	public void setFichas(Set<Ficha> fichas) {
 		this.fichas = fichas;
 	}
+	
 
 }
