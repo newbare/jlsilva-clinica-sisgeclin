@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:s="http://jboss.com/products/seam/taglib"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:rich="http://richfaces.org/rich"
+    template="layout/template.xhtml">
+
+<ui:define name="body">
+
+    <rich:panel>
+        <f:facet name="header">Tiporetornovacinacao Details</f:facet>
+
+        <s:decorate id="codtiporetornovacinacao" template="layout/display.xhtml">
+            <ui:define name="label">Codtiporetornovacinacao</ui:define>
+            <h:outputText value="#{tiporetornovacinacaoHome.instance.codtiporetornovacinacao}"/>
+        </s:decorate>
+
+        <s:decorate id="retorno" template="layout/display.xhtml">
+            <ui:define name="label">Retorno</ui:define>
+            <h:outputText value="#{tiporetornovacinacaoHome.instance.retorno}"/>
+        </s:decorate>
+
+        <s:decorate id="dias" template="layout/display.xhtml">
+            <ui:define name="label">Dias</ui:define>
+            <h:outputText value="#{tiporetornovacinacaoHome.instance.dias}"/>
+        </s:decorate>
+
+        <div style="clear:both"/>
+
+    </rich:panel>
+
+    <div class="actionButtons">
+
+        <s:button view="/TiporetornovacinacaoEdit.xhtml"
+                    id="edit"
+                 value="Edit"/>
+
+        <s:button view="/#{empty tiporetornovacinacaoFrom ? 'TiporetornovacinacaoList' : tiporetornovacinacaoFrom}.xhtml"
+                    id="done"
+                 value="Done"/>
+
+    </div>
+
+    <rich:tabPanel switchType="ajax">
+
+    <rich:tab>
+        <f:facet name="label">
+            <h:panelGroup><h:graphicImage value="/img/onetomany.gif" style="vertical-align: middle; padding-right: 4px;"/>Vacinas</h:panelGroup>
+        </f:facet>
+    <h:form styleClass="association" id="vacinasChildren">
+
+        <h:outputText value="There are no vacinas associated with this tiporetornovacinacao."
+                   rendered="#{empty tiporetornovacinacaoHome.vacinas}"/>
+
+        <rich:dataTable value="#{tiporetornovacinacaoHome.vacinas}"
+                       var="_vacina"
+                  rendered="#{not empty tiporetornovacinacaoHome.vacinas}"
+                rowClasses="rvgRowOne,rvgRowTwo"
+                        id="vacinasTable">
+            <rich:column sortBy="#{_vacina.codvacinas}">
+                <f:facet name="header">Codvacinas</f:facet>
+                <h:outputText value="#{_vacina.codvacinas}"/>
+            </rich:column>
+            <rich:column sortBy="#{_vacina.nomevacina}">
+                <f:facet name="header">Nomevacina</f:facet>
+                <h:outputText value="#{_vacina.nomevacina}"/>
+            </rich:column>
+            <rich:column sortBy="#{_vacina.retorno}">
+                <f:facet name="header">Retorno</f:facet>
+                <h:outputText value="#{_vacina.retorno}"/>
+            </rich:column>
+            <rich:column sortBy="#{_vacina.doses}">
+                <f:facet name="header">Doses</f:facet>
+                <h:outputText value="#{_vacina.doses}"/>
+            </rich:column>
+            <rich:column sortBy="#{_vacina.proximavacina}">
+                <f:facet name="header">Proximavacina</f:facet>
+                <h:outputText value="#{_vacina.proximavacina}"/>
+            </rich:column>
+            <h:column>
+                <f:facet name="header">Action</f:facet>
+                <s:link id="selectvacina"
+                     value="Select"
+                      view="/Vacina.xhtml">
+                    <f:param name="vacinaCodvacinas"
+                            value="#{_vacina.codvacinas}"/>
+                    <f:param name="vacinaFrom" value="Tiporetornovacinacao"/>
+                </s:link>
+            </h:column>
+        </rich:dataTable>
+
+    </h:form>
+
+    <div class="actionButtons">
+        <s:button
+               value="Add vacina"
+                view="/VacinaEdit.xhtml">
+            <f:param name="tiporetornovacinacaoCodtiporetornovacinacao"
+                    value="#{tiporetornovacinacaoHome.instance.codtiporetornovacinacao}"/>
+            <f:param name="vacinaFrom" value="Tiporetornovacinacao"/>
+        </s:button>
+    </div>
+    </rich:tab>
+</rich:tabPanel>
+</ui:define>
+
+</ui:composition>

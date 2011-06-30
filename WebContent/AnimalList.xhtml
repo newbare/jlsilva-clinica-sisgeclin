@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:s="http://jboss.com/products/seam/taglib"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:rich="http://richfaces.org/rich"
+    xmlns:c="http://java.sun.com/jstl/core"
+    template="layout/template.xhtml">
+
+<ui:define name="body">
+
+    <h:form id="animalSearch" styleClass="edit">
+
+        <rich:simpleTogglePanel label="Filtros de Pesquisa -> Animais" switchType="ajax">
+
+            <s:decorate template="layout/display.xhtml">
+                <ui:define name="label">Nome:</ui:define>
+                <h:inputText id="nome" value="#{animalList.animal.nome}"/>
+            </s:decorate>
+
+           <!-- <s:decorate template="layout/display.xhtml">
+                <ui:define name="label">CCI:</ui:define>
+                <h:inputText id="cci" value="#{animalList.animal.cci}"/>
+            </s:decorate>-->
+
+            <s:decorate template="layout/display.xhtml">
+                <ui:define name="label">CHIP:</ui:define>
+                <h:inputText id="chip" value="#{animalList.animal.chip}"/>
+            </s:decorate>
+
+            <!-- <s:decorate template="layout/display.xhtml">
+                <ui:define name="label">Alergias:</ui:define>
+                <h:inputText id="alergias" value="#{animalList.animal.alergias}"/>
+            </s:decorate>
+
+            <s:decorate template="layout/display.xhtml">
+                <ui:define name="label">Obs:</ui:define>
+                <h:inputText id="obs" value="#{animalList.animal.obs}"/>
+            </s:decorate>
+
+            <s:decorate template="layout/display.xhtml">
+                <ui:define name="label">Motivo:</ui:define>
+                <h:inputText id="motivo" value="#{animalList.animal.motivo}"/>
+            </s:decorate>
+             -->
+             
+            <s:decorate template="layout/display.xhtml">
+                <ui:define name="label">Tipo de Consulta</ui:define>
+                <h:selectOneRadio id="logic" value="#{animalList.restrictionLogicOperator}" styleClass="radio">
+                    <f:selectItem itemLabel="Todos os Filtros" itemValue="and" />
+						<f:selectItem itemLabel="Qualquer Filtro" itemValue="or" />
+                </h:selectOneRadio>
+            </s:decorate>
+
+        </rich:simpleTogglePanel>
+
+        <div class="actionButtons">
+            <h:commandButton id="search" value="Pesquisar" action="/AnimalList.xhtml"/>
+            <s:button id="reset" value="Limpar" includePageParams="false"/>            
+        </div>
+
+    </h:form>
+
+    <rich:panel>
+        <f:facet name="header">Itens encontrados (#{empty animalList.resultList ? 0 : (animalList.paginated ? animalList.resultCount : animalList.resultList.size)})</f:facet>
+    <div class="results" id="animalList">
+
+    <h:outputText value="Pesquisa sem Resultados."
+               rendered="#{empty animalList.resultList}"/>
+
+    <rich:dataTable id="animalList"
+                var="_animal"
+              value="#{animalList.resultList}"
+           rendered="#{not empty animalList.resultList}">
+           
+        <h:column>
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{animalList}"/>
+                    <ui:param name="propertyLabel" value="Cliente"/>
+                    <ui:param name="propertyPath" value="animal.clientes.nome"/>
+                </ui:include>
+            </f:facet>
+            <h:outputText value="#{_animal.clientes.nome}"/>
+        </h:column>   
+        <h:column>
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{animalList}"/>
+                    <ui:param name="propertyLabel" value="Animal"/>
+                    <ui:param name="propertyPath" value="animal.nome"/>
+                </ui:include>
+            </f:facet>
+            <h:outputText value="#{_animal.nome}"/>
+        </h:column>
+        
+        <h:column>
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{animalList}"/>
+                    <ui:param name="propertyLabel" value="Espécie"/>
+                    <ui:param name="propertyPath" value="animal.raca.especies.nomeespecie"/>
+                </ui:include>
+            </f:facet>
+            <h:outputText value="#{_animal.raca.especies.nomeespecie}"/>
+        </h:column>
+        
+        <h:column>
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{animalList}"/>
+                    <ui:param name="propertyLabel" value="Raça"/>
+                    <ui:param name="propertyPath" value="animal.raca.nomeraca"/>
+                </ui:include>
+            </f:facet>
+            <h:outputText value="#{_animal.raca.nomeraca}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{animalList}"/>
+                    <ui:param name="propertyLabel" value="Pelagem"/>
+                    <ui:param name="propertyPath" value="animal.pelagem.pelagem"/>
+                </ui:include>
+            </f:facet>
+            <h:outputText value="#{_animal.pelagem.pelagem}"/>
+        </h:column>
+        
+        <h:column>
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{animalList}"/>
+                    <ui:param name="propertyLabel" value="Data de Nascimento"/>
+                    <ui:param name="propertyPath" value="animal.dtnascimento" />
+                </ui:include>
+            </f:facet>
+            <h:outputText value="#{_animal.dtnascimento}" >
+                <s:convertDateTime type="date" dateStyle="short" pattern="dd/MM/yyyy"/>
+            </h:outputText>
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{animalList}"/>
+                    <ui:param name="propertyLabel" value="Sexo"/>
+                    <ui:param name="propertyPath" value="animal.sexo"/>
+                </ui:include>
+            </f:facet>
+            <h:outputText value="#{ _animal.sexo eq 'M'? 'Macho':'Fêmea'}"/>
+            
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{animalList}"/>
+                    <ui:param name="propertyLabel" value="CCI"/>
+                    <ui:param name="propertyPath" value="animal.cci"/>
+                </ui:include>
+            </f:facet>
+            <h:outputText value="#{_animal.cci}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{animalList}"/>
+                    <ui:param name="propertyLabel" value="CHIP"/>
+                    <ui:param name="propertyPath" value="animal.chip"/>
+                </ui:include>
+            </f:facet>
+            <h:outputText value="#{_animal.chip}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{animalList}"/>
+                    <ui:param name="propertyLabel" value="Pedigree"/>
+                    <ui:param name="propertyPath" value="animal.pedigree"/>
+                </ui:include>
+            </f:facet>
+            <c:if test="#{_animal.pedigree==true}">
+            	<h:outputText value="Sim"/>
+            </c:if>
+            <c:if test="#{_animal.pedigree==false}">
+            	<h:outputText value="Não"/>
+            </c:if>
+            <c:if test="#{empty _animal.pedigree}">
+            	<h:outputText value="Não Informado"/>
+            </c:if>
+        </h:column>
+        
+        <!-- <h:column>
+            <f:facet name="header"> 
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{animalList}"/>
+                    <ui:param name="propertyLabel" value="Alergias"/>
+                    <ui:param name="propertyPath" value="animal.alergias"/>
+                </ui:include>
+            </f:facet>
+            <h:outputText value="#{_animal.alergias}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{animalList}"/>
+                    <ui:param name="propertyLabel" value="Obs"/>
+                    <ui:param name="propertyPath" value="animal.obs"/>
+                </ui:include>
+            </f:facet>
+            <h:outputText value="#{_animal.obs}"/>
+        </h:column> -->
+        <c:if test="#{animal.morto==true}">
+        <h:column>
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{animalList}"/>
+                    <ui:param name="propertyLabel" value="Sim"/>
+                    <ui:param name="propertyPath" value="animal.morto"/>
+                </ui:include>
+            </f:facet>
+            <h:outputText value="#{_animal.morto}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{animalList}"/>
+                    <ui:param name="propertyLabel" value="Dtmorto"/>
+                    <ui:param name="propertyPath" value="animal.dtmorto"/>
+                </ui:include>
+            </f:facet>
+            <h:outputText value="#{_animal.dtmorto}">
+                <s:convertDateTime type="date" dateStyle="short" pattern="dd/MM/yyyy"/>
+            </h:outputText>
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{animalList}"/>
+                    <ui:param name="propertyLabel" value="Motivo"/>
+                    <ui:param name="propertyPath" value="animal.motivo"/>
+                </ui:include>
+            </f:facet>
+            <h:outputText value="#{_animal.motivo}"/>
+        </h:column>
+        </c:if>
+        <rich:column styleClass="action">
+            <f:facet name="header">Ações</f:facet>
+            <s:link view="/#{empty from ? 'Animal' : from}.xhtml"                 
+                      propagation="#{empty from ? 'none' : 'default'}"
+                      id="animalViewId">
+                      <c:if test="#{empty from}">
+                        <h:graphicImage value="/img/ico_HotKey.gif" alt="Visualizar" />
+                      </c:if>
+                      <c:if test="#{not empty from}">
+                        <h:graphicImage value="/img/passed.gif" alt="Selecionar" />
+                      </c:if>
+                <f:param name="animalCodanimal"
+                        value="#{_animal.codanimal}"/>
+            </s:link>
+            #{' '}
+            <s:link view="/AnimalEdit.xhtml"
+                   
+             propagation="none"
+                      id="animalEdit"
+                rendered="#{empty from}">
+                <h:graphicImage value="/img/ico_Editor.gif" alt="Editar" />
+                <f:param name="animalCodanimal" value="#{_animal.codanimal}"/>
+            </s:link>
+        </rich:column>
+    </rich:dataTable>
+
+    </div>
+    </rich:panel>
+
+    <div class="tableControl">
+
+        <s:link view="/AnimalList.xhtml"
+            rendered="#{animalList.previousExists}"
+               value="#{messages.left}#{messages.left} First Page"
+                  id="firstPage">
+          <f:param name="firstResult" value="0"/>
+        </s:link>
+
+        <s:link view="/AnimalList.xhtml"
+            rendered="#{animalList.previousExists}"
+               value="#{messages.left} Previous Page"
+                  id="previousPage">
+            <f:param name="firstResult"
+                    value="#{animalList.previousFirstResult}"/>
+        </s:link>
+
+        <s:link view="/AnimalList.xhtml"
+            rendered="#{animalList.nextExists}"
+               value="Next Page #{messages.right}"
+                  id="nextPage">
+            <f:param name="firstResult"
+                    value="#{animalList.nextFirstResult}"/>
+        </s:link>
+
+        <s:link view="/AnimalList.xhtml"
+            rendered="#{animalList.nextExists}"
+               value="Last Page #{messages.right}#{messages.right}"
+                  id="lastPage">
+            <f:param name="firstResult"
+                    value="#{animalList.lastFirstResult}"/>
+        </s:link>
+
+    </div>
+
+    <s:div styleClass="actionButtons" rendered="#{empty from}">
+        <s:button view="/AnimalEdit.xhtml"
+                    id="create"
+           propagation="none"
+                 value="Adicionar Animal">
+            <f:param name="animalCodanimal"/>
+        </s:button>
+    </s:div>
+
+</ui:define>
+
+</ui:composition>

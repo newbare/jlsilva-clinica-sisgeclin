@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:s="http://jboss.com/products/seam/taglib"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:rich="http://richfaces.org/rich"
+    template="layout/template.xhtml">
+
+<ui:define name="body">
+
+    <h:form id="racaSearch" styleClass="edit">
+
+        <rich:simpleTogglePanel label="Raca Search Filter" switchType="ajax">
+
+            <s:decorate template="layout/display.xhtml">
+                <ui:define name="label">Nomeraca</ui:define>
+                <h:inputText id="nomeraca" value="#{racaList.raca.nomeraca}"/>
+            </s:decorate>
+
+            <s:decorate template="layout/display.xhtml">
+                <ui:define name="label">Match</ui:define>
+                <h:selectOneRadio id="logic" value="#{racaList.restrictionLogicOperator}" styleClass="radio">
+                    <f:selectItem itemLabel="All" itemValue="and"/>
+                    <f:selectItem itemLabel="Any" itemValue="or"/>
+                </h:selectOneRadio>
+            </s:decorate>
+
+        </rich:simpleTogglePanel>
+
+        <div class="actionButtons">
+            <h:commandButton id="search" value="Search" action="/RacaList.xhtml"/>
+            <s:button id="reset" value="Reset" includePageParams="false"/>
+        </div>
+
+    </h:form>
+
+    <rich:panel>
+        <f:facet name="header">Raca Search Results (#{empty racaList.resultList ? 0 : (racaList.paginated ? racaList.resultCount : racaList.resultList.size)})</f:facet>
+    <div class="results" id="racaList">
+
+    <h:outputText value="The raca search returned no results."
+               rendered="#{empty racaList.resultList}"/>
+
+    <rich:dataTable id="racaList"
+                var="_raca"
+              value="#{racaList.resultList}"
+           rendered="#{not empty racaList.resultList}">
+        <h:column>
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{racaList}"/>
+                    <ui:param name="propertyLabel" value="Codraca"/>
+                    <ui:param name="propertyPath" value="raca.codraca"/>
+                </ui:include>
+            </f:facet>
+            <h:outputText value="#{_raca.codraca}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{racaList}"/>
+                    <ui:param name="propertyLabel" value="Especies codespecie"/>
+                    <ui:param name="propertyPath" value="raca.especies.codespecie"/>
+                </ui:include>
+            </f:facet>
+            <h:outputText value="#{_raca.especies.codespecie}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{racaList}"/>
+                    <ui:param name="propertyLabel" value="Nomeraca"/>
+                    <ui:param name="propertyPath" value="raca.nomeraca"/>
+                </ui:include>
+            </f:facet>
+            <h:outputText value="#{_raca.nomeraca}"/>
+        </h:column>
+        <rich:column styleClass="action">
+            <f:facet name="header">Action</f:facet>
+            <s:link view="/#{empty from ? 'Raca' : from}.xhtml"
+                   value="#{empty from ? 'View' : 'Select'}"
+             propagation="#{empty from ? 'none' : 'default'}"
+                      id="racaViewId">
+                <f:param name="racaCodraca"
+                        value="#{_raca.codraca}"/>
+            </s:link>
+            #{' '}
+            <s:link view="/RacaEdit.xhtml"
+                   value="Edit"
+             propagation="none"
+                      id="racaEdit"
+                rendered="#{empty from}">
+                <f:param name="racaCodraca"
+                        value="#{_raca.codraca}"/>
+            </s:link>
+        </rich:column>
+    </rich:dataTable>
+
+    </div>
+    </rich:panel>
+
+    <div class="tableControl">
+
+        <s:link view="/RacaList.xhtml"
+            rendered="#{racaList.previousExists}"
+               value="#{messages.left}#{messages.left} First Page"
+                  id="firstPage">
+          <f:param name="firstResult" value="0"/>
+        </s:link>
+
+        <s:link view="/RacaList.xhtml"
+            rendered="#{racaList.previousExists}"
+               value="#{messages.left} Previous Page"
+                  id="previousPage">
+            <f:param name="firstResult"
+                    value="#{racaList.previousFirstResult}"/>
+        </s:link>
+
+        <s:link view="/RacaList.xhtml"
+            rendered="#{racaList.nextExists}"
+               value="Next Page #{messages.right}"
+                  id="nextPage">
+            <f:param name="firstResult"
+                    value="#{racaList.nextFirstResult}"/>
+        </s:link>
+
+        <s:link view="/RacaList.xhtml"
+            rendered="#{racaList.nextExists}"
+               value="Last Page #{messages.right}#{messages.right}"
+                  id="lastPage">
+            <f:param name="firstResult"
+                    value="#{racaList.lastFirstResult}"/>
+        </s:link>
+
+    </div>
+
+    <s:div styleClass="actionButtons" rendered="#{empty from}">
+        <s:button view="/RacaEdit.xhtml"
+                    id="create"
+           propagation="none"
+                 value="Create raca">
+            <f:param name="racaCodraca"/>
+        </s:button>
+    </s:div>
+
+</ui:define>
+
+</ui:composition>

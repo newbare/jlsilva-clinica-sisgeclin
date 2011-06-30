@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page xmlns="http://jboss.com/products/seam/pages"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://jboss.com/products/seam/pages http://jboss.com/products/seam/pages-2.1.xsd">
+
+   <param name="firstResult" value="#{exurinaliseList.firstResult}"/>
+   <param name="sort" value="#{exurinaliseList.orderColumn}"/>
+   <param name="dir" value="#{exurinaliseList.orderDirection}"/>
+   <param name="logic" value="#{exurinaliseList.restrictionLogicOperator}"/>
+
+   <param name="from"/>
+   <param name="urinaColheita" value="#{exurinaliseList.exurinalise.urinaColheita}"/>
+   <param name="aspecto" value="#{exurinaliseList.exurinalise.aspecto}"/>
+   <param name="cor" value="#{exurinaliseList.exurinalise.cor}"/>
+   <param name="odor" value="#{exurinaliseList.exurinalise.odor}"/>
+   <param name="proteinas" value="#{exurinaliseList.exurinalise.proteinas}"/>
+   <param name="glicose" value="#{exurinaliseList.exurinalise.glicose}"/>
+   <param name="ccetonicos" value="#{exurinaliseList.exurinalise.ccetonicos}"/>
+   <param name="bilirrubina" value="#{exurinaliseList.exurinalise.bilirrubina}"/>
+   <param name="uribilinogenio" value="#{exurinaliseList.exurinalise.uribilinogenio}"/>
+   <param name="sgoculto" value="#{exurinaliseList.exurinalise.sgoculto}"/>
+   <param name="nitritos" value="#{exurinaliseList.exurinalise.nitritos}"/>
+   <param name="hemacias" value="#{exurinaliseList.exurinalise.hemacias}"/>
+   <param name="leucocitos" value="#{exurinaliseList.exurinalise.leucocitos}"/>
+   <param name="cilindros" value="#{exurinaliseList.exurinalise.cilindros}"/>
+   <param name="celdescm" value="#{exurinaliseList.exurinalise.celdescm}"/>
+   <param name="cristais" value="#{exurinaliseList.exurinalise.cristais}"/>
+   <param name="outros" value="#{exurinaliseList.exurinalise.outros}"/>
+   <param name="obs" value="#{exurinaliseList.exurinalise.obs}"/>
+
+</page>

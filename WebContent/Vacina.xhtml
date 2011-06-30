@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:s="http://jboss.com/products/seam/taglib"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:rich="http://richfaces.org/rich"
+    template="layout/template.xhtml">
+
+<ui:define name="body">
+
+    <rich:panel>
+        <f:facet name="header">Vacina Details</f:facet>
+
+        <s:decorate id="codvacinas" template="layout/display.xhtml">
+            <ui:define name="label">Codvacinas</ui:define>
+            <h:outputText value="#{vacinaHome.instance.codvacinas}"/>
+        </s:decorate>
+
+        <s:decorate id="nomevacina" template="layout/display.xhtml">
+            <ui:define name="label">Nomevacina</ui:define>
+            <h:outputText value="#{vacinaHome.instance.nomevacina}"/>
+        </s:decorate>
+
+        <s:decorate id="retorno" template="layout/display.xhtml">
+            <ui:define name="label">Retorno</ui:define>
+            <h:outputText value="#{vacinaHome.instance.retorno}"/>
+        </s:decorate>
+
+        <s:decorate id="doses" template="layout/display.xhtml">
+            <ui:define name="label">Doses</ui:define>
+            <h:outputText value="#{vacinaHome.instance.doses}"/>
+        </s:decorate>
+
+        <s:decorate id="proximavacina" template="layout/display.xhtml">
+            <ui:define name="label">Proximavacina</ui:define>
+            <h:outputText value="#{vacinaHome.instance.proximavacina}"/>
+        </s:decorate>
+
+        <div style="clear:both"/>
+
+    </rich:panel>
+
+    <div class="actionButtons">
+
+        <s:button view="/VacinaEdit.xhtml"
+                    id="edit"
+                 value="Edit"/>
+
+        <s:button view="/#{empty vacinaFrom ? 'VacinaList' : vacinaFrom}.xhtml"
+                    id="done"
+                 value="Done"/>
+
+    </div>
+
+    <rich:tabPanel switchType="ajax">
+
+    <rich:tab>
+        <f:facet name="label">
+            <h:panelGroup><h:graphicImage value="/img/manytoone.gif" style="vertical-align: middle; padding-right: 4px;"/>Vacinacao</h:panelGroup>
+        </f:facet>
+    <div class="association" id="vacinacaoParent">
+
+        <h:outputText value="There is no vacinacao associated with this vacina."
+                   rendered="#{vacinaHome.instance.vacinacao == null}"/>
+
+        <rich:dataTable var="_vacinacao"
+                   value="#{vacinaHome.instance.vacinacao}"
+                rendered="#{vacinaHome.instance.vacinacao != null}"
+              rowClasses="rvgRowOne,rvgRowTwo"
+                      id="vacinacaoTable">
+            <h:column>
+                <f:facet name="header">Codvacinacao</f:facet>
+                <h:outputText value="#{_vacinacao.codvacinacao}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Ficha codficha</f:facet>
+                <h:outputText value="#{_vacinacao.ficha.codficha}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Nomelaboratorio</f:facet>
+                <h:outputText value="#{_vacinacao.nomelaboratorio}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Dtvacinacao</f:facet>
+                <h:outputText value="#{_vacinacao.dtvacinacao}">
+                    <s:convertDateTime type="date" dateStyle="short"/>
+                </h:outputText>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Lote</f:facet>
+                <h:outputText value="#{_vacinacao.lote}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Retornou</f:facet>
+                <h:outputText value="#{_vacinacao.retornou}"/>
+            </h:column>
+            <h:column styleClass="action">
+                <f:facet name="header">Action</f:facet>
+                <s:link id="viewvacinacao"
+                     value="View"
+                      view="/Vacinacao.xhtml">
+                    <f:param name="vacinacaoCodvacinacao"
+                           value="#{_vacinacao.codvacinacao}"/>
+                </s:link>
+            </h:column>
+        </rich:dataTable>
+
+    </div>
+    </rich:tab>
+
+    <rich:tab>
+        <f:facet name="label">
+            <h:panelGroup><h:graphicImage value="/img/manytoone.gif" style="vertical-align: middle; padding-right: 4px;"/>Tiporetornovacinacao</h:panelGroup>
+        </f:facet>
+    <div class="association" id="tiporetornovacinacaoParent">
+
+        <h:outputText value="There is no tiporetornovacinacao associated with this vacina."
+                   rendered="#{vacinaHome.instance.tiporetornovacinacao == null}"/>
+
+        <rich:dataTable var="_tiporetornovacinacao"
+                   value="#{vacinaHome.instance.tiporetornovacinacao}"
+                rendered="#{vacinaHome.instance.tiporetornovacinacao != null}"
+              rowClasses="rvgRowOne,rvgRowTwo"
+                      id="tiporetornovacinacaoTable">
+            <h:column>
+                <f:facet name="header">Codtiporetornovacinacao</f:facet>
+                <h:outputText value="#{_tiporetornovacinacao.codtiporetornovacinacao}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Retorno</f:facet>
+                <h:outputText value="#{_tiporetornovacinacao.retorno}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Dias</f:facet>
+                <h:outputText value="#{_tiporetornovacinacao.dias}"/>
+            </h:column>
+            <h:column styleClass="action">
+                <f:facet name="header">Action</f:facet>
+                <s:link id="viewtiporetornovacinacao"
+                     value="View"
+                      view="/Tiporetornovacinacao.xhtml">
+                    <f:param name="tiporetornovacinacaoCodtiporetornovacinacao"
+                           value="#{_tiporetornovacinacao.codtiporetornovacinacao}"/>
+                </s:link>
+            </h:column>
+        </rich:dataTable>
+
+    </div>
+    </rich:tab>
+</rich:tabPanel>
+</ui:define>
+
+</ui:composition>

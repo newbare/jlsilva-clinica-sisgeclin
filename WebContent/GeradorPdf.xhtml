@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<p:document xmlns:p="http://jboss.com/products/seam/pdf"
+	        xmlns:s="http://jboss.com/products/seam/taglib"
+	        xmlns:f="http://java.sun.com/jsf/core" 
+	        xmlns:h="http://java.sun.com/jsf/html"
+	        xmlns:rich="http://richfaces.org/rich">
+
+
+	<f:facet name="header">
+		<p:font name="arial" size ="8">
+			<p:footer borderWidthTop="0.5" borderColorTop="gray"
+			borderWidthBottom="0" alignment="right" size="4">
+			Clinica Med Cães - Relatório Clínico.
+			</p:footer>
+		</p:font>	
+	</f:facet>
+	
+	<p:font size="24">
+		<p:paragraph spacinBefor="0" spacingAfter="20">Prontuários</p:paragraph>		 
+	</p:font>
+	<p:image alignment="right" value="/img/seamlogo.png"/>
+	
+	<p:html>
+	<table>
+		<tr>
+			<td>
+				<s:formattedText>Proprietário do Animal:</s:formattedText>
+			</td>
+			<td align="left">
+				<s:formattedText value="#{relatorioHome.instance.clientes.nome}"/>
+			</td>
+			<td align="left">
+				<s:formattedText>E-mail:</s:formattedText>
+			</td>
+			<td>
+				<s:formattedText value="#{relatorioHome.instance.clientes.email}"/>
+			</td>		
+		</tr>
+		
+		<tr>
+			<td>
+				<s:formattedText>Nome do Animal:</s:formattedText>
+			</td>
+			<td>
+				<s:formattedText value="#{relatorioHome.instance.nome}"/>
+			</td>
+			<td>
+				<s:formattedText>Raça do Animal:</s:formattedText>
+			</td>
+			<td>
+				<s:formattedText value="#{relatorioHome.instance.raca.nomeraca}"/>
+			</td>		
+		</tr>
+	</table>
+	
+	
+
+        <h:outputText value="Não existem Fichas de Prontuário associadas ao Animal."  rendered="#{empty relatorioHome.fichas}"/>
+
+<br /><br />
+	<table border="1">
+		<tr>
+			<td><rich:dataList var="fic" value="#{relatorioHome.fichas}"
+				rows="10">
+				<h:outputText value="Data de Atendimento:    "></h:outputText>
+				<h:outputText value="#{fic.dtregistro} " pattern="dd/MM/yyyy"/>
+				<br />
+				<h:outputText value="Anamnese:    " styleClass="font-weight:bold;"></h:outputText>
+				<br />
+				<h:outputText value="#{fic.anamnese} " />
+				<h:outputText
+					value="__________________________________________________________________________"></h:outputText>
+			</rich:dataList></td>
+		</tr>
+	</table>
+
+
+	</p:html>
+	      
+</p:document>

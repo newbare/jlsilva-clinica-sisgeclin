@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:s="http://jboss.com/products/seam/taglib"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:a="http://richfaces.org/a4j"
+    xmlns:rich="http://richfaces.org/rich"
+    template="layout/template.xhtml">
+
+<ui:define name="body">
+
+    <h:form id="exhemograma" styleClass="edit">
+
+        <rich:panel>
+            <f:facet name="header">#{exhemogramaHome.managed ? 'Edit' : 'Add'} Exhemograma</f:facet>
+
+
+            <!-- <s:decorate id="codhemogramaField" template="layout/edit.xhtml">
+                <ui:define name="label">Codhemograma</ui:define>
+                <h:inputText id="codhemograma"
+                       required="true"
+                       disabled="#{exhemogramaHome.managed}"
+                          value="#{exhemogramaHome.instance.codhemograma}">
+                    <a:support event="onblur" reRender="codhemogramaField" bypassUpdates="true" ajaxSingle="true"/>
+                </h:inputText>
+            </s:decorate> -->
+
+
+
+            <s:decorate id="dtregistroField" template="layout/edit.xhtml">
+                <ui:define name="label">Dtregistro</ui:define>
+                <rich:calendar id="dtregistro"
+                          value="#{exhemogramaHome.instance.dtregistro}" datePattern="MM/dd/yyyy" />
+            </s:decorate>
+
+
+            <s:decorate id="hemaciasField" template="layout/edit.xhtml">
+                <ui:define name="label">Hemacias</ui:define>
+                <h:inputText id="hemacias"
+                          value="#{exhemogramaHome.instance.hemacias}">
+                    <a:support event="onblur" reRender="hemaciasField" bypassUpdates="true" ajaxSingle="true"/>
+                </h:inputText>
+            </s:decorate>
+
+
+            <s:decorate id="hemoglobinaField" template="layout/edit.xhtml">
+                <ui:define name="label">Hemoglobina</ui:define>
+                <h:inputText id="hemoglobina"
+                          value="#{exhemogramaHome.instance.hemoglobina}">
+                    <a:support event="onblur" reRender="hemoglobinaField" bypassUpdates="true" ajaxSingle="true"/>
+                </h:inputText>
+            </s:decorate>
+
+
+            <s:decorate id="hematocritoField" template="layout/edit.xhtml">
+                <ui:define name="label">Hematocrito</ui:define>
+                <h:inputText id="hematocrito"
+                          value="#{exhemogramaHome.instance.hematocrito}">
+                    <a:support event="onblur" reRender="hematocritoField" bypassUpdates="true" ajaxSingle="true"/>
+                </h:inputText>
+            </s:decorate>
+
+
+            <s:decorate id="vcmField" template="layout/edit.xhtml">
+                <ui:define name="label">Vcm</ui:define>
+                <h:inputText id="vcm"
+                          value="#{exhemogramaHome.instance.vcm}">
+                    <a:support event="onblur" reRender="vcmField" bypassUpdates="true" ajaxSingle="true"/>
+                </h:inputText>
+            </s:decorate>
+
+
+            <s:decorate id="hcmField" template="layout/edit.xhtml">
+                <ui:define name="label">Hcm</ui:define>
+                <h:inputText id="hcm"
+                          value="#{exhemogramaHome.instance.hcm}">
+                    <a:support event="onblur" reRender="hcmField" bypassUpdates="true" ajaxSingle="true"/>
+                </h:inputText>
+            </s:decorate>
+
+
+            <s:decorate id="chcmField" template="layout/edit.xhtml">
+                <ui:define name="label">Chcm</ui:define>
+                <h:inputText id="chcm"
+                          value="#{exhemogramaHome.instance.chcm}">
+                    <a:support event="onblur" reRender="chcmField" bypassUpdates="true" ajaxSingle="true"/>
+                </h:inputText>
+            </s:decorate>
+
+
+            <s:decorate id="leuctotaisField" template="layout/edit.xhtml">
+                <ui:define name="label">Leuctotais</ui:define>
+                <h:inputText id="leuctotais"
+                          value="#{exhemogramaHome.instance.leuctotais}">
+                    <a:support event="onblur" reRender="leuctotaisField" bypassUpdates="true" ajaxSingle="true"/>
+                </h:inputText>
+            </s:decorate>
+
+
+            <s:decorate id="metamielocitosField" template="layout/edit.xhtml">
+                <ui:define name="label">Metamielocitos</ui:define>
+                <h:inputText id="metamielocitos"
+                          value="#{exhemogramaHome.instance.metamielocitos}">
+                    <a:support event="onblur" reRender="metamielocitosField" bypassUpdates="true" ajaxSingle="true"/>
+                </h:inputText>
+            </s:decorate>
+
+
+            <s:decorate id="bastonetesField" template="layout/edit.xhtml">
+                <ui:define name="label">Bastonetes</ui:define>
+                <h:inputText id="bastonetes"
+                          value="#{exhemogramaHome.instance.bastonetes}">
+                    <a:support event="onblur" reRender="bastonetesField" bypassUpdates="true" ajaxSingle="true"/>
+                </h:inputText>
+            </s:decorate>
+
+
+            <s:decorate id="segmentadosField" template="layout/edit.xhtml">
+                <ui:define name="label">Segmentados</ui:define>
+                <h:inputText id="segmentados"
+                          value="#{exhemogramaHome.instance.segmentados}">
+                    <a:support event="onblur" reRender="segmentadosField" bypassUpdates="true" ajaxSingle="true"/>
+                </h:inputText>
+            </s:decorate>
+
+
+            <s:decorate id="eosinofilosField" template="layout/edit.xhtml">
+                <ui:define name="label">Eosinofilos</ui:define>
+                <h:inputText id="eosinofilos"
+                          value="#{exhemogramaHome.instance.eosinofilos}">
+                    <a:support event="onblur" reRender="eosinofilosField" bypassUpdates="true" ajaxSingle="true"/>
+                </h:inputText>
+            </s:decorate>
+
+
+            <s:decorate id="basofilosField" template="layout/edit.xhtml">
+                <ui:define name="label">Basofilos</ui:define>
+                <h:inputText id="basofilos"
+                          value="#{exhemogramaHome.instance.basofilos}">
+                    <a:support event="onblur" reRender="basofilosField" bypassUpdates="true" ajaxSingle="true"/>
+                </h:inputText>
+            </s:decorate>
+
+
+            <s:decorate id="linfocitosField" template="layout/edit.xhtml">
+                <ui:define name="label">Linfocitos</ui:define>
+                <h:inputText id="linfocitos"
+                          value="#{exhemogramaHome.instance.linfocitos}">
+                    <a:support event="onblur" reRender="linfocitosField" bypassUpdates="true" ajaxSingle="true"/>
+                </h:inputText>
+            </s:decorate>
+
+
+            <s:decorate id="monocitosField" template="layout/edit.xhtml">
+                <ui:define name="label">Monocitos</ui:define>
+                <h:inputText id="monocitos"
+                          value="#{exhemogramaHome.instance.monocitos}">
+                    <a:support event="onblur" reRender="monocitosField" bypassUpdates="true" ajaxSingle="true"/>
+                </h:inputText>
+            </s:decorate>
+
+
+            <s:decorate id="obsField" template="layout/edit.xhtml">
+                <ui:define name="label">Obs</ui:define>
+                <h:inputTextarea id="obs"
+                               cols="80"
+                               rows="3"
+                              value="#{exhemogramaHome.instance.obs}"/>
+            </s:decorate>
+
+
+            <s:decorate id="proteinastotaisField" template="layout/edit.xhtml">
+                <ui:define name="label">Proteinastotais</ui:define>
+                <h:inputText id="proteinastotais"
+                          value="#{exhemogramaHome.instance.proteinastotais}">
+                    <a:support event="onblur" reRender="proteinastotaisField" bypassUpdates="true" ajaxSingle="true"/>
+                </h:inputText>
+            </s:decorate>
+
+
+            <s:decorate id="plaquetasField" template="layout/edit.xhtml">
+                <ui:define name="label">Plaquetas</ui:define>
+                <h:inputText id="plaquetas"
+                          value="#{exhemogramaHome.instance.plaquetas}">
+                    <a:support event="onblur" reRender="plaquetasField" bypassUpdates="true" ajaxSingle="true"/>
+                </h:inputText>
+            </s:decorate>
+
+            <div style="clear:both">
+                <span class="required">*</span>
+                required fields
+            </div>
+
+        </rich:panel>
+
+        <div class="actionButtons">
+
+            <h:commandButton id="save"
+                          value="Save"
+                         action="#{exhemogramaHome.persist}"
+                       disabled="#{!exhemogramaHome.wired}"
+                       rendered="#{!exhemogramaHome.managed}"/>
+
+            <h:commandButton id="update"
+                          value="Save"
+                         action="#{exhemogramaHome.update}"
+                       rendered="#{exhemogramaHome.managed}"/>
+
+            <h:commandButton id="delete"
+                          value="Delete"
+                         action="#{exhemogramaHome.remove}"
+                      immediate="true"
+                       rendered="#{exhemogramaHome.managed}"/>
+
+            <s:button id="cancelEdit"
+                   value="Cancel"
+             propagation="end"
+                    view="/Exhemograma.xhtml"
+                rendered="#{exhemogramaHome.managed}"/>
+
+            <s:button id="cancelAdd"
+                   value="Cancel"
+             propagation="end"
+                    view="/#{empty exhemogramaFrom ? 'ExhemogramaList' : exhemogramaFrom}.xhtml"
+                rendered="#{!exhemogramaHome.managed}"/>
+
+        </div>
+    </h:form>
+
+<rich:tabPanel switchType="ajax">
+
+    <rich:tab label="Ficha *" labelClass="required">
+    <div class="association" id="fichaParent">
+
+        <h:outputText value="There is no ficha associated with this exhemograma."
+                   rendered="#{exhemogramaHome.instance.ficha == null}"/>
+
+        <rich:dataTable var="_ficha"
+                   value="#{exhemogramaHome.instance.ficha}"
+                rendered="#{exhemogramaHome.instance.ficha != null}"
+              rowClasses="rvgRowOne,rvgRowTwo"
+                      id="fichaTable">
+            <h:column>
+                <f:facet name="header">Codficha</f:facet>
+                <h:outputText value="#{_ficha.codficha}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Animal codanimal</f:facet>
+                <h:outputText value="#{_ficha.animal.codanimal}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Anamnese</f:facet>
+                <h:outputText value="#{_ficha.anamnese}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Dtretorno</f:facet>
+                <h:outputText value="#{_ficha.dtretorno}">
+                    <s:convertDateTime type="date" dateStyle="short"/>
+                </h:outputText>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Diagnostico</f:facet>
+                <h:outputText value="#{_ficha.diagnostico}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Dtregistro</f:facet>
+                <h:outputText value="#{_ficha.dtregistro}">
+                    <s:convertDateTime type="date" dateStyle="short"/>
+                </h:outputText>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Peso</f:facet>
+                <h:outputText value="#{_ficha.peso}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Solicitados</f:facet>
+                <h:outputText value="#{_ficha.solicitados}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Receituario</f:facet>
+                <h:outputText value="#{_ficha.receituario}"/>
+            </h:column>
+        </rich:dataTable>
+
+        <div class="actionButtons">
+            <s:button id="#{exhemogramaHome.instance.ficha != null ? 'changeParent' : 'selectParent'}" value="#{exhemogramaHome.instance.ficha != null ? 'Change' : 'Select'} ficha"
+                       view="/FichaList.xhtml">
+                <f:param name="from" value="ExhemogramaEdit"/>
+            </s:button>
+        </div>
+
+    </div>
+    </rich:tab>
+</rich:tabPanel>
+</ui:define>
+
+</ui:composition>

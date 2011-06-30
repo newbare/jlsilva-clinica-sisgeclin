@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:s="http://jboss.com/products/seam/taglib"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:rich="http://richfaces.org/rich"
+    template="layout/template.xhtml">
+
+<ui:define name="body">
+
+    <h:form id="exfezesSearch" styleClass="edit">
+
+        <rich:simpleTogglePanel label="Exfezes Search Filter" switchType="ajax">
+
+            <s:decorate template="layout/display.xhtml">
+                <ui:define name="label">Resultado</ui:define>
+                <h:inputText id="resultado" value="#{exfezesList.exfezes.resultado}"/>
+            </s:decorate>
+
+            <s:decorate template="layout/display.xhtml">
+                <ui:define name="label">Metodo</ui:define>
+                <h:inputText id="metodo" value="#{exfezesList.exfezes.metodo}"/>
+            </s:decorate>
+
+            <s:decorate template="layout/display.xhtml">
+                <ui:define name="label">Match</ui:define>
+                <h:selectOneRadio id="logic" value="#{exfezesList.restrictionLogicOperator}" styleClass="radio">
+                    <f:selectItem itemLabel="All" itemValue="and"/>
+                    <f:selectItem itemLabel="Any" itemValue="or"/>
+                </h:selectOneRadio>
+            </s:decorate>
+
+        </rich:simpleTogglePanel>
+
+        <div class="actionButtons">
+            <h:commandButton id="search" value="Search" action="/ExfezesList.xhtml"/>
+            <s:button id="reset" value="Reset" includePageParams="false"/>
+        </div>
+
+    </h:form>
+
+    <rich:panel>
+        <f:facet name="header">Exfezes Search Results (#{empty exfezesList.resultList ? 0 : (exfezesList.paginated ? exfezesList.resultCount : exfezesList.resultList.size)})</f:facet>
+    <div class="results" id="exfezesList">
+
+    <h:outputText value="The exfezes search returned no results."
+               rendered="#{empty exfezesList.resultList}"/>
+
+    <rich:dataTable id="exfezesList"
+                var="_exfezes"
+              value="#{exfezesList.resultList}"
+           rendered="#{not empty exfezesList.resultList}">
+        <h:column>
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{exfezesList}"/>
+                    <ui:param name="propertyLabel" value="Codexfezes"/>
+                    <ui:param name="propertyPath" value="exfezes.codexfezes"/>
+                </ui:include>
+            </f:facet>
+            <h:outputText value="#{_exfezes.codexfezes}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{exfezesList}"/>
+                    <ui:param name="propertyLabel" value="Ficha codficha"/>
+                    <ui:param name="propertyPath" value="exfezes.ficha.codficha"/>
+                </ui:include>
+            </f:facet>
+            <h:outputText value="#{_exfezes.ficha.codficha}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{exfezesList}"/>
+                    <ui:param name="propertyLabel" value="Dtregistro"/>
+                    <ui:param name="propertyPath" value="exfezes.dtregistro"/>
+                </ui:include>
+            </f:facet>
+            <h:outputText value="#{_exfezes.dtregistro}">
+                <s:convertDateTime type="date" dateStyle="short"/>
+            </h:outputText>
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{exfezesList}"/>
+                    <ui:param name="propertyLabel" value="Resultado"/>
+                    <ui:param name="propertyPath" value="exfezes.resultado"/>
+                </ui:include>
+            </f:facet>
+            <h:outputText value="#{_exfezes.resultado}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{exfezesList}"/>
+                    <ui:param name="propertyLabel" value="Metodo"/>
+                    <ui:param name="propertyPath" value="exfezes.metodo"/>
+                </ui:include>
+            </f:facet>
+            <h:outputText value="#{_exfezes.metodo}"/>
+        </h:column>
+        <rich:column styleClass="action">
+            <f:facet name="header">Action</f:facet>
+            <s:link view="/#{empty from ? 'Exfezes' : from}.xhtml"
+                   value="#{empty from ? 'View' : 'Select'}"
+             propagation="#{empty from ? 'none' : 'default'}"
+                      id="exfezesViewId">
+                <f:param name="exfezesCodexfezes"
+                        value="#{_exfezes.codexfezes}"/>
+            </s:link>
+            #{' '}
+            <s:link view="/ExfezesEdit.xhtml"
+                   value="Edit"
+             propagation="none"
+                      id="exfezesEdit"
+                rendered="#{empty from}">
+                <f:param name="exfezesCodexfezes"
+                        value="#{_exfezes.codexfezes}"/>
+            </s:link>
+        </rich:column>
+    </rich:dataTable>
+
+    </div>
+    </rich:panel>
+
+    <div class="tableControl">
+
+        <s:link view="/ExfezesList.xhtml"
+            rendered="#{exfezesList.previousExists}"
+               value="#{messages.left}#{messages.left} First Page"
+                  id="firstPage">
+          <f:param name="firstResult" value="0"/>
+        </s:link>
+
+        <s:link view="/ExfezesList.xhtml"
+            rendered="#{exfezesList.previousExists}"
+               value="#{messages.left} Previous Page"
+                  id="previousPage">
+            <f:param name="firstResult"
+                    value="#{exfezesList.previousFirstResult}"/>
+        </s:link>
+
+        <s:link view="/ExfezesList.xhtml"
+            rendered="#{exfezesList.nextExists}"
+               value="Next Page #{messages.right}"
+                  id="nextPage">
+            <f:param name="firstResult"
+                    value="#{exfezesList.nextFirstResult}"/>
+        </s:link>
+
+        <s:link view="/ExfezesList.xhtml"
+            rendered="#{exfezesList.nextExists}"
+               value="Last Page #{messages.right}#{messages.right}"
+                  id="lastPage">
+            <f:param name="firstResult"
+                    value="#{exfezesList.lastFirstResult}"/>
+        </s:link>
+
+    </div>
+
+    <s:div styleClass="actionButtons" rendered="#{empty from}">
+        <s:button view="/ExfezesEdit.xhtml"
+                    id="create"
+           propagation="none"
+                 value="Create exfezes">
+            <f:param name="exfezesCodexfezes"/>
+        </s:button>
+    </s:div>
+
+</ui:define>
+
+</ui:composition>

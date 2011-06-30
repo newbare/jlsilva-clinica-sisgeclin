@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:s="http://jboss.com/products/seam/taglib"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:rich="http://richfaces.org/rich"
+    template="layout/template.xhtml">
+
+<ui:define name="body">
+
+    <rich:panel>
+        <f:facet name="header">Internacao Details</f:facet>
+
+        <s:decorate id="codinternacao" template="layout/display.xhtml">
+            <ui:define name="label">Codinternacao</ui:define>
+            <h:outputText value="#{internacaoHome.instance.codinternacao}"/>
+        </s:decorate>
+
+        <s:decorate id="obs" template="layout/display.xhtml">
+            <ui:define name="label">Obs</ui:define>
+            <h:outputText value="#{internacaoHome.instance.obs}"/>
+        </s:decorate>
+
+        <s:decorate id="dtregistro" template="layout/display.xhtml">
+            <ui:define name="label">Dtregistro</ui:define>
+            <h:outputText value="#{internacaoHome.instance.dtregistro}">
+                <s:convertDateTime type="date" dateStyle="short"/>
+            </h:outputText>
+        </s:decorate>
+
+        <s:decorate id="estsaida" template="layout/display.xhtml">
+            <ui:define name="label">Estsaida</ui:define>
+            <h:outputText value="#{internacaoHome.instance.estsaida}">
+                <s:convertDateTime type="date" dateStyle="short"/>
+            </h:outputText>
+        </s:decorate>
+
+        <s:decorate id="datasaida" template="layout/display.xhtml">
+            <ui:define name="label">Datasaida</ui:define>
+            <h:outputText value="#{internacaoHome.instance.datasaida}">
+                <s:convertDateTime type="date" dateStyle="short"/>
+            </h:outputText>
+        </s:decorate>
+
+        <s:decorate id="vlcheque" template="layout/display.xhtml">
+            <ui:define name="label">Vlcheque</ui:define>
+            <h:outputText value="#{internacaoHome.instance.vlcheque}"/>
+        </s:decorate>
+
+        <s:decorate id="datahorasaida" template="layout/display.xhtml">
+            <ui:define name="label">Datahorasaida</ui:define>
+            <h:outputText value="#{internacaoHome.instance.datahorasaida}">
+                <s:convertDateTime type="date" dateStyle="short"/>
+            </h:outputText>
+        </s:decorate>
+
+        <s:decorate id="motivosaida" template="layout/display.xhtml">
+            <ui:define name="label">Motivosaida</ui:define>
+            <h:outputText value="#{internacaoHome.instance.motivosaida}"/>
+        </s:decorate>
+
+        <s:decorate id="obssaida" template="layout/display.xhtml">
+            <ui:define name="label">Obssaida</ui:define>
+            <h:outputText value="#{internacaoHome.instance.obssaida}"/>
+        </s:decorate>
+
+        <div style="clear:both"/>
+
+    </rich:panel>
+
+    <div class="actionButtons">
+
+        <s:button view="/InternacaoEdit.xhtml"
+                    id="edit"
+                 value="Edit"/>
+
+        <s:button view="/#{empty internacaoFrom ? 'InternacaoList' : internacaoFrom}.xhtml"
+                    id="done"
+                 value="Done"/>
+
+    </div>
+
+    <rich:tabPanel switchType="ajax">
+
+    <rich:tab>
+        <f:facet name="label">
+            <h:panelGroup><h:graphicImage value="/img/manytoone.gif" style="vertical-align: middle; padding-right: 4px;"/>Ficha</h:panelGroup>
+        </f:facet>
+    <div class="association" id="fichaParent">
+
+        <h:outputText value="There is no ficha associated with this internacao."
+                   rendered="#{internacaoHome.instance.ficha == null}"/>
+
+        <rich:dataTable var="_ficha"
+                   value="#{internacaoHome.instance.ficha}"
+                rendered="#{internacaoHome.instance.ficha != null}"
+              rowClasses="rvgRowOne,rvgRowTwo"
+                      id="fichaTable">
+            <h:column>
+                <f:facet name="header">Codficha</f:facet>
+                <h:outputText value="#{_ficha.codficha}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Animal codanimal</f:facet>
+                <h:outputText value="#{_ficha.animal.codanimal}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Anamnese</f:facet>
+                <h:outputText value="#{_ficha.anamnese}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Dtretorno</f:facet>
+                <h:outputText value="#{_ficha.dtretorno}">
+                    <s:convertDateTime type="date" dateStyle="short"/>
+                </h:outputText>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Diagnostico</f:facet>
+                <h:outputText value="#{_ficha.diagnostico}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Dtregistro</f:facet>
+                <h:outputText value="#{_ficha.dtregistro}">
+                    <s:convertDateTime type="date" dateStyle="short"/>
+                </h:outputText>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Peso</f:facet>
+                <h:outputText value="#{_ficha.peso}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Solicitados</f:facet>
+                <h:outputText value="#{_ficha.solicitados}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Receituario</f:facet>
+                <h:outputText value="#{_ficha.receituario}"/>
+            </h:column>
+            <h:column styleClass="action">
+                <f:facet name="header">Action</f:facet>
+                <s:link id="viewficha"
+                     value="View"
+                      view="/Ficha.xhtml">
+                    <f:param name="fichaCodficha"
+                           value="#{_ficha.codficha}"/>
+                </s:link>
+            </h:column>
+        </rich:dataTable>
+
+    </div>
+    </rich:tab>
+
+    <rich:tab>
+        <f:facet name="label">
+            <h:panelGroup><h:graphicImage value="/img/onetomany.gif" style="vertical-align: middle; padding-right: 4px;"/>Internacao medicamentos</h:panelGroup>
+        </f:facet>
+    <h:form styleClass="association" id="internacaoMedicamentosChildren">
+
+        <h:outputText value="There are no internacaoMedicamentos associated with this internacao."
+                   rendered="#{empty internacaoHome.internacaoMedicamentos}"/>
+
+        <rich:dataTable value="#{internacaoHome.internacaoMedicamentos}"
+                       var="_internacaoMedicamento"
+                  rendered="#{not empty internacaoHome.internacaoMedicamentos}"
+                rowClasses="rvgRowOne,rvgRowTwo"
+                        id="internacaoMedicamentosTable">
+            <rich:column sortBy="#{_internacaoMedicamento.codinternacaoMedicamento}">
+                <f:facet name="header">Codinternacao medicamento</f:facet>
+                <h:outputText value="#{_internacaoMedicamento.codinternacaoMedicamento}"/>
+            </rich:column>
+            <rich:column sortBy="#{_internacaoMedicamento.medicamento}">
+                <f:facet name="header">Medicamento</f:facet>
+                <h:outputText value="#{_internacaoMedicamento.medicamento}"/>
+            </rich:column>
+            <rich:column sortBy="#{_internacaoMedicamento.doses}">
+                <f:facet name="header">Doses</f:facet>
+                <h:outputText value="#{_internacaoMedicamento.doses}"/>
+            </rich:column>
+            <rich:column sortBy="#{_internacaoMedicamento.forma}">
+                <f:facet name="header">Forma</f:facet>
+                <h:outputText value="#{_internacaoMedicamento.forma}"/>
+            </rich:column>
+            <rich:column sortBy="#{_internacaoMedicamento.qtd}">
+                <f:facet name="header">Qtd</f:facet>
+                <h:outputText value="#{_internacaoMedicamento.qtd}"/>
+            </rich:column>
+            <rich:column sortBy="#{_internacaoMedicamento.dias}">
+                <f:facet name="header">Dias</f:facet>
+                <h:outputText value="#{_internacaoMedicamento.dias}"/>
+            </rich:column>
+            <rich:column sortBy="#{_internacaoMedicamento.horarios}">
+                <f:facet name="header">Horarios</f:facet>
+                <h:outputText value="#{_internacaoMedicamento.horarios}">
+                    <s:convertDateTime type="time"/>
+                </h:outputText>
+            </rich:column>
+            <h:column>
+                <f:facet name="header">Action</f:facet>
+                <s:link id="selectinternacaoMedicamento"
+                     value="Select"
+                      view="/InternacaoMedicamento.xhtml">
+                    <f:param name="internacaoMedicamentoCodinternacaoMedicamento"
+                            value="#{_internacaoMedicamento.codinternacaoMedicamento}"/>
+                    <f:param name="internacaoMedicamentoFrom" value="Internacao"/>
+                </s:link>
+            </h:column>
+        </rich:dataTable>
+
+    </h:form>
+
+    <div class="actionButtons">
+        <s:button
+               value="Add internacaoMedicamento"
+                view="/InternacaoMedicamentoEdit.xhtml">
+            <f:param name="internacaoCodinternacao"
+                    value="#{internacaoHome.instance.codinternacao}"/>
+            <f:param name="internacaoMedicamentoFrom" value="Internacao"/>
+        </s:button>
+    </div>
+    </rich:tab>
+</rich:tabPanel>
+</ui:define>
+
+</ui:composition>

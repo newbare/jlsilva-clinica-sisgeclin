@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:s="http://jboss.com/products/seam/taglib"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:rich="http://richfaces.org/rich"
+    template="layout/template.xhtml">
+
+<ui:define name="body">
+
+    <rich:panel>
+        <f:facet name="header">Pelagem Details</f:facet>
+
+        <s:decorate id="codpelagem" template="layout/display.xhtml">
+            <ui:define name="label">Codpelagem</ui:define>
+            <h:outputText value="#{pelagemHome.instance.codpelagem}"/>
+        </s:decorate>
+
+        <s:decorate id="pelagem" template="layout/display.xhtml">
+            <ui:define name="label">Pelagem</ui:define>
+            <h:outputText value="#{pelagemHome.instance.pelagem}"/>
+        </s:decorate>
+
+        <div style="clear:both"/>
+
+    </rich:panel>
+
+    <div class="actionButtons">
+
+        <s:button view="/PelagemEdit.xhtml"
+                    id="edit"
+                 value="Edit"/>
+
+        <s:button view="/#{empty pelagemFrom ? 'PelagemList' : pelagemFrom}.xhtml"
+                    id="done"
+                 value="Done"/>
+
+    </div>
+
+    <rich:tabPanel switchType="ajax">
+
+    <rich:tab>
+        <f:facet name="label">
+            <h:panelGroup><h:graphicImage value="/img/onetomany.gif" style="vertical-align: middle; padding-right: 4px;"/>Animals</h:panelGroup>
+        </f:facet>
+    <h:form styleClass="association" id="animalsChildren">
+
+        <h:outputText value="There are no animals associated with this pelagem."
+                   rendered="#{empty pelagemHome.animals}"/>
+
+        <rich:dataTable value="#{pelagemHome.animals}"
+                       var="_animal"
+                  rendered="#{not empty pelagemHome.animals}"
+                rowClasses="rvgRowOne,rvgRowTwo"
+                        id="animalsTable">
+            <rich:column sortBy="#{_animal.codanimal}">
+                <f:facet name="header">Codanimal</f:facet>
+                <h:outputText value="#{_animal.codanimal}"/>
+            </rich:column>
+            <rich:column sortBy="#{_animal.nome}">
+                <f:facet name="header">Nome</f:facet>
+                <h:outputText value="#{_animal.nome}"/>
+            </rich:column>
+            <rich:column sortBy="#{_animal.dtnascimento}">
+                <f:facet name="header">Data de Nascimento</f:facet>
+                <h:outputText value="#{_animal.dtnascimento}">
+                    <s:convertDateTime type="date" dateStyle="short" pattern="dd/MM/yyyy"/>
+                </h:outputText>
+            </rich:column>
+            <rich:column sortBy="#{_animal.sexo}">
+                <f:facet name="header">Sexo</f:facet>
+                <h:outputText value="#{ _animal.sexo eq 'M'? 'Macho':'Fêmea'}"/>
+            </rich:column>
+            <rich:column sortBy="#{_animal.cci}">
+                <f:facet name="header">Cci</f:facet>
+                <h:outputText value="#{_animal.cci}"/>
+            </rich:column>
+            <rich:column sortBy="#{_animal.chip}">
+                <f:facet name="header">Chip</f:facet>
+                <h:outputText value="#{_animal.chip}"/>
+            </rich:column>
+            <rich:column sortBy="#{_animal.pedigree}">
+                <f:facet name="header">Pedigree</f:facet>
+                <h:outputText value="#{_animal.pedigree}"/>
+            </rich:column>
+            <rich:column sortBy="#{_animal.morto}">
+                <f:facet name="header">Morto</f:facet>
+                <h:outputText value="#{_animal.morto}"/>
+            </rich:column>
+            <rich:column sortBy="#{_animal.dtmorto}">
+                <f:facet name="header">Dtmorto</f:facet>
+                <h:outputText value="#{_animal.dtmorto}">
+                    <s:convertDateTime type="date" dateStyle="short"/>
+                </h:outputText>
+            </rich:column>
+            <rich:column sortBy="#{_animal.alergias}">
+                <f:facet name="header">Alergias</f:facet>
+                <h:outputText value="#{_animal.alergias}"/>
+            </rich:column>
+            <rich:column sortBy="#{_animal.obs}">
+                <f:facet name="header">Obs</f:facet>
+                <h:outputText value="#{_animal.obs}"/>
+            </rich:column>
+            <rich:column sortBy="#{_animal.motivo}">
+                <f:facet name="header">Motivo</f:facet>
+                <h:outputText value="#{_animal.motivo}"/>
+            </rich:column>
+            <h:column>
+                <f:facet name="header">Action</f:facet>
+                <s:link id="selectanimal"
+                     value="Select"
+                      view="/Animal.xhtml">
+                    <f:param name="animalCodanimal"
+                            value="#{_animal.codanimal}"/>
+                    <f:param name="animalFrom" value="Pelagem"/>
+                </s:link>
+            </h:column>
+        </rich:dataTable>
+
+    </h:form>
+
+    <div class="actionButtons">
+        <s:button
+               value="Add animal"
+                view="/AnimalEdit.xhtml">
+            <f:param name="pelagemCodpelagem"
+                    value="#{pelagemHome.instance.codpelagem}"/>
+            <f:param name="animalFrom" value="Pelagem"/>
+        </s:button>
+    </div>
+    </rich:tab>
+</rich:tabPanel>
+</ui:define>
+
+</ui:composition>

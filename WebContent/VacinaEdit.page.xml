@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page xmlns="http://jboss.com/products/seam/pages"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://jboss.com/products/seam/pages http://jboss.com/products/seam/pages-2.1.xsd"
+      no-conversation-view-id="/VacinaList.xhtml"
+      login-required="true">
+
+   <begin-conversation join="true" flush-mode="MANUAL"/>
+
+   <action execute="#{vacinaHome.wire}"/>
+
+   <param name="vacinaFrom"/>
+   <param name="vacinaCodvacinas" value="#{vacinaHome.vacinaCodvacinas}"/>
+   <param name="vacinacaoFrom"/>
+   <param name="vacinacaoCodvacinacao" value="#{vacinacaoHome.vacinacaoCodvacinacao}"/>
+   <param name="fichaFrom"/>
+   <param name="fichaCodficha" value="#{fichaHome.fichaCodficha}"/>
+   <param name="animalFrom"/>
+   <param name="animalCodanimal" value="#{animalHome.animalCodanimal}"/>
+   <param name="clientesFrom"/>
+   <param name="clientesCodclientes" value="#{clientesHome.clientesCodclientes}"/>
+
+   <param name="racaFrom"/>
+   <param name="racaCodraca" value="#{racaHome.racaCodraca}"/>
+   <param name="especiesFrom"/>
+   <param name="especiesCodespecie" value="#{especiesHome.especiesCodespecie}"/>
+
+
+   <param name="pelagemFrom"/>
+   <param name="pelagemCodpelagem" value="#{pelagemHome.pelagemCodpelagem}"/>
+
+
+
+
+   <param name="tiporetornovacinacaoFrom"/>
+   <param name="tiporetornovacinacaoCodtiporetornovacinacao" value="#{tiporetornovacinacaoHome.tiporetornovacinacaoCodtiporetornovacinacao}"/>
+
+
+
+   <navigation from-action="#{vacinaHome.persist}">
+      <rule if-outcome="persisted">
+         <end-conversation/>
+         <redirect view-id="/Vacina.xhtml"/>
+      </rule>
+   </navigation>
+
+   <navigation from-action="#{vacinaHome.update}">
+      <rule if-outcome="updated">
+         <end-conversation/>
+         <redirect view-id="/Vacina.xhtml"/>
+      </rule>
+   </navigation>
+
+   <navigation from-action="#{vacinaHome.remove}">
+      <rule if-outcome="removed">
+         <end-conversation/>
+         <redirect view-id="/VacinaList.xhtml"/>
+      </rule>
+   </navigation>
+
+</page>
