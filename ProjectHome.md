@@ -1,0 +1,1 @@
+Sistema para gestão de Clinica, modulo veterinário, manter clientes, animais, vacinas, internações e medicamentos, geração de relatórios, Tecnologia Java, JBOSS SEAM, Postgres.
